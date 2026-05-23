@@ -8,7 +8,7 @@ This repository implements the acoustic FWI problem using both:
 - **Classical FBPINNs** (`scripts/fwi_classical.py`) — fully connected networks
 - **Quantum-hybrid FBPINNs** (`scripts/fwi_quantum.py`) — classical layers + variational quantum circuit (VQC)
 
-The quantum circuit implementation (`pqcs/`) is a standalone JAX module with no fbpinns dependency, enabling future comparison work (e.g., PennyLane).
+The quantum circuit implementation (`src/qufwi/pqcs/`) is a standalone JAX module with no fbpinns dependency, enabling future comparison work (e.g., PennyLane).
 
 ## Installation
 
@@ -26,13 +26,13 @@ uv run python scripts/rasht/fwi_classical.py
 
 ```bash
 # Classical FWI
-cd scripts && python fwi_classical.py
+uv run python scripts/rasht/fwi_classical.py
 
 # Quantum-hybrid FWI (set XLA flag to reduce memory overhead)
-XLA_FLAGS=--xla_gpu_enable_command_buffer= python scripts/fwi_quantum.py
+XLA_FLAGS=--xla_gpu_enable_command_buffer= uv run python scripts/rasht/fwi_quantum.py
 
 # Resume from checkpoint
-python scripts/fwi_classical.py --resume 200000
+uv run python scripts/rasht/fwi_classical.py --resume 200000
 
 # Monitor training
 tensorboard --logdir results/summaries/
@@ -48,10 +48,11 @@ tensorboard --logdir results/summaries/
 
 ## Repository Structure
 
-- `pqcs/` — Standalone VQC library (JAX only, no fbpinns dependency)
-- `fbpinns/` — Vendored fbpinns package (merged classical + quantum networks)
-- `scripts/` — FWI training scripts (classical and quantum)
-- `data/specfem/` — SPECFEM synthetic seismic data
+- `src/qufwi/pqcs/` — Standalone VQC library
+- `src/qufwi/fbpinns/` — Core FBPINNs framework (merged classical + quantum)
+- `scripts/` — FWI training scripts for rasht and checkerboard models
+- `data/` — SPECFEM synthetic seismic data
+- `pennylane/` — Tests and benchmarks comparing the custom VQC against PennyLane
 
 ## Dependencies
 
