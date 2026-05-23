@@ -1,15 +1,15 @@
-#!/usr/bin/env bash
+#!/bin/bash
+# Compile results.tex to PDF (two passes for cross-refs) and clean aux files.
 set -e
 cd "$(dirname "$0")"
 
-# Main manuscript
-latexmk -pdf -interaction=nonstopmode main.tex
-latexmk -c main.tex  # clean aux files, keep main.pdf
+TEX=${1:-results.tex}
+BASE=${TEX%.tex}
 
-# Supplementary information (separate PDF)
-latexmk -pdf -interaction=nonstopmode supplementary.tex
-latexmk -c supplementary.tex  # clean aux files, keep supplementary.pdf
+pdflatex -interaction=nonstopmode -halt-on-error "$TEX" > /dev/null
+bibtex "$BASE" > /dev/null || true
+pdflatex -interaction=nonstopmode -halt-on-error "$TEX" > /dev/null
+pdflatex -interaction=nonstopmode -halt-on-error "$TEX" > /dev/null
 
-# Cover letter
-latexmk -pdf -interaction=nonstopmode cover_letter.tex
-latexmk -c cover_letter.tex  # clean aux files, keep cover_letter.pdf
+rm -f "$BASE.aux" "$BASE.log" "$BASE.out" "$BASE.toc" "$BASE.fdb_latexmk" "$BASE.fls" "$BASE.synctex.gz" "$BASE.nav" "$BASE.snm" "$BASE.vrb" "$BASE.bbl" "$BASE.blg"
+echo "Built: $BASE.pdf"
