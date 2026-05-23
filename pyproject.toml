@@ -1,3 +1,7 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "qufwi"
 version = "0.1.0"
@@ -31,4 +35,4 @@ url = "https://storage.googleapis.com/jax-releases/jax_cuda_releases.html"
 explicit = true
 
 [tool.setuptools.packages.find]
-include = ["fbpinns*", "pqcs*"]
+include = ["fbpinns*", "pqcs*", "pennylane*"]
