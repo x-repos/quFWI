@@ -1,0 +1,32 @@
+\documentclass[11pt,a4paper]{letter}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{lmodern}
+
+\signature{Hoang Anh Nguyen \\ (on behalf of all co-authors)}
+\address{Department of Geophysics \\ Colorado School of Mines \\ Golden, CO 80401, USA \\ hoanganh\_nguyen@mines.edu}
+
+\begin{document}
+
+\begin{letter}{Editorial Office \\ Communications AI \& Computing \\ Nature Portfolio}
+
+\opening{Dear Editor,}
+
+We are pleased to submit our manuscript, ``\texttt{quFWI}: Hybrid Quantum-Classical Finite Basis Physics-Informed Neural Networks for Wave Propagation and Full Waveform Inversion,'' for consideration in \emph{Communications AI \& Computing}.
+
+The manuscript presents the first integration of parameterized quantum circuits into domain-decomposed physics-informed neural networks (FBPINNs) for seismic inverse problems. Our main result is that a hybrid quantum-classical velocity network achieves a lower L1 velocity error than a classical FBPINN baseline---and than 15 classical hyperparameter variants---in approximately $8\times$ fewer training iterations, while using $\sim$$33$\% fewer trainable parameters, on a laterally-varying synthetic FWI benchmark. The quantum circuit is implemented as a JAX-native differentiable statevector simulator, enabling end-to-end automatic differentiation through the classical PINN, the quantum circuit, and the physics-informed loss, without the overhead of parameter-shift rules.
+
+We believe this work falls squarely within the scope of \emph{Communications AI \& Computing}, in particular the \emph{Hybrid quantum-classical systems}, \emph{AI for scientific discovery}, and \emph{Computational modeling in physics} areas. It represents a concrete demonstration of how near-term quantum parameterization can improve an important scientific inverse problem---full waveform inversion---with broader applicability to medical ultrasound tomography, photoacoustic imaging, and non-destructive evaluation.
+
+All data, code, and reproduction scripts are openly available at \url{https://github.com/x-repos/quFWI}, following FAIR principles. We frame the convergence advantage as an improvement in optimization iterations on classically-simulated circuits, not as a claim of quantum computational speedup; the manuscript discusses limitations (classical simulation, 2D acoustic setup, single source) and the path to hardware validation.
+
+We confirm that this manuscript has not been published elsewhere and is not under consideration by another journal. We suggest the following reviewers with expertise in physics-informed neural networks, FWI, and quantum machine learning:
+% FILL: suggest 3-4 reviewers with name, affiliation, and email.
+
+Thank you for considering our submission.
+
+\closing{Sincerely,}
+
+\end{letter}
+
+\end{document}

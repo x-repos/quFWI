@@ -1,0 +1,2372 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global/global}
+    \entry{Tarantola1984}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=7f5b2d6262ddc71c1e6f1cbe3ecc5fbe}{%
+           family={Tarantola},
+           familyi={T\bibinitperiod},
+           given={Albert},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{7f5b2d6262ddc71c1e6f1cbe3ecc5fbe}
+      \strng{fullhash}{7f5b2d6262ddc71c1e6f1cbe3ecc5fbe}
+      \strng{fullhashraw}{7f5b2d6262ddc71c1e6f1cbe3ecc5fbe}
+      \strng{bibnamehash}{7f5b2d6262ddc71c1e6f1cbe3ecc5fbe}
+      \strng{authorbibnamehash}{7f5b2d6262ddc71c1e6f1cbe3ecc5fbe}
+      \strng{authornamehash}{7f5b2d6262ddc71c1e6f1cbe3ecc5fbe}
+      \strng{authorfullhash}{7f5b2d6262ddc71c1e6f1cbe3ecc5fbe}
+      \strng{authorfullhashraw}{7f5b2d6262ddc71c1e6f1cbe3ecc5fbe}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The nonlinear inverse problem for seismic reflection data is solved in the acoustic approximation. The method is based on the generalized least-squares criterion, and it can handle errors in the data set and a priori information on the model. Multiply reflected energy is naturally taken into account, as well as refracted energy or surface waves. The inverse problem can be solved using an iterative algorithm which gives, at each iteration, updated values of bulk modulus, density, and time source function. Each step of the iterative algorithm essentially consists of a forward propagation of the actual sources in the current model and a forward propagation (backward in time) of the data residuals. The correlation at each point of the space of the two fields thus obtained yields the corrections of the bulk modulus and density models. This shows, in particular, that the general solution of the inverse problem can be attained by methods strongly related to the methods of migration of unstacked data, and commercially competitive with them.}
+      \field{issn}{0016-8033}
+      \field{journaltitle}{Geophysics}
+      \field{month}{08}
+      \field{number}{8}
+      \field{title}{Inversion of seismic reflection data in the acoustic approximation}
+      \field{volume}{49}
+      \field{year}{1984}
+      \field{pages}{1259\bibrangedash 1266}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1190/1.1441754
+      \endverb
+      \verb{eprint}
+      \verb https://pubs.geoscienceworld.org/seg/geophysics/article-pdf/49/8/1259/3163308/1259.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1190/1.1441754
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1190/1.1441754
+      \endverb
+    \endentry
+    \entry{Fichtner2009}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=c44b844ddb7f3e18c4217fbb70345cde}{%
+           family={Fichtner},
+           familyi={F\bibinitperiod},
+           given={Andreas},
+           giveni={A\bibinitperiod}}}%
+        {{hash=9a88d00fc65f5d1c515bf69959c5f231}{%
+           family={Kennett},
+           familyi={K\bibinitperiod},
+           given={Brian\bibnamedelimb L.\bibnamedelimi N.},
+           giveni={B\bibinitperiod\bibinitdelim L\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+        {{hash=433fff8c5fbd6fe68ccdace60b6c4b36}{%
+           family={Igel},
+           familyi={I\bibinitperiod},
+           given={Heiner},
+           giveni={H\bibinitperiod}}}%
+        {{hash=d49bd3365c1ef4c2a48d5be0820d2f53}{%
+           family={Bunge},
+           familyi={B\bibinitperiod},
+           given={Hans-Peter},
+           giveni={H\bibinithyphendelim P\bibinitperiod}}}%
+      }
+      \strng{namehash}{a418ce4b14bd36c067dad07a2979273b}
+      \strng{fullhash}{b2ba21d8bd4825a097afff44c7bc775a}
+      \strng{fullhashraw}{b2ba21d8bd4825a097afff44c7bc775a}
+      \strng{bibnamehash}{a418ce4b14bd36c067dad07a2979273b}
+      \strng{authorbibnamehash}{a418ce4b14bd36c067dad07a2979273b}
+      \strng{authornamehash}{a418ce4b14bd36c067dad07a2979273b}
+      \strng{authorfullhash}{b2ba21d8bd4825a097afff44c7bc775a}
+      \strng{authorfullhashraw}{b2ba21d8bd4825a097afff44c7bc775a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0956-540X}
+      \field{journaltitle}{Geophysical Journal International}
+      \field{month}{12}
+      \field{number}{3}
+      \field{title}{Full seismic waveform tomography for upper-mantle structure in the Australasian region using adjoint methods}
+      \field{volume}{179}
+      \field{year}{2009}
+      \field{pages}{1703\bibrangedash 1725}
+      \range{pages}{23}
+      \verb{doi}
+      \verb 10.1111/j.1365-246X.2009.04368.x
+      \endverb
+      \verb{eprint}
+      \verb https://academic.oup.com/gji/article-pdf/179/3/1703/6011534/179-3-1703.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1111/j.1365-246X.2009.04368.x
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1111/j.1365-246X.2009.04368.x
+      \endverb
+    \endentry
+    \entry{Ebru2011}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=84785fc5e19942d89b846c2344d680fe}{%
+           family={Bozdağ},
+           familyi={B\bibinitperiod},
+           given={Ebru},
+           giveni={E\bibinitperiod}}}%
+        {{hash=3d0a9ca53d1dc0e25bbffb658caa3b4e}{%
+           family={Trampert},
+           familyi={T\bibinitperiod},
+           given={Jeannot},
+           giveni={J\bibinitperiod}}}%
+        {{hash=89b5dc07097f898af47df233237a12c1}{%
+           family={Tromp},
+           familyi={T\bibinitperiod},
+           given={Jeroen},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{f6f3ea639db933654ad302c1348bdd8a}
+      \strng{fullhash}{f6f3ea639db933654ad302c1348bdd8a}
+      \strng{fullhashraw}{f6f3ea639db933654ad302c1348bdd8a}
+      \strng{bibnamehash}{f6f3ea639db933654ad302c1348bdd8a}
+      \strng{authorbibnamehash}{f6f3ea639db933654ad302c1348bdd8a}
+      \strng{authornamehash}{f6f3ea639db933654ad302c1348bdd8a}
+      \strng{authorfullhash}{f6f3ea639db933654ad302c1348bdd8a}
+      \strng{authorfullhashraw}{f6f3ea639db933654ad302c1348bdd8a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0956-540X}
+      \field{journaltitle}{Geophysical Journal International}
+      \field{month}{05}
+      \field{number}{2}
+      \field{title}{Misfit functions for full waveform inversion based on instantaneous phase and envelope measurements}
+      \field{volume}{185}
+      \field{year}{2011}
+      \field{pages}{845\bibrangedash 870}
+      \range{pages}{26}
+      \verb{doi}
+      \verb 10.1111/j.1365-246X.2011.04970.x
+      \endverb
+      \verb{eprint}
+      \verb https://academic.oup.com/gji/article-pdf/185/2/845/1969004/185-2-845.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1111/j.1365-246X.2011.04970.x
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1111/j.1365-246X.2011.04970.x
+      \endverb
+    \endentry
+    \entry{Virieux2009}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=01da5f2c8fa1cf6ce8f8f42b88728be4}{%
+           family={Virieux},
+           familyi={V\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=e4a490d4fa2bd272a99869b256c64de2}{%
+           family={Operto},
+           familyi={O\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{3c44d21d471c6cce35df1960aee3adcb}
+      \strng{fullhash}{3c44d21d471c6cce35df1960aee3adcb}
+      \strng{fullhashraw}{3c44d21d471c6cce35df1960aee3adcb}
+      \strng{bibnamehash}{3c44d21d471c6cce35df1960aee3adcb}
+      \strng{authorbibnamehash}{3c44d21d471c6cce35df1960aee3adcb}
+      \strng{authornamehash}{3c44d21d471c6cce35df1960aee3adcb}
+      \strng{authorfullhash}{3c44d21d471c6cce35df1960aee3adcb}
+      \strng{authorfullhashraw}{3c44d21d471c6cce35df1960aee3adcb}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0016-8033}
+      \field{journaltitle}{Geophysics}
+      \field{month}{12}
+      \field{number}{6}
+      \field{title}{An overview of full-waveform inversion in exploration geophysics}
+      \field{volume}{74}
+      \field{year}{2009}
+      \field{pages}{WCC1\bibrangedash WCC26}
+      \range{pages}{-1}
+      \verb{doi}
+      \verb 10.1190/1.3238367
+      \endverb
+      \verb{eprint}
+      \verb https://pubs.geoscienceworld.org/seg/geophysics/article-pdf/74/6/WCC1/3138505/gsgpy_74_6_WCC1.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1190/1.3238367
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1190/1.3238367
+      \endverb
+    \endentry
+    \entry{10.1121/1.3699240}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=b7d9fd1b07c5a9fe77b2d6fffcfeab83}{%
+           family={Wiskin},
+           familyi={W\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=7b729b0f31cd87d49b14833009f3092e}{%
+           family={Borup},
+           familyi={B\bibinitperiod},
+           given={D.\bibnamedelimi T.},
+           giveni={D\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
+        {{hash=5a5d8d4b84cbfcc51fde6436f420b9a1}{%
+           family={Johnson},
+           familyi={J\bibinitperiod},
+           given={S.\bibnamedelimi A.},
+           giveni={S\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=345db377cc97ed323e6792ad5b99bfb2}{%
+           family={Berggren},
+           familyi={B\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{5fd83fc535d7bc3ed92df5b8334e48c5}
+      \strng{fullhash}{2a1e096075f2481807e538b7c31b4e2d}
+      \strng{fullhashraw}{2a1e096075f2481807e538b7c31b4e2d}
+      \strng{bibnamehash}{5fd83fc535d7bc3ed92df5b8334e48c5}
+      \strng{authorbibnamehash}{5fd83fc535d7bc3ed92df5b8334e48c5}
+      \strng{authornamehash}{5fd83fc535d7bc3ed92df5b8334e48c5}
+      \strng{authorfullhash}{2a1e096075f2481807e538b7c31b4e2d}
+      \strng{authorfullhashraw}{2a1e096075f2481807e538b7c31b4e2d}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Recent published results in inverse scattering generally show the difficulty in dealing with moderate to high contrast inhomogeneities when employing linearized or iteratively linearized algorithms (e.g., distorted Born iterative method). This paper presents a fully nonlinear algorithm utilizing full wave field data, that results in ultrasound computed tomographic images from a laboratory breast scanner, and shows several such unique images from volunteer subjects. The forward problem, data collection process and inverse scattering algorithm used are discussed. A functional that represents the “best fit” between predicted and measured data is minimized, and therefore requires a very fast forward problem solver, Jacobian calculation, and gradient estimation, all of which are described. The data collection device is described. The algorithm and device yield quantitative estimates of human breast tissue in vivo. Several high resolution images, measuring ∼150 by 150 wavelengths, obtained from the 2D inverse scattering algorithms, using data collected from a first prototype, are shown and discussed. The quantitative values are compared with previous published work.}
+      \field{issn}{0001-4966}
+      \field{journaltitle}{The Journal of the Acoustical Society of America}
+      \field{month}{05}
+      \field{number}{5}
+      \field{title}{Non-linear inverse scattering: High resolution quantitative breast tissue tomography}
+      \field{volume}{131}
+      \field{year}{2012}
+      \field{pages}{3802\bibrangedash 3813}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1121/1.3699240
+      \endverb
+      \verb{eprint}
+      \verb https://pubs.aip.org/asa/jasa/article-pdf/131/5/3802/16741384/3802_1_online.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1121/1.3699240
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1121/1.3699240
+      \endverb
+    \endentry
+    \entry{Sandhu_2015}{article}{}{}
+      \name{author}{5}{}{%
+        {{hash=8244c5c8c70a7a90eb16a34a05d0f560}{%
+           family={Sandhu},
+           familyi={S\bibinitperiod},
+           given={G\bibnamedelima Y},
+           giveni={G\bibinitperiod\bibinitdelim Y\bibinitperiod}}}%
+        {{hash=d32559a5fc6b9c48ad950f89259bc465}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={C},
+           giveni={C\bibinitperiod}}}%
+        {{hash=a968508e52f28ff5b9be55968b6b02fd}{%
+           family={Roy},
+           familyi={R\bibinitperiod},
+           given={O},
+           giveni={O\bibinitperiod}}}%
+        {{hash=c9aa9e73ccab7eb48d955624cc4187b3}{%
+           family={Schmidt},
+           familyi={S\bibinitperiod},
+           given={S},
+           giveni={S\bibinitperiod}}}%
+        {{hash=bc5b64ba6e05452b4676970f6fa32e2a}{%
+           family={Duric},
+           familyi={D\bibinitperiod},
+           given={N},
+           giveni={N\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IOP Publishing}%
+      }
+      \strng{namehash}{f527620ed8d6c1585bff65d6f49b86bd}
+      \strng{fullhash}{2d1b37bf5e0aefd212e1d0c30bf50d40}
+      \strng{fullhashraw}{2d1b37bf5e0aefd212e1d0c30bf50d40}
+      \strng{bibnamehash}{f527620ed8d6c1585bff65d6f49b86bd}
+      \strng{authorbibnamehash}{f527620ed8d6c1585bff65d6f49b86bd}
+      \strng{authornamehash}{f527620ed8d6c1585bff65d6f49b86bd}
+      \strng{authorfullhash}{2d1b37bf5e0aefd212e1d0c30bf50d40}
+      \strng{authorfullhashraw}{2d1b37bf5e0aefd212e1d0c30bf50d40}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Application of the frequency domain acoustic wave equation on data acquired from ultrasound tomography scans is shown to yield high resolution sound speed images on the order of the wavelength of the highest reconstructed frequency. Using a signal bandwidth of 0.4–1 MHz and an average sound speed of 1500 m s−1, the resolution is approximately 1.5 mm. The quantitative sound speed values and morphology provided by these images have the potential to inform diagnosis and classification of breast disease. In this study, we present the formalism, practical application, and in vivo results of waveform tomography applied to breast data gathered by two different ultrasound tomography scanners that utilize ring transducers. The formalism includes a review of frequency domain modeling of the wave equation using finite difference operators as well as a review of the gradient descent method for the iterative reconstruction scheme. It is shown that the practical application of waveform tomography requires an accurate starting model, careful data processing, and a method to gradually incorporate higher frequency information into the sound speed reconstruction. Following these steps resulted in high resolution quantitative sound speed images of the breast. These images show marked improvement relative to commonly used ray tomography reconstruction methods. The robustness of the method is demonstrated by obtaining similar results from two different ultrasound tomography devices. We also compare our method to MRI to demonstrate concordant findings. The clinical data used in this work was obtained from a HIPAA compliant clinical study (IRB 040912M1F).}
+      \field{journaltitle}{Physics in Medicine \& Biology}
+      \field{month}{6}
+      \field{number}{14}
+      \field{title}{Frequency domain ultrasound waveform tomography: breast imaging using a ring transducer}
+      \field{volume}{60}
+      \field{year}{2015}
+      \field{pages}{5381}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1088/0031-9155/60/14/5381
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1088/0031-9155/60/14/5381
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1088/0031-9155/60/14/5381
+      \endverb
+    \endentry
+    \entry{Wang2016}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=cfcb3714c08123a2f71969f103b2a7a5}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Lihong\bibnamedelima V.},
+           giveni={L\bibinitperiod\bibinitdelim V\bibinitperiod}}}%
+        {{hash=456c69390beec1cfe6e8aa5eb7dfd789}{%
+           family={Yao},
+           familyi={Y\bibinitperiod},
+           given={Junjie},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{8fd238b13519d7b67892866e0f80bca4}
+      \strng{fullhash}{8fd238b13519d7b67892866e0f80bca4}
+      \strng{fullhashraw}{8fd238b13519d7b67892866e0f80bca4}
+      \strng{bibnamehash}{8fd238b13519d7b67892866e0f80bca4}
+      \strng{authorbibnamehash}{8fd238b13519d7b67892866e0f80bca4}
+      \strng{authornamehash}{8fd238b13519d7b67892866e0f80bca4}
+      \strng{authorfullhash}{8fd238b13519d7b67892866e0f80bca4}
+      \strng{authorfullhashraw}{8fd238b13519d7b67892866e0f80bca4}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Photoacoustic imaging (PAI) can bridge the gap between high resolution optical imaging and deep tissue imaging applications. This Review introduces PAI as well as various implementations for a range of biological applications.}
+      \field{journaltitle}{Nature Methods}
+      \field{month}{08}
+      \field{number}{8}
+      \field{title}{A practical guide to photoacoustic tomography in the life sciences}
+      \field{volume}{13}
+      \field{year}{2016}
+      \field{pages}{627\bibrangedash 638}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1038/nmeth.3925
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1038/nmeth.3925
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1038/nmeth.3925
+      \endverb
+    \endentry
+    \entry{7422116}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=713b4d01da39896b7dda6f1fcd355d11}{%
+           family={Rao},
+           familyi={R\bibinitperiod},
+           given={Jing},
+           giveni={J\bibinitperiod}}}%
+        {{hash=faf924ae74d88779cb3d0a68cce57f16}{%
+           family={Ratassepp},
+           familyi={R\bibinitperiod},
+           given={Madis},
+           giveni={M\bibinitperiod}}}%
+        {{hash=c5d1e17fe7f6f933ae8ad2ddc0df908f}{%
+           family={Fan},
+           familyi={F\bibinitperiod},
+           given={Zheng},
+           giveni={Z\bibinitperiod}}}%
+      }
+      \strng{namehash}{556c938dffdec7d6f2c3a9725921ae0b}
+      \strng{fullhash}{556c938dffdec7d6f2c3a9725921ae0b}
+      \strng{fullhashraw}{556c938dffdec7d6f2c3a9725921ae0b}
+      \strng{bibnamehash}{556c938dffdec7d6f2c3a9725921ae0b}
+      \strng{authorbibnamehash}{556c938dffdec7d6f2c3a9725921ae0b}
+      \strng{authornamehash}{556c938dffdec7d6f2c3a9725921ae0b}
+      \strng{authorfullhash}{556c938dffdec7d6f2c3a9725921ae0b}
+      \strng{authorfullhashraw}{556c938dffdec7d6f2c3a9725921ae0b}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Ultrasonics, Ferroelectrics, and Frequency Control}
+      \field{number}{5}
+      \field{title}{Guided Wave Tomography Based on Full Waveform Inversion}
+      \field{volume}{63}
+      \field{year}{2016}
+      \field{pages}{737\bibrangedash 745}
+      \range{pages}{9}
+      \verb{doi}
+      \verb 10.1109/TUFFC.2016.2536144
+      \endverb
+      \keyw{Tomography;Numerical models;Scattering;Acoustics;Frequency control;Mathematical model;Frequency-domain analysis;Full waveform inversion (FWI);guided wave tomography;irregular shaped defect}
+    \endentry
+    \entry{RAISSI2019686}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=a3194cb4f8e3959e569236521aa2fd86}{%
+           family={Raissi},
+           familyi={R\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+        {{hash=c2e8423b7b49343a85abf9af92ee2a82}{%
+           family={Perdikaris},
+           familyi={P\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+        {{hash=1c2f5930e36485e8d38a87746769fdcc}{%
+           family={Karniadakis},
+           familyi={K\bibinitperiod},
+           given={G.E.},
+           giveni={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{a17a0649dc8bad70026488d4ea37c508}
+      \strng{fullhash}{a17a0649dc8bad70026488d4ea37c508}
+      \strng{fullhashraw}{a17a0649dc8bad70026488d4ea37c508}
+      \strng{bibnamehash}{a17a0649dc8bad70026488d4ea37c508}
+      \strng{authorbibnamehash}{a17a0649dc8bad70026488d4ea37c508}
+      \strng{authornamehash}{a17a0649dc8bad70026488d4ea37c508}
+      \strng{authorfullhash}{a17a0649dc8bad70026488d4ea37c508}
+      \strng{authorfullhashraw}{a17a0649dc8bad70026488d4ea37c508}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{We introduce physics-informed neural networks – neural networks that are trained to solve supervised learning tasks while respecting any given laws of physics described by general nonlinear partial differential equations. In this work, we present our developments in the context of solving two main classes of problems: data-driven solution and data-driven discovery of partial differential equations. Depending on the nature and arrangement of the available data, we devise two distinct types of algorithms, namely continuous time and discrete time models. The first type of models forms a new family of data-efficient spatio-temporal function approximators, while the latter type allows the use of arbitrarily accurate implicit Runge–Kutta time stepping schemes with unlimited number of stages. The effectiveness of the proposed framework is demonstrated through a collection of classical problems in fluids, quantum mechanics, reaction–diffusion systems, and the propagation of nonlinear shallow-water waves.}
+      \field{issn}{0021-9991}
+      \field{journaltitle}{Journal of Computational Physics}
+      \field{title}{Physics-informed neural networks: A deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations}
+      \field{volume}{378}
+      \field{year}{2019}
+      \field{pages}{686\bibrangedash 707}
+      \range{pages}{22}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.jcp.2018.10.045
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0021999118307125
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0021999118307125
+      \endverb
+      \keyw{Data-driven scientific computing,Machine learning,Predictive modeling,Runge–Kutta methods,Nonlinear dynamics}
+    \endentry
+    \entry{10.1093/gji/ggab010}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=6e13595bc707c04198ec8fd174353628}{%
+           family={Song},
+           familyi={S\bibinitperiod},
+           given={Chao},
+           giveni={C\bibinitperiod}}}%
+        {{hash=a4332f0c44f428308a0b12da20ce8df8}{%
+           family={Alkhalifah},
+           familyi={A\bibinitperiod},
+           given={Tariq},
+           giveni={T\bibinitperiod}}}%
+        {{hash=14c5fd4d53a286d4ee4e2c6f3d44176b}{%
+           family={Waheed},
+           familyi={W\bibinitperiod},
+           given={Umair\bibnamedelima Bin},
+           giveni={U\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+      }
+      \strng{namehash}{c888c6ba2f480dc2ef3408b5e38e1f15}
+      \strng{fullhash}{c888c6ba2f480dc2ef3408b5e38e1f15}
+      \strng{fullhashraw}{c888c6ba2f480dc2ef3408b5e38e1f15}
+      \strng{bibnamehash}{c888c6ba2f480dc2ef3408b5e38e1f15}
+      \strng{authorbibnamehash}{c888c6ba2f480dc2ef3408b5e38e1f15}
+      \strng{authornamehash}{c888c6ba2f480dc2ef3408b5e38e1f15}
+      \strng{authorfullhash}{c888c6ba2f480dc2ef3408b5e38e1f15}
+      \strng{authorfullhashraw}{c888c6ba2f480dc2ef3408b5e38e1f15}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Frequency-domain wavefield solutions corresponding to the anisotropic acoustic wave equation can be used to describe the anisotropic nature of the Earth. To solve a frequency-domain wave equation, we often need to invert the impedance matrix. This results in a dramatic increase in computational cost as the model size increases. It is even a bigger challenge for anisotropic media, where the impedance matrix is far more complex. In addition, the conventional finite-difference method produces numerical dispersion artefacts in solving acoustic wave equations for anisotropic media. To address these issues, we use the emerging paradigm of physics-informed neural networks (PINNs) to obtain wavefield solutions for an acoustic wave equation for transversely isotropic (TI) media with a vertical axis of symmetry (VTI). PINNs utilize the concept of automatic differentiation to calculate their partial derivatives, which are free of numerical dispersion artefacts. Thus, we use the wave equation as a loss function to train a neural network to provide functional solutions to the acoustic VTI form of the wave equation. Instead of predicting the pressure wavefields directly, we solve for the scattered pressure wavefields to avoid dealing with the point-source singularity. We use the spatial coordinates as input data to the network, which outputs the real and imaginary parts of the scattered wavefields and auxiliary function. After training a deep neural network, we can evaluate the wavefield at any point in space almost instantly using this trained neural network without calculating the impedance matrix inverse. We demonstrate these features on a simple 2-D anomaly model and a 2-D layered model. Additional tests on a modified 3-D Overthrust model and a 2-D model with irregular topography further validate the effectiveness of the proposed method.}
+      \field{issn}{0956-540X}
+      \field{journaltitle}{Geophysical Journal International}
+      \field{month}{01}
+      \field{number}{2}
+      \field{title}{Solving the frequency-domain acoustic VTI wave equation using physics-informed neural networks}
+      \field{volume}{225}
+      \field{year}{2021}
+      \field{pages}{846\bibrangedash 859}
+      \range{pages}{14}
+      \verb{doi}
+      \verb 10.1093/gji/ggab010
+      \endverb
+      \verb{eprint}
+      \verb https://academic.oup.com/gji/article-pdf/225/2/846/40816370/ggab010.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1093/gji/ggab010
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1093/gji/ggab010
+      \endverb
+    \endentry
+    \entry{waheed2021pinntomoseismictomographyusing}{misc}{}{}
+      \name{author}{5}{}{%
+        {{hash=105e92ff70d971aca87d83cc30cafa11}{%
+           family={Waheed},
+           familyi={W\bibinitperiod},
+           given={Umair},
+           giveni={U\bibinitperiod},
+           prefix={bin},
+           prefixi={b\bibinitperiod}}}%
+        {{hash=a4332f0c44f428308a0b12da20ce8df8}{%
+           family={Alkhalifah},
+           familyi={A\bibinitperiod},
+           given={Tariq},
+           giveni={T\bibinitperiod}}}%
+        {{hash=54ceedda9dccec97fb61ec85fd321445}{%
+           family={Haghighat},
+           familyi={H\bibinitperiod},
+           given={Ehsan},
+           giveni={E\bibinitperiod}}}%
+        {{hash=6e13595bc707c04198ec8fd174353628}{%
+           family={Song},
+           familyi={S\bibinitperiod},
+           given={Chao},
+           giveni={C\bibinitperiod}}}%
+        {{hash=567907cc46b805f6f6a9868243221fb5}{%
+           family={Virieux},
+           familyi={V\bibinitperiod},
+           given={Jean},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{18c1a62a9a5faeca00fade508470fa52}
+      \strng{fullhash}{e350e3dfb73ff2430258c2005dc92984}
+      \strng{fullhashraw}{e350e3dfb73ff2430258c2005dc92984}
+      \strng{bibnamehash}{18c1a62a9a5faeca00fade508470fa52}
+      \strng{authorbibnamehash}{18c1a62a9a5faeca00fade508470fa52}
+      \strng{authornamehash}{18c1a62a9a5faeca00fade508470fa52}
+      \strng{authorfullhash}{e350e3dfb73ff2430258c2005dc92984}
+      \strng{authorfullhashraw}{e350e3dfb73ff2430258c2005dc92984}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{physics.comp-ph}
+      \field{eprinttype}{arXiv}
+      \field{title}{PINNtomo: Seismic tomography using physics-informed neural networks}
+      \field{year}{2021}
+      \verb{eprint}
+      \verb 2104.01588
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2104.01588
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2104.01588
+      \endverb
+    \endentry
+    \entry{10230537}{inproceedings}{}{}
+      \name{author}{2}{}{%
+        {{hash=90631ec1cdd6d7bdd0fb734912e416a5}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Xilun},
+           giveni={X\bibinitperiod}}}%
+        {{hash=9418370ab3ace9009f2cf6b28dec63ed}{%
+           family={Almekkawy},
+           familyi={A\bibinitperiod},
+           given={Mohamed},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{7618c1b9cf5d42f2756325016ec4b334}
+      \strng{fullhash}{7618c1b9cf5d42f2756325016ec4b334}
+      \strng{fullhashraw}{7618c1b9cf5d42f2756325016ec4b334}
+      \strng{bibnamehash}{7618c1b9cf5d42f2756325016ec4b334}
+      \strng{authorbibnamehash}{7618c1b9cf5d42f2756325016ec4b334}
+      \strng{authornamehash}{7618c1b9cf5d42f2756325016ec4b334}
+      \strng{authorfullhash}{7618c1b9cf5d42f2756325016ec4b334}
+      \strng{authorfullhashraw}{7618c1b9cf5d42f2756325016ec4b334}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2023 IEEE 20th International Symposium on Biomedical Imaging (ISBI)}
+      \field{title}{Full Wave Inversion For Ultrasound Tomography Using Physics Based Deep Neural Network}
+      \field{year}{2023}
+      \field{pages}{1\bibrangedash 4}
+      \range{pages}{4}
+      \verb{doi}
+      \verb 10.1109/ISBI53787.2023.10230537
+      \endverb
+      \keyw{Training;Ultrasonic imaging;Inverse problems;Propagation;Partial differential equations;Transfer learning;Phantoms;deep learning;physical-informed neural network;wave equation}
+    \endentry
+    \entry{rahst}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=626c1f26ba096d0310c3c9ec047415e6}{%
+           family={Rasht-Behesht},
+           familyi={R\bibinithyphendelim B\bibinitperiod},
+           given={Majid},
+           giveni={M\bibinitperiod}}}%
+        {{hash=f8f62547d12a8fb87970b052b8f7d6ce}{%
+           family={Huber},
+           familyi={H\bibinitperiod},
+           given={Christian},
+           giveni={C\bibinitperiod}}}%
+        {{hash=b6ff2e071655e6d1eae8558cc2f4eb39}{%
+           family={Shukla},
+           familyi={S\bibinitperiod},
+           given={Khemraj},
+           giveni={K\bibinitperiod}}}%
+        {{hash=bfaf154b1f300f885a75adce4c6b773e}{%
+           family={Karniadakis},
+           familyi={K\bibinitperiod},
+           given={George\bibnamedelima Em},
+           giveni={G\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \strng{namehash}{1e564e02a59d58b8f27087de962eb967}
+      \strng{fullhash}{e4e5fef089ddb6d714e21588486a0e30}
+      \strng{fullhashraw}{e4e5fef089ddb6d714e21588486a0e30}
+      \strng{bibnamehash}{1e564e02a59d58b8f27087de962eb967}
+      \strng{authorbibnamehash}{1e564e02a59d58b8f27087de962eb967}
+      \strng{authornamehash}{1e564e02a59d58b8f27087de962eb967}
+      \strng{authorfullhash}{e4e5fef089ddb6d714e21588486a0e30}
+      \strng{authorfullhashraw}{e4e5fef089ddb6d714e21588486a0e30}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Abstract We propose a new approach to the solution of the wave propagation and full waveform inversions (FWIs) based on a recent advance in deep learning called physics-informed neural networks (PINNs). In this study, we present an algorithm for PINNs applied to the acoustic wave equation and test the method with both forward models and FWI case studies. These synthetic case studies are designed to explore the ability of PINNs to handle varying degrees of structural complexity using both teleseismic plane waves and seismic point sources. PINNs' meshless formalism allows for a flexible implementation of the wave equation and different types of boundary conditions. For instance, our models demonstrate that PINN automatically satisfies absorbing boundary conditions, a serious computational challenge for common wave propagation solvers. Furthermore, a priori knowledge of the subsurface structure can be seamlessly encoded in PINNs' formulation. We find that the current state-of-the-art PINNs provide good results for the forward model, even though spectral element or finite difference methods are more efficient and accurate. More importantly, our results demonstrate that PINNs yield excellent results for inversions on all cases considered and with limited computational complexity. We discuss the current limitations of the method with complex velocity models as well as strategies to overcome these challenges. Using PINNs as a geophysical inversion solver offers exciting perspectives, not only for the full waveform seismic inversions, but also when dealing with other geophysical datasets (e.g., MT, gravity) as well as joint inversions because of its robust framework and simple implementation.}
+      \field{journaltitle}{Journal of Geophysical Research: Solid Earth}
+      \field{number}{5}
+      \field{title}{Physics-Informed Neural Networks (PINNs) for Wave Propagation and Full Waveform Inversions}
+      \field{volume}{127}
+      \field{year}{2022}
+      \verb{doi}
+      \verb https://doi.org/10.1029/2021JB023120
+      \endverb
+      \verb{eprint}
+      \verb https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1029/2021JB023120
+      \endverb
+      \verb{urlraw}
+      \verb https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/2021JB023120
+      \endverb
+      \verb{url}
+      \verb https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/2021JB023120
+      \endverb
+      \keyw{physics-informed neural networks,deep learning,full waveform inversion,acoustic wave propagation}
+    \endentry
+    \entry{Moseley2023}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=7447b1719aec4d046851d2c9708210fe}{%
+           family={Moseley},
+           familyi={M\bibinitperiod},
+           given={Ben},
+           giveni={B\bibinitperiod}}}%
+        {{hash=d1740fbea2675bcc1d15aca9ec37610a}{%
+           family={Markham},
+           familyi={M\bibinitperiod},
+           given={Andrew},
+           giveni={A\bibinitperiod}}}%
+        {{hash=f42f40dec95fb576c42900b76996907d}{%
+           family={Nissen-Meyer},
+           familyi={N\bibinithyphendelim M\bibinitperiod},
+           given={Tarje},
+           giveni={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{3a4e2afd33085afa9f56fd0f60d43cf2}
+      \strng{fullhash}{3a4e2afd33085afa9f56fd0f60d43cf2}
+      \strng{fullhashraw}{3a4e2afd33085afa9f56fd0f60d43cf2}
+      \strng{bibnamehash}{3a4e2afd33085afa9f56fd0f60d43cf2}
+      \strng{authorbibnamehash}{3a4e2afd33085afa9f56fd0f60d43cf2}
+      \strng{authornamehash}{3a4e2afd33085afa9f56fd0f60d43cf2}
+      \strng{authorfullhash}{3a4e2afd33085afa9f56fd0f60d43cf2}
+      \strng{authorfullhashraw}{3a4e2afd33085afa9f56fd0f60d43cf2}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Recently, physics-informed neural networks (PINNs) have offered a powerful new paradigm for solving problems relating to differential equations... In this work, we propose a new, scalable approach for solving large problems relating to differential equations called finite basis physics-informed neural networks (FBPINNs).}
+      \field{journaltitle}{Advances in Computational Mathematics}
+      \field{month}{07}
+      \field{number}{4}
+      \field{title}{Finite basis physics-informed neural networks ({FBPINNs}): a scalable domain decomposition approach for solving differential equations}
+      \field{volume}{49}
+      \field{year}{2023}
+      \field{pages}{62}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1007/s10444-023-10065-9
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/s10444-023-10065-9
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/s10444-023-10065-9
+      \endverb
+    \endentry
+    \entry{Preskill2018quantumcomputingin}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=fbe61da8813855105d0c727fa93b4b4d}{%
+           family={Preskill},
+           familyi={P\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Verein zur Förderung des Open Access Publizierens in den Quantenwissenschaften}%
+      }
+      \strng{namehash}{fbe61da8813855105d0c727fa93b4b4d}
+      \strng{fullhash}{fbe61da8813855105d0c727fa93b4b4d}
+      \strng{fullhashraw}{fbe61da8813855105d0c727fa93b4b4d}
+      \strng{bibnamehash}{fbe61da8813855105d0c727fa93b4b4d}
+      \strng{authorbibnamehash}{fbe61da8813855105d0c727fa93b4b4d}
+      \strng{authornamehash}{fbe61da8813855105d0c727fa93b4b4d}
+      \strng{authorfullhash}{fbe61da8813855105d0c727fa93b4b4d}
+      \strng{authorfullhashraw}{fbe61da8813855105d0c727fa93b4b4d}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{2521-327X}
+      \field{journaltitle}{{Quantum}}
+      \field{month}{8}
+      \field{title}{Quantum {C}omputing in the {NISQ} era and beyond}
+      \field{volume}{2}
+      \field{year}{2018}
+      \field{pages}{79}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.22331/q-2018-08-06-79
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.22331/q-2018-08-06-79
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.22331/q-2018-08-06-79
+      \endverb
+    \endentry
+    \entry{PhysRevA.101.032308}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=566bc76219b4c730f8c2d46f5dcc455a}{%
+           family={Schuld},
+           familyi={S\bibinitperiod},
+           given={Maria},
+           giveni={M\bibinitperiod}}}%
+        {{hash=8bb3ca26d47dff11fac330ecd976d870}{%
+           family={Bocharov},
+           familyi={B\bibinitperiod},
+           given={Alex},
+           giveni={A\bibinitperiod}}}%
+        {{hash=1e0b27cffef483b809894bbe98096b26}{%
+           family={Svore},
+           familyi={S\bibinitperiod},
+           given={Krysta\bibnamedelima M.},
+           giveni={K\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=9906b78ec80183f9ac5008ae54ce7088}{%
+           family={Wiebe},
+           familyi={W\bibinitperiod},
+           given={Nathan},
+           giveni={N\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {American Physical Society}%
+      }
+      \strng{namehash}{174d124a8cd3fb18c916be5f0deec227}
+      \strng{fullhash}{6b3f177d75021f2f2ef675096a635dae}
+      \strng{fullhashraw}{6b3f177d75021f2f2ef675096a635dae}
+      \strng{bibnamehash}{174d124a8cd3fb18c916be5f0deec227}
+      \strng{authorbibnamehash}{174d124a8cd3fb18c916be5f0deec227}
+      \strng{authornamehash}{174d124a8cd3fb18c916be5f0deec227}
+      \strng{authorfullhash}{6b3f177d75021f2f2ef675096a635dae}
+      \strng{authorfullhashraw}{6b3f177d75021f2f2ef675096a635dae}
+      \field{extraname}{1}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issue}{3}
+      \field{journaltitle}{Phys. Rev. A}
+      \field{month}{3}
+      \field{title}{Circuit-centric quantum classifiers}
+      \field{volume}{101}
+      \field{year}{2020}
+      \field{pages}{032308}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1103/PhysRevA.101.032308
+      \endverb
+      \verb{urlraw}
+      \verb https://link.aps.org/doi/10.1103/PhysRevA.101.032308
+      \endverb
+      \verb{url}
+      \verb https://link.aps.org/doi/10.1103/PhysRevA.101.032308
+      \endverb
+    \endentry
+    \entry{Benedetti_2019}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=a72591df50023022dfff6f8200ef27fe}{%
+           family={Benedetti},
+           familyi={B\bibinitperiod},
+           given={Marcello},
+           giveni={M\bibinitperiod}}}%
+        {{hash=274e282577fc2d1652647222f033f539}{%
+           family={Lloyd},
+           familyi={L\bibinitperiod},
+           given={Erika},
+           giveni={E\bibinitperiod}}}%
+        {{hash=e637e1d0e0a1068efffc644459f15f55}{%
+           family={Sack},
+           familyi={S\bibinitperiod},
+           given={Stefan},
+           giveni={S\bibinitperiod}}}%
+        {{hash=4dbefc3f9d1da32047d9349fa33d431a}{%
+           family={Fiorentini},
+           familyi={F\bibinitperiod},
+           given={Mattia},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IOP Publishing}%
+      }
+      \strng{namehash}{78f945f62a9a0d68e82b1c6b7a9e6050}
+      \strng{fullhash}{b331929d98c2f14c09f0ffb1fc66acd0}
+      \strng{fullhashraw}{b331929d98c2f14c09f0ffb1fc66acd0}
+      \strng{bibnamehash}{78f945f62a9a0d68e82b1c6b7a9e6050}
+      \strng{authorbibnamehash}{78f945f62a9a0d68e82b1c6b7a9e6050}
+      \strng{authornamehash}{78f945f62a9a0d68e82b1c6b7a9e6050}
+      \strng{authorfullhash}{b331929d98c2f14c09f0ffb1fc66acd0}
+      \strng{authorfullhashraw}{b331929d98c2f14c09f0ffb1fc66acd0}
+      \field{extraname}{1}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Hybrid quantum–classical systems make it possible to utilize existing quantum computers to their fullest extent. Within this framework, parameterized quantum circuits can be regarded as machine learning models with remarkable expressive power. This Review presents the components of these models and discusses their application to a variety of data-driven tasks, such as supervised learning and generative modeling. With an increasing number of experimental demonstrations carried out on actual quantum hardware and with software being actively developed, this rapidly growing field is poised to have a broad spectrum of real-world applications.}
+      \field{journaltitle}{Quantum Science and Technology}
+      \field{month}{11}
+      \field{number}{4}
+      \field{title}{Parameterized quantum circuits as machine learning models}
+      \field{volume}{4}
+      \field{year}{2019}
+      \field{pages}{043001}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1088/2058-9565/ab4eb5
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1088/2058-9565/ab4eb5
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1088/2058-9565/ab4eb5
+      \endverb
+    \endentry
+    \entry{Ostaszewski2021structure}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=bbed4c280130bd2ccc3c81a498a2d679}{%
+           family={Ostaszewski},
+           familyi={O\bibinitperiod},
+           given={Mateusz},
+           giveni={M\bibinitperiod}}}%
+        {{hash=b1d176833e606713973a4617ef10e618}{%
+           family={Grant},
+           familyi={G\bibinitperiod},
+           given={Edward},
+           giveni={E\bibinitperiod}}}%
+        {{hash=a72591df50023022dfff6f8200ef27fe}{%
+           family={Benedetti},
+           familyi={B\bibinitperiod},
+           given={Marcello},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Verein zur Förderung des Open Access Publizierens in den Quantenwissenschaften}%
+      }
+      \strng{namehash}{9cf074657dbf9584857bf97b2929b6b6}
+      \strng{fullhash}{9cf074657dbf9584857bf97b2929b6b6}
+      \strng{fullhashraw}{9cf074657dbf9584857bf97b2929b6b6}
+      \strng{bibnamehash}{9cf074657dbf9584857bf97b2929b6b6}
+      \strng{authorbibnamehash}{9cf074657dbf9584857bf97b2929b6b6}
+      \strng{authornamehash}{9cf074657dbf9584857bf97b2929b6b6}
+      \strng{authorfullhash}{9cf074657dbf9584857bf97b2929b6b6}
+      \strng{authorfullhashraw}{9cf074657dbf9584857bf97b2929b6b6}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{2521-327X}
+      \field{journaltitle}{{Quantum}}
+      \field{month}{1}
+      \field{title}{Structure optimization for parameterized quantum circuits}
+      \field{volume}{5}
+      \field{year}{2021}
+      \field{pages}{391}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.22331/q-2021-01-28-391
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.22331/q-2021-01-28-391
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.22331/q-2021-01-28-391
+      \endverb
+    \endentry
+    \entry{https://doi.org/10.1002/qute.202300065}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=496f37a6b2a57dfd45f4ae984ad3d160}{%
+           family={Paine},
+           familyi={P\bibinitperiod},
+           given={Annie\bibnamedelima E.},
+           giveni={A\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{hash=141a67c9b9371d479b73cd4c5b73928d}{%
+           family={Elfving},
+           familyi={E\bibinitperiod},
+           given={Vincent\bibnamedelima E.},
+           giveni={V\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{hash=84e4c1fc56182ace7d420baa57651de1}{%
+           family={Kyriienko},
+           familyi={K\bibinitperiod},
+           given={Oleksandr},
+           giveni={O\bibinitperiod}}}%
+      }
+      \strng{namehash}{9e2b7527502c7fb4a38b225c45e76837}
+      \strng{fullhash}{9e2b7527502c7fb4a38b225c45e76837}
+      \strng{fullhashraw}{9e2b7527502c7fb4a38b225c45e76837}
+      \strng{bibnamehash}{9e2b7527502c7fb4a38b225c45e76837}
+      \strng{authorbibnamehash}{9e2b7527502c7fb4a38b225c45e76837}
+      \strng{authornamehash}{9e2b7527502c7fb4a38b225c45e76837}
+      \strng{authorfullhash}{9e2b7527502c7fb4a38b225c45e76837}
+      \strng{authorfullhashraw}{9e2b7527502c7fb4a38b225c45e76837}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Abstract A quantum algorithm is proposed for sampling from a solution of stochastic differential equations (SDEs). Using differentiable quantum circuits (DQCs) with a feature map encoding of latent variables, the quantile function is represented for an underlying probability distribution and samples extracted as DQC expectation values. Using quantile mechanics the system is propagated in time, thereby allowing for time-series generation. The method is tested by simulating the Ornstein-Uhlenbeck process and sampling at times different from the initial point, as required in financial analysis and dataset augmentation. Additionally, continuous quantum generative adversarial networks (qGANs) are analyzed, and the authors show that they represent quantile functions with a modified (reordered) shape that impedes their efficient time-propagation. The results shed light on the connection between quantum quantile mechanics (QQM) and qGANs for SDE-based distributions, and point the importance of differential constraints for model training, analogously with the recent success of physics informed neural networks.}
+      \field{journaltitle}{Advanced Quantum Technologies}
+      \field{number}{10}
+      \field{title}{Quantum Quantile Mechanics: Solving Stochastic Differential Equations for Generating Time-Series}
+      \field{volume}{6}
+      \field{year}{2023}
+      \field{pages}{2300065}
+      \range{pages}{1}
+      \verb{doi}
+      \verb https://doi.org/10.1002/qute.202300065
+      \endverb
+      \verb{eprint}
+      \verb https://advanced.onlinelibrary.wiley.com/doi/pdf/10.1002/qute.202300065
+      \endverb
+      \verb{urlraw}
+      \verb https://advanced.onlinelibrary.wiley.com/doi/abs/10.1002/qute.202300065
+      \endverb
+      \verb{url}
+      \verb https://advanced.onlinelibrary.wiley.com/doi/abs/10.1002/qute.202300065
+      \endverb
+      \keyw{generative modeling,quantile function,quantum machine learning,quantum sampling}
+    \endentry
+    \entry{LEONG2025106782}{article}{}{}
+      \name{author}{5}{}{%
+        {{hash=ae55f1aa90d9c0ffc52702ec2a124eb7}{%
+           family={Leong},
+           familyi={L\bibinitperiod},
+           given={Fong\bibnamedelima Yew},
+           giveni={F\bibinitperiod\bibinitdelim Y\bibinitperiod}}}%
+        {{hash=1e45f8586974491f2c6531ed8e8132b4}{%
+           family={Ewe},
+           familyi={E\bibinitperiod},
+           given={Wei-Bin},
+           giveni={W\bibinithyphendelim B\bibinitperiod}}}%
+        {{hash=f69e68b4ca6695d1671f7707bc17337d}{%
+           family={Tran},
+           familyi={T\bibinitperiod},
+           given={Si\bibnamedelima Bui\bibnamedelima Quang},
+           giveni={S\bibinitperiod\bibinitdelim B\bibinitperiod\bibinitdelim Q\bibinitperiod}}}%
+        {{hash=0e89108d978a69cef641d011df51b076}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Zhongyuan},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=96def98f0cf5b8e8f504d2b0cedef73a}{%
+           family={Khoo},
+           familyi={K\bibinitperiod},
+           given={Jun\bibnamedelima Yong},
+           giveni={J\bibinitperiod\bibinitdelim Y\bibinitperiod}}}%
+      }
+      \strng{namehash}{f7bc46555239928d11134d6f23ea9289}
+      \strng{fullhash}{4c5221251b8a4c3540e96a8213879135}
+      \strng{fullhashraw}{4c5221251b8a4c3540e96a8213879135}
+      \strng{bibnamehash}{f7bc46555239928d11134d6f23ea9289}
+      \strng{authorbibnamehash}{f7bc46555239928d11134d6f23ea9289}
+      \strng{authornamehash}{f7bc46555239928d11134d6f23ea9289}
+      \strng{authorfullhash}{4c5221251b8a4c3540e96a8213879135}
+      \strng{authorfullhashraw}{4c5221251b8a4c3540e96a8213879135}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This study benchmarks hybrid quantum physics-informed neural network (HQPINN) to model high-speed flows, compared against classical physics-informed neural networks (PINNs) and fully quantum neural networks (QNNs). The HQPINN architecture integrates a parameterized quantum circuit (PQC) with a classical neural network in parallel, trained via a physics-informed loss. Across harmonic, non-harmonic, and transonic benchmarks, HQPINNs demonstrate balanced performance, offering competitive accuracy and stability with reduced parameter cost. Quantum PINNs are highly efficient for harmonic problems achieving the lowest loss with minimal parameters due to their Fourier structure, but struggle to generalize in non-harmonic settings involving shocks and discontinuities. HQPINNs mitigate such artifacts, and with sufficient parameterization, can match the performance of classical models in more complex regimes. Although constrained by current quantum emulation costs and scalability, HQPINNs show promise as general-purpose solvers, offering parameter efficiency with robust fallback behavior, particularly suited for problems where the nature of the solution is not known a-priori.}
+      \field{issn}{0045-7930}
+      \field{journaltitle}{Computers \& Fluids}
+      \field{title}{Hybrid quantum physics-informed neural network: Towards efficient learning of high-speed flows}
+      \field{volume}{301}
+      \field{year}{2025}
+      \field{pages}{106782}
+      \range{pages}{1}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.compfluid.2025.106782
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0045793025002427
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0045793025002427
+      \endverb
+      \keyw{Hybrid quantum-classical computing,Physics-informed neural networks,High-speed flows,Shock capturing,Quantum neural networks}
+    \endentry
+    \entry{Berger2025}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=9ed0dcfc6a472ad65ee8cc75949d7789}{%
+           family={Berger},
+           familyi={B\bibinitperiod},
+           given={Stefan},
+           giveni={S\bibinitperiod}}}%
+        {{hash=fd533854044911426d085ea442ca05d7}{%
+           family={Hosters},
+           familyi={H\bibinitperiod},
+           given={Norbert},
+           giveni={N\bibinitperiod}}}%
+        {{hash=28181041151c3c08221c47a2d5e1691d}{%
+           family={Möller},
+           familyi={M\bibinitperiod},
+           given={Matthias},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{7aafab4bd986ca06b518fb0fb7c65d33}
+      \strng{fullhash}{7aafab4bd986ca06b518fb0fb7c65d33}
+      \strng{fullhashraw}{7aafab4bd986ca06b518fb0fb7c65d33}
+      \strng{bibnamehash}{7aafab4bd986ca06b518fb0fb7c65d33}
+      \strng{authorbibnamehash}{7aafab4bd986ca06b518fb0fb7c65d33}
+      \strng{authornamehash}{7aafab4bd986ca06b518fb0fb7c65d33}
+      \strng{authorfullhash}{7aafab4bd986ca06b518fb0fb7c65d33}
+      \strng{authorfullhashraw}{7aafab4bd986ca06b518fb0fb7c65d33}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This paper proposes a novel approach for solving nonlinear partial differential equations (PDEs) with a quantum computer, the trainable embedding quantum physics informed neural network (TE-QPINN). By leveraging the advantages of classical and quantum computers, we can create algorithms that have a potential to be run on noisy intermediate-scale quantum devices (NISQ). The approach achieves superior results compared to classical PINNs while using the same number of parameters.}
+      \field{journaltitle}{Scientific Reports}
+      \field{month}{05}
+      \field{number}{1}
+      \field{title}{Trainable embedding quantum physics informed neural networks for solving nonlinear {PDEs}}
+      \field{volume}{15}
+      \field{year}{2025}
+      \field{pages}{18823}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1038/s41598-025-02959-z
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1038/s41598-025-02959-z
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1038/s41598-025-02959-z
+      \endverb
+    \endentry
+    \entry{Nguyen2025}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=aebc77350c8e3ebdf4db0fc649e20111}{%
+           family={Nguyen},
+           familyi={N\bibinitperiod},
+           given={Hoang\bibnamedelima Anh},
+           giveni={H\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=8cc84a07014a4cfde25a167febfc3e3e}{%
+           family={Tura},
+           familyi={T\bibinitperiod},
+           given={Ali},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Nature Publishing Group}%
+      }
+      \strng{namehash}{36cf493562a8574735eb5129be74670d}
+      \strng{fullhash}{36cf493562a8574735eb5129be74670d}
+      \strng{fullhashraw}{36cf493562a8574735eb5129be74670d}
+      \strng{bibnamehash}{36cf493562a8574735eb5129be74670d}
+      \strng{authorbibnamehash}{36cf493562a8574735eb5129be74670d}
+      \strng{authornamehash}{36cf493562a8574735eb5129be74670d}
+      \strng{authorfullhash}{36cf493562a8574735eb5129be74670d}
+      \strng{authorfullhashraw}{36cf493562a8574735eb5129be74670d}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Scientific Reports}
+      \field{number}{1}
+      \field{title}{Seismic traveltime inversion with quantum annealing}
+      \field{volume}{15}
+      \field{year}{2025}
+      \field{pages}{17984}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1038/s41598-025-01188-8
+      \endverb
+    \endentry
+    \entry{komatitsch1998spectral}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=6ebc37feae5a296190a5b4dc90096105}{%
+           family={Komatitsch},
+           familyi={K\bibinitperiod},
+           given={Dimitri},
+           giveni={D\bibinitperiod}}}%
+        {{hash=e1f31ed528eccb8bf1ed073751a94547}{%
+           family={Vilotte},
+           familyi={V\bibinitperiod},
+           given={Jean-Pierre},
+           giveni={J\bibinithyphendelim P\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Seismological Society of America}%
+      }
+      \strng{namehash}{ec9ed92dd1c9f4e0ce9b5bc97cfe4c6d}
+      \strng{fullhash}{ec9ed92dd1c9f4e0ce9b5bc97cfe4c6d}
+      \strng{fullhashraw}{ec9ed92dd1c9f4e0ce9b5bc97cfe4c6d}
+      \strng{bibnamehash}{ec9ed92dd1c9f4e0ce9b5bc97cfe4c6d}
+      \strng{authorbibnamehash}{ec9ed92dd1c9f4e0ce9b5bc97cfe4c6d}
+      \strng{authornamehash}{ec9ed92dd1c9f4e0ce9b5bc97cfe4c6d}
+      \strng{authorfullhash}{ec9ed92dd1c9f4e0ce9b5bc97cfe4c6d}
+      \strng{authorfullhashraw}{ec9ed92dd1c9f4e0ce9b5bc97cfe4c6d}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Bulletin of the Seismological Society of America}
+      \field{number}{2}
+      \field{title}{The spectral element method: An efficient tool to simulate the seismic response of 2D and 3D geological structures}
+      \field{volume}{88}
+      \field{year}{1998}
+      \field{pages}{368\bibrangedash 392}
+      \range{pages}{25}
+    \endentry
+    \entry{cerezo2021variational}{article}{}{}
+      \name{author}{11}{}{%
+        {{hash=cda5b62144e1a42caba2840a7224b769}{%
+           family={Cerezo},
+           familyi={C\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+        {{hash=655d5e2bade9a389149f8beb0fc5c18c}{%
+           family={Arrasmith},
+           familyi={A\bibinitperiod},
+           given={Andrew},
+           giveni={A\bibinitperiod}}}%
+        {{hash=7bb1dcf8a93d1ecc6f9531ece93ef1fa}{%
+           family={Babbush},
+           familyi={B\bibinitperiod},
+           given={Ryan},
+           giveni={R\bibinitperiod}}}%
+        {{hash=b10a34e16a501939634880eade0cec5e}{%
+           family={Benjamin},
+           familyi={B\bibinitperiod},
+           given={Simon\bibnamedelima C.},
+           giveni={S\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=c3acfc5e323c389790b828fbf6955f09}{%
+           family={Endo},
+           familyi={E\bibinitperiod},
+           given={Suguru},
+           giveni={S\bibinitperiod}}}%
+        {{hash=569711c363027fed98622c62cda54209}{%
+           family={Fujii},
+           familyi={F\bibinitperiod},
+           given={Keisuke},
+           giveni={K\bibinitperiod}}}%
+        {{hash=a253ddc1c4c24cde70238bd45dc9aeff}{%
+           family={McClean},
+           familyi={M\bibinitperiod},
+           given={Jarrod\bibnamedelima R.},
+           giveni={J\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=80dde347ecbddac8ca3ca422033ac88b}{%
+           family={Mitarai},
+           familyi={M\bibinitperiod},
+           given={Kosuke},
+           giveni={K\bibinitperiod}}}%
+        {{hash=001b5a60b43cad93e93a32a46ae0c874}{%
+           family={Yuan},
+           familyi={Y\bibinitperiod},
+           given={Xiao},
+           giveni={X\bibinitperiod}}}%
+        {{hash=4a995a4c6263a9857f548527d6fff0c5}{%
+           family={Cincio},
+           familyi={C\bibinitperiod},
+           given={Lukasz},
+           giveni={L\bibinitperiod}}}%
+        {{hash=d10bd053b9868d0af6fa53be761e3350}{%
+           family={Coles},
+           familyi={C\bibinitperiod},
+           given={Patrick\bibnamedelima J.},
+           giveni={P\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Nature Publishing Group}%
+      }
+      \strng{namehash}{9f3fe252c8e07ea798c5758094bc02cd}
+      \strng{fullhash}{aeb54beafe59128c13a6651991958563}
+      \strng{fullhashraw}{aeb54beafe59128c13a6651991958563}
+      \strng{bibnamehash}{9f3fe252c8e07ea798c5758094bc02cd}
+      \strng{authorbibnamehash}{9f3fe252c8e07ea798c5758094bc02cd}
+      \strng{authornamehash}{9f3fe252c8e07ea798c5758094bc02cd}
+      \strng{authorfullhash}{aeb54beafe59128c13a6651991958563}
+      \strng{authorfullhashraw}{aeb54beafe59128c13a6651991958563}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Nature Reviews Physics}
+      \field{number}{9}
+      \field{title}{Variational quantum algorithms}
+      \field{volume}{3}
+      \field{year}{2021}
+      \field{pages}{625\bibrangedash 644}
+      \range{pages}{20}
+      \verb{doi}
+      \verb 10.1038/s42254-021-00348-9
+      \endverb
+    \endentry
+    \entry{havlicek2019supervised}{article}{}{}
+      \name{author}{7}{}{%
+        {{hash=77d207422e3d98d0663c207b774bceab}{%
+           family={Havlíček},
+           familyi={H\bibinitperiod},
+           given={Vojtěch},
+           giveni={V\bibinitperiod}}}%
+        {{hash=fae667f11f5ce3a1e75f762d1ab4e8df}{%
+           family={Córcoles},
+           familyi={C\bibinitperiod},
+           given={Antonio\bibnamedelima D.},
+           giveni={A\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=68b8d929f9cb9fea3f1f9991863a6439}{%
+           family={Temme},
+           familyi={T\bibinitperiod},
+           given={Kristan},
+           giveni={K\bibinitperiod}}}%
+        {{hash=6bc7275eb8de2a3404fd3f07e6c21a2a}{%
+           family={Harrow},
+           familyi={H\bibinitperiod},
+           given={Aram\bibnamedelima W.},
+           giveni={A\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{hash=9705aa9039b085b4ba6158e898c83dea}{%
+           family={Kandala},
+           familyi={K\bibinitperiod},
+           given={Abhinav},
+           giveni={A\bibinitperiod}}}%
+        {{hash=c18a761c9acda3b5e83d9e596c195028}{%
+           family={Chow},
+           familyi={C\bibinitperiod},
+           given={Jerry\bibnamedelima M.},
+           giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=13ffee31f58f6a53a6d6969d093862dc}{%
+           family={Gambetta},
+           familyi={G\bibinitperiod},
+           given={Jay\bibnamedelima M.},
+           giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Nature Publishing Group}%
+      }
+      \strng{namehash}{b605e8001bdac708803769dd87b38c97}
+      \strng{fullhash}{4b89d806d67b8a453e66ff009bee068e}
+      \strng{fullhashraw}{4b89d806d67b8a453e66ff009bee068e}
+      \strng{bibnamehash}{b605e8001bdac708803769dd87b38c97}
+      \strng{authorbibnamehash}{b605e8001bdac708803769dd87b38c97}
+      \strng{authornamehash}{b605e8001bdac708803769dd87b38c97}
+      \strng{authorfullhash}{4b89d806d67b8a453e66ff009bee068e}
+      \strng{authorfullhashraw}{4b89d806d67b8a453e66ff009bee068e}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Nature}
+      \field{number}{7747}
+      \field{title}{Supervised learning with quantum-enhanced feature spaces}
+      \field{volume}{567}
+      \field{year}{2019}
+      \field{pages}{209\bibrangedash 212}
+      \range{pages}{4}
+      \verb{doi}
+      \verb 10.1038/s41586-019-0980-2
+      \endverb
+    \endentry
+    \entry{huang2021power}{article}{}{}
+      \name{author}{7}{}{%
+        {{hash=557e8b0644394a4580aa21daabbdf021}{%
+           family={Huang},
+           familyi={H\bibinitperiod},
+           given={Hsin-Yuan},
+           giveni={H\bibinithyphendelim Y\bibinitperiod}}}%
+        {{hash=21fa87c1539531f85692c35121a01518}{%
+           family={Broughton},
+           familyi={B\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+        {{hash=3660f6bf9d4821aa4c362d0abd316e4f}{%
+           family={Mohseni},
+           familyi={M\bibinitperiod},
+           given={Masoud},
+           giveni={M\bibinitperiod}}}%
+        {{hash=7bb1dcf8a93d1ecc6f9531ece93ef1fa}{%
+           family={Babbush},
+           familyi={B\bibinitperiod},
+           given={Ryan},
+           giveni={R\bibinitperiod}}}%
+        {{hash=915e31fc5958183d06275c3c3e811123}{%
+           family={Boixo},
+           familyi={B\bibinitperiod},
+           given={Sergio},
+           giveni={S\bibinitperiod}}}%
+        {{hash=ddcc46c5456340da59be4077c7102a27}{%
+           family={Neven},
+           familyi={N\bibinitperiod},
+           given={Hartmut},
+           giveni={H\bibinitperiod}}}%
+        {{hash=a253ddc1c4c24cde70238bd45dc9aeff}{%
+           family={McClean},
+           familyi={M\bibinitperiod},
+           given={Jarrod\bibnamedelima R.},
+           giveni={J\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Nature Publishing Group}%
+      }
+      \strng{namehash}{2633591ac4bfaefbd983cb4bdadde83a}
+      \strng{fullhash}{c5ad343fa11a623f0d9bad4b6f8493ce}
+      \strng{fullhashraw}{c5ad343fa11a623f0d9bad4b6f8493ce}
+      \strng{bibnamehash}{2633591ac4bfaefbd983cb4bdadde83a}
+      \strng{authorbibnamehash}{2633591ac4bfaefbd983cb4bdadde83a}
+      \strng{authornamehash}{2633591ac4bfaefbd983cb4bdadde83a}
+      \strng{authorfullhash}{c5ad343fa11a623f0d9bad4b6f8493ce}
+      \strng{authorfullhashraw}{c5ad343fa11a623f0d9bad4b6f8493ce}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Nature Communications}
+      \field{number}{1}
+      \field{title}{Power of data in quantum machine learning}
+      \field{volume}{12}
+      \field{year}{2021}
+      \field{pages}{2631}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1038/s41467-021-22539-9
+      \endverb
+    \endentry
+    \entry{schuld2021effect}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=566bc76219b4c730f8c2d46f5dcc455a}{%
+           family={Schuld},
+           familyi={S\bibinitperiod},
+           given={Maria},
+           giveni={M\bibinitperiod}}}%
+        {{hash=5ad899c94bf216d9a3334f13a79e79b0}{%
+           family={Sweke},
+           familyi={S\bibinitperiod},
+           given={Ryan},
+           giveni={R\bibinitperiod}}}%
+        {{hash=8b74ad1cb03ef3fbf3deed0fe8fd9d1f}{%
+           family={Meyer},
+           familyi={M\bibinitperiod},
+           given={Johannes\bibnamedelima Jakob},
+           giveni={J\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {American Physical Society}%
+      }
+      \strng{namehash}{a2e18e1080802841bd8a8642a18b251b}
+      \strng{fullhash}{a2e18e1080802841bd8a8642a18b251b}
+      \strng{fullhashraw}{a2e18e1080802841bd8a8642a18b251b}
+      \strng{bibnamehash}{a2e18e1080802841bd8a8642a18b251b}
+      \strng{authorbibnamehash}{a2e18e1080802841bd8a8642a18b251b}
+      \strng{authornamehash}{a2e18e1080802841bd8a8642a18b251b}
+      \strng{authorfullhash}{a2e18e1080802841bd8a8642a18b251b}
+      \strng{authorfullhashraw}{a2e18e1080802841bd8a8642a18b251b}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Physical Review A}
+      \field{number}{3}
+      \field{title}{Effect of data encoding on the expressive power of variational quantum-machine-learning models}
+      \field{volume}{103}
+      \field{year}{2021}
+      \field{pages}{032430}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1103/PhysRevA.103.032430
+      \endverb
+    \endentry
+    \entry{mcclean2018barren}{article}{}{}
+      \name{author}{5}{}{%
+        {{hash=a253ddc1c4c24cde70238bd45dc9aeff}{%
+           family={McClean},
+           familyi={M\bibinitperiod},
+           given={Jarrod\bibnamedelima R.},
+           giveni={J\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=915e31fc5958183d06275c3c3e811123}{%
+           family={Boixo},
+           familyi={B\bibinitperiod},
+           given={Sergio},
+           giveni={S\bibinitperiod}}}%
+        {{hash=80791f3c0f47c56afab9266e364f7223}{%
+           family={Smelyanskiy},
+           familyi={S\bibinitperiod},
+           given={Vadim\bibnamedelima N.},
+           giveni={V\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+        {{hash=7bb1dcf8a93d1ecc6f9531ece93ef1fa}{%
+           family={Babbush},
+           familyi={B\bibinitperiod},
+           given={Ryan},
+           giveni={R\bibinitperiod}}}%
+        {{hash=ddcc46c5456340da59be4077c7102a27}{%
+           family={Neven},
+           familyi={N\bibinitperiod},
+           given={Hartmut},
+           giveni={H\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Nature Publishing Group}%
+      }
+      \strng{namehash}{836c04a8ead66d709fbf0afad5433010}
+      \strng{fullhash}{c126993002e7862bf539c09f21d34637}
+      \strng{fullhashraw}{c126993002e7862bf539c09f21d34637}
+      \strng{bibnamehash}{836c04a8ead66d709fbf0afad5433010}
+      \strng{authorbibnamehash}{836c04a8ead66d709fbf0afad5433010}
+      \strng{authornamehash}{836c04a8ead66d709fbf0afad5433010}
+      \strng{authorfullhash}{c126993002e7862bf539c09f21d34637}
+      \strng{authorfullhashraw}{c126993002e7862bf539c09f21d34637}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Nature Communications}
+      \field{number}{1}
+      \field{title}{Barren plateaus in quantum neural network training landscapes}
+      \field{volume}{9}
+      \field{year}{2018}
+      \field{pages}{4812}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1038/s41467-018-07090-4
+      \endverb
+    \endentry
+    \entry{krishnapriyan2021failure}{inproceedings}{}{}
+      \name{author}{5}{}{%
+        {{hash=55962960aee21c086dfdde95d91f8cab}{%
+           family={Krishnapriyan},
+           familyi={K\bibinitperiod},
+           given={Aditi},
+           giveni={A\bibinitperiod}}}%
+        {{hash=ff99b6be6f7ad0c9f311e5ddf91c01f7}{%
+           family={Gholami},
+           familyi={G\bibinitperiod},
+           given={Amir},
+           giveni={A\bibinitperiod}}}%
+        {{hash=2b2d4c95737d2d23f0073f459c476a5b}{%
+           family={Zhe},
+           familyi={Z\bibinitperiod},
+           given={Shandian},
+           giveni={S\bibinitperiod}}}%
+        {{hash=9b6d19f4446e4560e17cd1763734578a}{%
+           family={Kirby},
+           familyi={K\bibinitperiod},
+           given={Robert},
+           giveni={R\bibinitperiod}}}%
+        {{hash=6428c5852da0dfbdd50e39418c9571bf}{%
+           family={Mahoney},
+           familyi={M\bibinitperiod},
+           given={Michael\bibnamedelima W.},
+           giveni={M\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+      }
+      \strng{namehash}{129c9accf5da3794168f152fe202d8e8}
+      \strng{fullhash}{e710fadeb02123ab8bce4fef273730eb}
+      \strng{fullhashraw}{e710fadeb02123ab8bce4fef273730eb}
+      \strng{bibnamehash}{129c9accf5da3794168f152fe202d8e8}
+      \strng{authorbibnamehash}{129c9accf5da3794168f152fe202d8e8}
+      \strng{authornamehash}{129c9accf5da3794168f152fe202d8e8}
+      \strng{authorfullhash}{e710fadeb02123ab8bce4fef273730eb}
+      \strng{authorfullhashraw}{e710fadeb02123ab8bce4fef273730eb}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Advances in Neural Information Processing Systems}
+      \field{title}{Characterizing possible failure modes in physics-informed neural networks}
+      \field{volume}{34}
+      \field{year}{2021}
+      \field{pages}{26548\bibrangedash 26560}
+      \range{pages}{13}
+    \endentry
+    \entry{benedetti2019parameterized}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=a72591df50023022dfff6f8200ef27fe}{%
+           family={Benedetti},
+           familyi={B\bibinitperiod},
+           given={Marcello},
+           giveni={M\bibinitperiod}}}%
+        {{hash=274e282577fc2d1652647222f033f539}{%
+           family={Lloyd},
+           familyi={L\bibinitperiod},
+           given={Erika},
+           giveni={E\bibinitperiod}}}%
+        {{hash=e637e1d0e0a1068efffc644459f15f55}{%
+           family={Sack},
+           familyi={S\bibinitperiod},
+           given={Stefan},
+           giveni={S\bibinitperiod}}}%
+        {{hash=4dbefc3f9d1da32047d9349fa33d431a}{%
+           family={Fiorentini},
+           familyi={F\bibinitperiod},
+           given={Mattia},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IOP Publishing}%
+      }
+      \strng{namehash}{78f945f62a9a0d68e82b1c6b7a9e6050}
+      \strng{fullhash}{b331929d98c2f14c09f0ffb1fc66acd0}
+      \strng{fullhashraw}{b331929d98c2f14c09f0ffb1fc66acd0}
+      \strng{bibnamehash}{78f945f62a9a0d68e82b1c6b7a9e6050}
+      \strng{authorbibnamehash}{78f945f62a9a0d68e82b1c6b7a9e6050}
+      \strng{authornamehash}{78f945f62a9a0d68e82b1c6b7a9e6050}
+      \strng{authorfullhash}{b331929d98c2f14c09f0ffb1fc66acd0}
+      \strng{authorfullhashraw}{b331929d98c2f14c09f0ffb1fc66acd0}
+      \field{extraname}{2}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Quantum Science and Technology}
+      \field{number}{4}
+      \field{title}{Parameterized quantum circuits as machine learning models}
+      \field{volume}{4}
+      \field{year}{2019}
+      \field{pages}{043001}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1088/2058-9565/ab4eb5
+      \endverb
+    \endentry
+    \entry{sim2019expressibility}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=f156a71a758735a1cfc0aab991a121e2}{%
+           family={Sim},
+           familyi={S\bibinitperiod},
+           given={Sukin},
+           giveni={S\bibinitperiod}}}%
+        {{hash=9831fd95cc14da373cb72142dd856b48}{%
+           family={Johnson},
+           familyi={J\bibinitperiod},
+           given={Peter\bibnamedelima D.},
+           giveni={P\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=083dcdd0db2687433b22fabfb2e55c17}{%
+           family={Aspuru-Guzik},
+           familyi={A\bibinithyphendelim G\bibinitperiod},
+           given={Alán},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Wiley}%
+      }
+      \strng{namehash}{6b862d3e16e6a055a0ddc4aa812f75ac}
+      \strng{fullhash}{6b862d3e16e6a055a0ddc4aa812f75ac}
+      \strng{fullhashraw}{6b862d3e16e6a055a0ddc4aa812f75ac}
+      \strng{bibnamehash}{6b862d3e16e6a055a0ddc4aa812f75ac}
+      \strng{authorbibnamehash}{6b862d3e16e6a055a0ddc4aa812f75ac}
+      \strng{authornamehash}{6b862d3e16e6a055a0ddc4aa812f75ac}
+      \strng{authorfullhash}{6b862d3e16e6a055a0ddc4aa812f75ac}
+      \strng{authorfullhashraw}{6b862d3e16e6a055a0ddc4aa812f75ac}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Advanced Quantum Technologies}
+      \field{number}{12}
+      \field{title}{Expressibility and entangling capability of parameterized quantum circuits for hybrid quantum-classical algorithms}
+      \field{volume}{2}
+      \field{year}{2019}
+      \field{pages}{1900070}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1002/qute.201900070
+      \endverb
+    \endentry
+    \entry{schuld2021machine}{book}{}{}
+      \name{author}{2}{}{%
+        {{hash=566bc76219b4c730f8c2d46f5dcc455a}{%
+           family={Schuld},
+           familyi={S\bibinitperiod},
+           given={Maria},
+           giveni={M\bibinitperiod}}}%
+        {{hash=4b215190f542b12fd214896e21eff64b}{%
+           family={Petruccione},
+           familyi={P\bibinitperiod},
+           given={Francesco},
+           giveni={F\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{2aeac50fe58b98b77f0aec56f0b52e2e}
+      \strng{fullhash}{2aeac50fe58b98b77f0aec56f0b52e2e}
+      \strng{fullhashraw}{2aeac50fe58b98b77f0aec56f0b52e2e}
+      \strng{bibnamehash}{2aeac50fe58b98b77f0aec56f0b52e2e}
+      \strng{authorbibnamehash}{2aeac50fe58b98b77f0aec56f0b52e2e}
+      \strng{authornamehash}{2aeac50fe58b98b77f0aec56f0b52e2e}
+      \strng{authorfullhash}{2aeac50fe58b98b77f0aec56f0b52e2e}
+      \strng{authorfullhashraw}{2aeac50fe58b98b77f0aec56f0b52e2e}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{2nd}
+      \field{series}{Quantum Science and Technology}
+      \field{title}{Machine Learning with Quantum Computers}
+      \field{year}{2021}
+    \endentry
+    \entry{jax2018github}{software}{}{}
+      \name{author}{11}{}{%
+        {{hash=b75383e6b48c8360c7a60031424c85cf}{%
+           family={Bradbury},
+           familyi={B\bibinitperiod},
+           given={James},
+           giveni={J\bibinitperiod}}}%
+        {{hash=29563c986154ca2b45d286b4dd5ef92a}{%
+           family={Frostig},
+           familyi={F\bibinitperiod},
+           given={Roy},
+           giveni={R\bibinitperiod}}}%
+        {{hash=7ab2d7e7f2bfceec36e42ad1962fde11}{%
+           family={Hawkins},
+           familyi={H\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+        {{hash=e4d515e534ba184f553d5a2a926e0ea7}{%
+           family={Johnson},
+           familyi={J\bibinitperiod},
+           given={Matthew\bibnamedelima James},
+           giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=0101ae5b219809cf901e7645ca40b9ae}{%
+           family={Leary},
+           familyi={L\bibinitperiod},
+           given={Chris},
+           giveni={C\bibinitperiod}}}%
+        {{hash=07e607fb522f06610feb023ecfa712e2}{%
+           family={Maclaurin},
+           familyi={M\bibinitperiod},
+           given={Dougal},
+           giveni={D\bibinitperiod}}}%
+        {{hash=bca7d753be3217d63404d860acb6e5f5}{%
+           family={Necula},
+           familyi={N\bibinitperiod},
+           given={George},
+           giveni={G\bibinitperiod}}}%
+        {{hash=56bf0b340039cf8594436a624ff548a9}{%
+           family={Paszke},
+           familyi={P\bibinitperiod},
+           given={Adam},
+           giveni={A\bibinitperiod}}}%
+        {{hash=0fd9a0e34f1b2adda41357c948d14986}{%
+           family={Vander{P}las},
+           familyi={V\bibinitperiod},
+           given={Jake},
+           giveni={J\bibinitperiod}}}%
+        {{hash=02f809ed2547f721c304772c06378c2d}{%
+           family={Wanderman-{M}ilne},
+           familyi={W\bibinithyphendelim M\bibinitperiod},
+           given={Skye},
+           giveni={S\bibinitperiod}}}%
+        {{hash=fe167f78433aabd363ac3c06710a1945}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Qiao},
+           giveni={Q\bibinitperiod}}}%
+      }
+      \strng{namehash}{be9c2f36b976223518e841214253df92}
+      \strng{fullhash}{12f83c04441cfb40a3c9b086929c12bf}
+      \strng{fullhashraw}{12f83c04441cfb40a3c9b086929c12bf}
+      \strng{bibnamehash}{be9c2f36b976223518e841214253df92}
+      \strng{authorbibnamehash}{be9c2f36b976223518e841214253df92}
+      \strng{authornamehash}{be9c2f36b976223518e841214253df92}
+      \strng{authorfullhash}{12f83c04441cfb40a3c9b086929c12bf}
+      \strng{authorfullhashraw}{12f83c04441cfb40a3c9b086929c12bf}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{JAX}: composable transformations of {P}ython+{N}um{P}y programs}
+      \field{version}{0.3.13}
+      \field{year}{2018}
+      \verb{urlraw}
+      \verb http://github.com/jax-ml/jax
+      \endverb
+      \verb{url}
+      \verb http://github.com/jax-ml/jax
+      \endverb
+    \endentry
+    \entry{bergholm2022pennylaneautomaticdifferentiationhybrid}{misc}{}{}
+      \name{author}{68}{}{%
+        {{hash=561d6475ad9a0d32f8d1b33dd8d1dd5c}{%
+           family={Bergholm},
+           familyi={B\bibinitperiod},
+           given={Ville},
+           giveni={V\bibinitperiod}}}%
+        {{hash=7f931b8a8e5094419b9a192b65e7c403}{%
+           family={Izaac},
+           familyi={I\bibinitperiod},
+           given={Josh},
+           giveni={J\bibinitperiod}}}%
+        {{hash=566bc76219b4c730f8c2d46f5dcc455a}{%
+           family={Schuld},
+           familyi={S\bibinitperiod},
+           given={Maria},
+           giveni={M\bibinitperiod}}}%
+        {{hash=b2283e26f29ee3d76c9354deb486064e}{%
+           family={Gogolin},
+           familyi={G\bibinitperiod},
+           given={Christian},
+           giveni={C\bibinitperiod}}}%
+        {{hash=cf9e8f14f772309d5570684ba03ad71e}{%
+           family={Ahmed},
+           familyi={A\bibinitperiod},
+           given={Shahnawaz},
+           giveni={S\bibinitperiod}}}%
+        {{hash=fb68461a1cb7c989f2d15629804f57e3}{%
+           family={Ajith},
+           familyi={A\bibinitperiod},
+           given={Vishnu},
+           giveni={V\bibinitperiod}}}%
+        {{hash=b60fa802c10a780b108a403edc66bfe1}{%
+           family={Alam},
+           familyi={A\bibinitperiod},
+           given={M.\bibnamedelimi Sohaib},
+           giveni={M\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=d4c859306d7fbbbd2ee9fcdd19367d6b}{%
+           family={Alonso-Linaje},
+           familyi={A\bibinithyphendelim L\bibinitperiod},
+           given={Guillermo},
+           giveni={G\bibinitperiod}}}%
+        {{hash=b87ac45169f95a5ef8cbf7245b1b7130}{%
+           family={AkashNarayanan},
+           familyi={A\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod}}}%
+        {{hash=d2919e76fb93d7ebeb11e1ec741f45db}{%
+           family={Asadi},
+           familyi={A\bibinitperiod},
+           given={Ali},
+           giveni={A\bibinitperiod}}}%
+        {{hash=13964e1d0dff462d866640377d7f11d8}{%
+           family={Arrazola},
+           familyi={A\bibinitperiod},
+           given={Juan\bibnamedelima Miguel},
+           giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=598c9e3099c5122211b22ab715b09380}{%
+           family={Azad},
+           familyi={A\bibinitperiod},
+           given={Utkarsh},
+           giveni={U\bibinitperiod}}}%
+        {{hash=4629af3185eeef04733b12e80e1a13bc}{%
+           family={Banning},
+           familyi={B\bibinitperiod},
+           given={Sam},
+           giveni={S\bibinitperiod}}}%
+        {{hash=b9ec28ca621c317ca1edc8c5ff0cc25b}{%
+           family={Blank},
+           familyi={B\bibinitperiod},
+           given={Carsten},
+           giveni={C\bibinitperiod}}}%
+        {{hash=6f25008d029339a26a31eece56726eb9}{%
+           family={Bromley},
+           familyi={B\bibinitperiod},
+           given={Thomas\bibnamedelima R},
+           giveni={T\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=0df6119de7fa89da5a6727c74efa737c}{%
+           family={Cordier},
+           familyi={C\bibinitperiod},
+           given={Benjamin\bibnamedelima A.},
+           giveni={B\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=7aac9720088ee115fe0071b186ef8962}{%
+           family={Ceroni},
+           familyi={C\bibinitperiod},
+           given={Jack},
+           giveni={J\bibinitperiod}}}%
+        {{hash=e1b5a39b55c6da1c26e9a3f42a0b2f96}{%
+           family={Delgado},
+           familyi={D\bibinitperiod},
+           given={Alain},
+           giveni={A\bibinitperiod}}}%
+        {{hash=56bdc53ee7d45db9e137dc79c867c253}{%
+           family={Matteo},
+           familyi={M\bibinitperiod},
+           given={Olivia\bibnamedelima Di},
+           giveni={O\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=f2c8d84ca22b06124a31a14cdc6faa56}{%
+           family={Dusko},
+           familyi={D\bibinitperiod},
+           given={Amintor},
+           giveni={A\bibinitperiod}}}%
+        {{hash=e9ebd67e1c563cddc5f7e2bb48be1f29}{%
+           family={Garg},
+           familyi={G\bibinitperiod},
+           given={Tanya},
+           giveni={T\bibinitperiod}}}%
+        {{hash=f19117c732de3c1d086a818f560e1064}{%
+           family={Guala},
+           familyi={G\bibinitperiod},
+           given={Diego},
+           giveni={D\bibinitperiod}}}%
+        {{hash=9e08cb8c68b34688e5b0de0a3719c75f}{%
+           family={Hayes},
+           familyi={H\bibinitperiod},
+           given={Anthony},
+           giveni={A\bibinitperiod}}}%
+        {{hash=8175c7589566ffa2a54e90fefee7ba1e}{%
+           family={Hill},
+           familyi={H\bibinitperiod},
+           given={Ryan},
+           giveni={R\bibinitperiod}}}%
+        {{hash=7b12019b97f4dbc4453354f6ec9092cc}{%
+           family={Ijaz},
+           familyi={I\bibinitperiod},
+           given={Aroosa},
+           giveni={A\bibinitperiod}}}%
+        {{hash=b06468e03d89c11b9655abd9cf58efe1}{%
+           family={Isacsson},
+           familyi={I\bibinitperiod},
+           given={Theodor},
+           giveni={T\bibinitperiod}}}%
+        {{hash=af27c72dd35e05f2aca9eca09c29b25c}{%
+           family={Ittah},
+           familyi={I\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+        {{hash=82d462d8b3ec38f51f33343552e9e7c4}{%
+           family={Jahangiri},
+           familyi={J\bibinitperiod},
+           given={Soran},
+           giveni={S\bibinitperiod}}}%
+        {{hash=fbeb5a488714394fadfaff285a9b2a13}{%
+           family={Jain},
+           familyi={J\bibinitperiod},
+           given={Prateek},
+           giveni={P\bibinitperiod}}}%
+        {{hash=64bff54176cd716a2289444a7f7b8779}{%
+           family={Jiang},
+           familyi={J\bibinitperiod},
+           given={Edward},
+           giveni={E\bibinitperiod}}}%
+        {{hash=9f008e74d1c8e57e3ebc29aaa61c0a05}{%
+           family={Khandelwal},
+           familyi={K\bibinitperiod},
+           given={Ankit},
+           giveni={A\bibinitperiod}}}%
+        {{hash=54086318e8f1a19877b0097b12092d76}{%
+           family={Kottmann},
+           familyi={K\bibinitperiod},
+           given={Korbinian},
+           giveni={K\bibinitperiod}}}%
+        {{hash=faea36dcd58a676597dc894319503c53}{%
+           family={Lang},
+           familyi={L\bibinitperiod},
+           given={Robert\bibnamedelima A.},
+           giveni={R\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=1855272e10d527faa6f054bc9f17e601}{%
+           family={Lee},
+           familyi={L\bibinitperiod},
+           given={Christina},
+           giveni={C\bibinitperiod}}}%
+        {{hash=ed133c3f1627b3998f70b8a08089ec56}{%
+           family={Loke},
+           familyi={L\bibinitperiod},
+           given={Thomas},
+           giveni={T\bibinitperiod}}}%
+        {{hash=ce578776d1afd26436dabd83e524134e}{%
+           family={Lowe},
+           familyi={L\bibinitperiod},
+           given={Angus},
+           giveni={A\bibinitperiod}}}%
+        {{hash=f8fd2cac64a27f90bde4649ee5af1540}{%
+           family={McKiernan},
+           familyi={M\bibinitperiod},
+           given={Keri},
+           giveni={K\bibinitperiod}}}%
+        {{hash=8b74ad1cb03ef3fbf3deed0fe8fd9d1f}{%
+           family={Meyer},
+           familyi={M\bibinitperiod},
+           given={Johannes\bibnamedelima Jakob},
+           giveni={J\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=1c60e200300e0638bf79e81d0e25e0b9}{%
+           family={Montañez-Barrera},
+           familyi={M\bibinithyphendelim B\bibinitperiod},
+           given={J.\bibnamedelimi A.},
+           giveni={J\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=5af4f4757b115bd7f27a7237603ed22a}{%
+           family={Moyard},
+           familyi={M\bibinitperiod},
+           given={Romain},
+           giveni={R\bibinitperiod}}}%
+        {{hash=783b40817d14133ad4c9807fcccda2e5}{%
+           family={Niu},
+           familyi={N\bibinitperiod},
+           given={Zeyue},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=726d20a15ad259dd2fdffcc0249cbe28}{%
+           family={O'Riordan},
+           familyi={O\bibinitperiod},
+           given={Lee\bibnamedelima James},
+           giveni={L\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=b2f549098fba6cae6ddb59cea5f11cd4}{%
+           family={Oud},
+           familyi={O\bibinitperiod},
+           given={Steven},
+           giveni={S\bibinitperiod}}}%
+        {{hash=14f6821bf0f379a0ed957176ff29a3e6}{%
+           family={Panigrahi},
+           familyi={P\bibinitperiod},
+           given={Ashish},
+           giveni={A\bibinitperiod}}}%
+        {{hash=0ce4235364064ab825853a0ffd756a14}{%
+           family={Park},
+           familyi={P\bibinitperiod},
+           given={Chae-Yeun},
+           giveni={C\bibinithyphendelim Y\bibinitperiod}}}%
+        {{hash=021bbc9ff27814ae0d24935cf92556d1}{%
+           family={Polatajko},
+           familyi={P\bibinitperiod},
+           given={Daniel},
+           giveni={D\bibinitperiod}}}%
+        {{hash=88890ebe3c958ddcd7ff85c5028af9c8}{%
+           family={Quesada},
+           familyi={Q\bibinitperiod},
+           given={Nicolás},
+           giveni={N\bibinitperiod}}}%
+        {{hash=6989df20a262846637e8f76032563234}{%
+           family={Roberts},
+           familyi={R\bibinitperiod},
+           given={Chase},
+           giveni={C\bibinitperiod}}}%
+        {{hash=5d7d4ea822d338146b0eae475f5aa354}{%
+           family={Sá},
+           familyi={S\bibinitperiod},
+           given={Nahum},
+           giveni={N\bibinitperiod}}}%
+        {{hash=a45dfca738017e7457e94f6f1fb62f3c}{%
+           family={Schoch},
+           familyi={S\bibinitperiod},
+           given={Isidor},
+           giveni={I\bibinitperiod}}}%
+        {{hash=10cc6fb9cdd4befcc92742487f684f46}{%
+           family={Shi},
+           familyi={S\bibinitperiod},
+           given={Borun},
+           giveni={B\bibinitperiod}}}%
+        {{hash=943cf2cff6923ad6dd43a19286aed837}{%
+           family={Shu},
+           familyi={S\bibinitperiod},
+           given={Shuli},
+           giveni={S\bibinitperiod}}}%
+        {{hash=f156a71a758735a1cfc0aab991a121e2}{%
+           family={Sim},
+           familyi={S\bibinitperiod},
+           given={Sukin},
+           giveni={S\bibinitperiod}}}%
+        {{hash=1434b833bd4efb527b43488337fbd4a7}{%
+           family={Singh},
+           familyi={S\bibinitperiod},
+           given={Arshpreet},
+           giveni={A\bibinitperiod}}}%
+        {{hash=7f292ec073ee78fe3b374b2532df77c7}{%
+           family={Strandberg},
+           familyi={S\bibinitperiod},
+           given={Ingrid},
+           giveni={I\bibinitperiod}}}%
+        {{hash=211da194d8d590f82c1899ba9c1a9063}{%
+           family={Soni},
+           familyi={S\bibinitperiod},
+           given={Jay},
+           giveni={J\bibinitperiod}}}%
+        {{hash=ccc85b312b8450edc59822c51453208c}{%
+           family={Száva},
+           familyi={S\bibinitperiod},
+           given={Antal},
+           giveni={A\bibinitperiod}}}%
+        {{hash=c819858f44f6f887fabb8b8f8b65a9db}{%
+           family={Thabet},
+           familyi={T\bibinitperiod},
+           given={Slimane},
+           giveni={S\bibinitperiod}}}%
+        {{hash=555159e7ce94df6ad8d4fac95a833fba}{%
+           family={Vargas-Hernández},
+           familyi={V\bibinithyphendelim H\bibinitperiod},
+           given={Rodrigo\bibnamedelima A.},
+           giveni={R\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=e89ef9decf7fb4ebbe32b0c95db9382e}{%
+           family={Vincent},
+           familyi={V\bibinitperiod},
+           given={Trevor},
+           giveni={T\bibinitperiod}}}%
+        {{hash=588be1684cacdca021eb1b521af7b83f}{%
+           family={Vitucci},
+           familyi={V\bibinitperiod},
+           given={Nicola},
+           giveni={N\bibinitperiod}}}%
+        {{hash=42e5152da7095eb31157064918c63c6f}{%
+           family={Weber},
+           familyi={W\bibinitperiod},
+           given={Maurice},
+           giveni={M\bibinitperiod}}}%
+        {{hash=b3b26992d4e0cffa2e1fbdafeef6e03d}{%
+           family={Wierichs},
+           familyi={W\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+        {{hash=dd06529aa2d6fb560f5e12b2af907ac4}{%
+           family={Wiersema},
+           familyi={W\bibinitperiod},
+           given={Roeland},
+           giveni={R\bibinitperiod}}}%
+        {{hash=39bd8734581f8f561163ecb2a935b453}{%
+           family={Willmann},
+           familyi={W\bibinitperiod},
+           given={Moritz},
+           giveni={M\bibinitperiod}}}%
+        {{hash=f5b255e456533f2c915a6a5842ae972e}{%
+           family={Wong},
+           familyi={W\bibinitperiod},
+           given={Vincent},
+           giveni={V\bibinitperiod}}}%
+        {{hash=c3b9a2a1551a2258328a14e6714dc690}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Shaoming},
+           giveni={S\bibinitperiod}}}%
+        {{hash=7ceb1ede08b81c0ede1cc933ce63d461}{%
+           family={Killoran},
+           familyi={K\bibinitperiod},
+           given={Nathan},
+           giveni={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{e0e311fbe2fd6503a2c44372823bb0fb}
+      \strng{fullhash}{3324078fd469e717bccd62be9905f26b}
+      \strng{fullhashraw}{3324078fd469e717bccd62be9905f26b}
+      \strng{bibnamehash}{e0e311fbe2fd6503a2c44372823bb0fb}
+      \strng{authorbibnamehash}{e0e311fbe2fd6503a2c44372823bb0fb}
+      \strng{authornamehash}{e0e311fbe2fd6503a2c44372823bb0fb}
+      \strng{authorfullhash}{3324078fd469e717bccd62be9905f26b}
+      \strng{authorfullhashraw}{3324078fd469e717bccd62be9905f26b}
+      \field{extraname}{1}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{quant-ph}
+      \field{eprinttype}{arXiv}
+      \field{title}{PennyLane: Automatic differentiation of hybrid quantum-classical computations}
+      \field{year}{2022}
+      \verb{eprint}
+      \verb 1811.04968
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/1811.04968
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/1811.04968
+      \endverb
+    \endentry
+    \entry{javadiabhari2024quantumcomputingqiskit}{misc}{}{}
+      \name{author}{12}{}{%
+        {{hash=191becd84b73801334fff604a5665c49}{%
+           family={Javadi-Abhari},
+           familyi={J\bibinithyphendelim A\bibinitperiod},
+           given={Ali},
+           giveni={A\bibinitperiod}}}%
+        {{hash=3ddf92bae01328a13d27c7cabe02efa1}{%
+           family={Treinish},
+           familyi={T\bibinitperiod},
+           given={Matthew},
+           giveni={M\bibinitperiod}}}%
+        {{hash=9b71173fcbb124846c41e0c8e3894773}{%
+           family={Krsulich},
+           familyi={K\bibinitperiod},
+           given={Kevin},
+           giveni={K\bibinitperiod}}}%
+        {{hash=bc4a77bac59c7c82cc2b1428d662ff47}{%
+           family={Wood},
+           familyi={W\bibinitperiod},
+           given={Christopher\bibnamedelima J.},
+           giveni={C\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=41ed78a462ad7ac7bc9c602b8d0506f5}{%
+           family={Lishman},
+           familyi={L\bibinitperiod},
+           given={Jake},
+           giveni={J\bibinitperiod}}}%
+        {{hash=6c340749f3f6b3ae36a090c17db53a05}{%
+           family={Gacon},
+           familyi={G\bibinitperiod},
+           given={Julien},
+           giveni={J\bibinitperiod}}}%
+        {{hash=64eefbf7dbc30f454372ed7327ea5cb4}{%
+           family={Martiel},
+           familyi={M\bibinitperiod},
+           given={Simon},
+           giveni={S\bibinitperiod}}}%
+        {{hash=18e9b26f0950d587e91a81069962248d}{%
+           family={Nation},
+           familyi={N\bibinitperiod},
+           given={Paul\bibnamedelima D.},
+           giveni={P\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=1b3e8c12eb951bb269c85b45b91a44cc}{%
+           family={Bishop},
+           familyi={B\bibinitperiod},
+           given={Lev\bibnamedelima S.},
+           giveni={L\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=c04493cf8499c58c15078120b5a6737a}{%
+           family={Cross},
+           familyi={C\bibinitperiod},
+           given={Andrew\bibnamedelima W.},
+           giveni={A\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{hash=91eec8d1a1dcb9e546221f8a63861ba7}{%
+           family={Johnson},
+           familyi={J\bibinitperiod},
+           given={Blake\bibnamedelima R.},
+           giveni={B\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=13ffee31f58f6a53a6d6969d093862dc}{%
+           family={Gambetta},
+           familyi={G\bibinitperiod},
+           given={Jay\bibnamedelima M.},
+           giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \strng{namehash}{bbceb1aaf33962659986a12694cb690b}
+      \strng{fullhash}{c281528d08ef0903500588ac6c2b9353}
+      \strng{fullhashraw}{c281528d08ef0903500588ac6c2b9353}
+      \strng{bibnamehash}{bbceb1aaf33962659986a12694cb690b}
+      \strng{authorbibnamehash}{bbceb1aaf33962659986a12694cb690b}
+      \strng{authornamehash}{bbceb1aaf33962659986a12694cb690b}
+      \strng{authorfullhash}{c281528d08ef0903500588ac6c2b9353}
+      \strng{authorfullhashraw}{c281528d08ef0903500588ac6c2b9353}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{quant-ph}
+      \field{eprinttype}{arXiv}
+      \field{title}{Quantum computing with Qiskit}
+      \field{year}{2024}
+      \verb{eprint}
+      \verb 2405.08810
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2405.08810
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2405.08810
+      \endverb
+    \endentry
+    \entry{mitarai2018quantum}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=80dde347ecbddac8ca3ca422033ac88b}{%
+           family={Mitarai},
+           familyi={M\bibinitperiod},
+           given={Kosuke},
+           giveni={K\bibinitperiod}}}%
+        {{hash=a08a5f4d85eae065d1ffb00b6e5e9cfe}{%
+           family={Negoro},
+           familyi={N\bibinitperiod},
+           given={Makoto},
+           giveni={M\bibinitperiod}}}%
+        {{hash=2128f0d9f20b713e7afb473d0807577e}{%
+           family={Kitagawa},
+           familyi={K\bibinitperiod},
+           given={Masahiro},
+           giveni={M\bibinitperiod}}}%
+        {{hash=569711c363027fed98622c62cda54209}{%
+           family={Fujii},
+           familyi={F\bibinitperiod},
+           given={Keisuke},
+           giveni={K\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {American Physical Society}%
+      }
+      \strng{namehash}{efab1a2e1152e7b441a98ed6586c2560}
+      \strng{fullhash}{f7fc68b9a55509691ce0c3c4f659181f}
+      \strng{fullhashraw}{f7fc68b9a55509691ce0c3c4f659181f}
+      \strng{bibnamehash}{efab1a2e1152e7b441a98ed6586c2560}
+      \strng{authorbibnamehash}{efab1a2e1152e7b441a98ed6586c2560}
+      \strng{authornamehash}{efab1a2e1152e7b441a98ed6586c2560}
+      \strng{authorfullhash}{f7fc68b9a55509691ce0c3c4f659181f}
+      \strng{authorfullhashraw}{f7fc68b9a55509691ce0c3c4f659181f}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Physical Review A}
+      \field{number}{3}
+      \field{title}{Quantum circuit learning}
+      \field{volume}{98}
+      \field{year}{2018}
+      \field{pages}{032309}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1103/PhysRevA.98.032309
+      \endverb
+    \endentry
+    \entry{schuld2019evaluating}{article}{}{}
+      \name{author}{5}{}{%
+        {{hash=566bc76219b4c730f8c2d46f5dcc455a}{%
+           family={Schuld},
+           familyi={S\bibinitperiod},
+           given={Maria},
+           giveni={M\bibinitperiod}}}%
+        {{hash=561d6475ad9a0d32f8d1b33dd8d1dd5c}{%
+           family={Bergholm},
+           familyi={B\bibinitperiod},
+           given={Ville},
+           giveni={V\bibinitperiod}}}%
+        {{hash=b2283e26f29ee3d76c9354deb486064e}{%
+           family={Gogolin},
+           familyi={G\bibinitperiod},
+           given={Christian},
+           giveni={C\bibinitperiod}}}%
+        {{hash=7f931b8a8e5094419b9a192b65e7c403}{%
+           family={Izaac},
+           familyi={I\bibinitperiod},
+           given={Josh},
+           giveni={J\bibinitperiod}}}%
+        {{hash=7ceb1ede08b81c0ede1cc933ce63d461}{%
+           family={Killoran},
+           familyi={K\bibinitperiod},
+           given={Nathan},
+           giveni={N\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {American Physical Society}%
+      }
+      \strng{namehash}{174d124a8cd3fb18c916be5f0deec227}
+      \strng{fullhash}{03ea86fe7b7040874115dd2ad94aa26f}
+      \strng{fullhashraw}{03ea86fe7b7040874115dd2ad94aa26f}
+      \strng{bibnamehash}{174d124a8cd3fb18c916be5f0deec227}
+      \strng{authorbibnamehash}{174d124a8cd3fb18c916be5f0deec227}
+      \strng{authornamehash}{174d124a8cd3fb18c916be5f0deec227}
+      \strng{authorfullhash}{03ea86fe7b7040874115dd2ad94aa26f}
+      \strng{authorfullhashraw}{03ea86fe7b7040874115dd2ad94aa26f}
+      \field{extraname}{2}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Physical Review A}
+      \field{number}{3}
+      \field{title}{Evaluating analytic gradients on quantum hardware}
+      \field{volume}{99}
+      \field{year}{2019}
+      \field{pages}{032331}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1103/PhysRevA.99.032331
+      \endverb
+    \endentry
+    \entry{bergholm2018pennylane}{misc}{}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{10}{}{%
+        {{hash=561d6475ad9a0d32f8d1b33dd8d1dd5c}{%
+           family={Bergholm},
+           familyi={B\bibinitperiod},
+           given={Ville},
+           giveni={V\bibinitperiod}}}%
+        {{hash=7f931b8a8e5094419b9a192b65e7c403}{%
+           family={Izaac},
+           familyi={I\bibinitperiod},
+           given={Josh},
+           giveni={J\bibinitperiod}}}%
+        {{hash=566bc76219b4c730f8c2d46f5dcc455a}{%
+           family={Schuld},
+           familyi={S\bibinitperiod},
+           given={Maria},
+           giveni={M\bibinitperiod}}}%
+        {{hash=b2283e26f29ee3d76c9354deb486064e}{%
+           family={Gogolin},
+           familyi={G\bibinitperiod},
+           given={Christian},
+           giveni={C\bibinitperiod}}}%
+        {{hash=cf9e8f14f772309d5570684ba03ad71e}{%
+           family={Ahmed},
+           familyi={A\bibinitperiod},
+           given={Shahnawaz},
+           giveni={S\bibinitperiod}}}%
+        {{hash=fb68461a1cb7c989f2d15629804f57e3}{%
+           family={Ajith},
+           familyi={A\bibinitperiod},
+           given={Vishnu},
+           giveni={V\bibinitperiod}}}%
+        {{hash=b60fa802c10a780b108a403edc66bfe1}{%
+           family={Alam},
+           familyi={A\bibinitperiod},
+           given={M.\bibnamedelimi Sohaib},
+           giveni={M\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=d4c859306d7fbbbd2ee9fcdd19367d6b}{%
+           family={Alonso-Linaje},
+           familyi={A\bibinithyphendelim L\bibinitperiod},
+           given={Guillermo},
+           giveni={G\bibinitperiod}}}%
+        {{hash=b87ac45169f95a5ef8cbf7245b1b7130}{%
+           family={AkashNarayanan},
+           familyi={A\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod}}}%
+        {{hash=d2919e76fb93d7ebeb11e1ec741f45db}{%
+           family={Asadi},
+           familyi={A\bibinitperiod},
+           given={Ali},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{e0e311fbe2fd6503a2c44372823bb0fb}
+      \strng{fullhash}{7fcb80e61d167dcb634815ca2d0be920}
+      \strng{fullhashraw}{7fcb80e61d167dcb634815ca2d0be920}
+      \strng{bibnamehash}{e0e311fbe2fd6503a2c44372823bb0fb}
+      \strng{authorbibnamehash}{e0e311fbe2fd6503a2c44372823bb0fb}
+      \strng{authornamehash}{e0e311fbe2fd6503a2c44372823bb0fb}
+      \strng{authorfullhash}{7fcb80e61d167dcb634815ca2d0be920}
+      \strng{authorfullhashraw}{7fcb80e61d167dcb634815ca2d0be920}
+      \field{extraname}{2}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{quant-ph}
+      \field{eprinttype}{arXiv}
+      \field{title}{{PennyLane}: Automatic differentiation of hybrid quantum-classical computations}
+      \field{year}{2018}
+      \verb{eprint}
+      \verb 1811.04968
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

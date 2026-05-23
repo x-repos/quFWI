@@ -1,0 +1,263 @@
+% Section 2.4 — Quantum computing background
+% Copy into your main manuscript .tex file
+
+\subsection{Quantum computing background}
+\label{sec:quantum_background}
+
+This section introduces the quantum computing concepts required to
+understand the hybrid classical--quantum architecture presented in
+Section~\ref{sec:hybrid_network}.
+
+\subsubsection{Qubits and quantum states}
+
+The fundamental unit of quantum information is the \emph{qubit}, a
+two-level quantum system whose state is represented by a unit vector in
+$\mathbb{C}^2$.  In the computational basis $\{|0\rangle, |1\rangle\}$,
+an arbitrary single-qubit state is written as
+\begin{equation}
+  |\psi\rangle = \alpha\,|0\rangle + \beta\,|1\rangle, \qquad
+  |\alpha|^2 + |\beta|^2 = 1,
+\end{equation}
+where $\alpha, \beta \in \mathbb{C}$ are probability amplitudes.
+Geometrically, the state of a single qubit can be visualised as a point
+on the Bloch sphere, parameterised by polar and azimuthal angles.  An
+$n$-qubit register is described by a statevector in
+$\mathbb{C}^{2^n}$,
+\begin{equation}
+  |\psi\rangle = \sum_{k=0}^{2^n - 1} \alpha_k\,|k\rangle, \qquad
+  \sum_{k=0}^{2^n - 1} |\alpha_k|^2 = 1,
+\end{equation}
+where $|k\rangle$ denotes the $k$-th computational basis state.  The
+exponential growth of the Hilbert space dimension with qubit count
+underlies both the potential computational advantage of quantum systems
+and the cost of their classical simulation.
+
+\subsubsection{Quantum gates}
+
+Quantum computation proceeds by applying \emph{quantum gates}---unitary
+transformations that evolve the statevector while preserving its norm.
+The gates used in this work fall into two categories.
+
+\paragraph{Single-qubit rotation gates.}
+The Pauli rotation gates $R_X$, $R_Y$, and $R_Z$ perform rotations
+about the $x$, $y$, and $z$ axes of the Bloch sphere, respectively,
+each parameterised by a continuous angle $\theta$:
+\begin{equation}
+  R_X(\theta) = e^{-i\theta X/2} =
+  \begin{pmatrix} \cos\tfrac{\theta}{2} & -i\sin\tfrac{\theta}{2} \\
+  -i\sin\tfrac{\theta}{2} & \cos\tfrac{\theta}{2} \end{pmatrix},
+\end{equation}
+\begin{equation}
+  R_Y(\theta) = e^{-i\theta Y/2} =
+  \begin{pmatrix} \cos\tfrac{\theta}{2} & -\sin\tfrac{\theta}{2} \\
+  \sin\tfrac{\theta}{2} & \cos\tfrac{\theta}{2} \end{pmatrix},
+\end{equation}
+\begin{equation}
+  R_Z(\theta) = e^{-i\theta Z/2} =
+  \begin{pmatrix} e^{-i\theta/2} & 0 \\
+  0 & e^{i\theta/2} \end{pmatrix},
+\end{equation}
+where $X$, $Y$, $Z$ denote the Pauli matrices.  The composition
+$R_Z(\theta_3)\,R_Y(\theta_2)\,R_X(\theta_1)$ constitutes a general
+single-qubit rotation with three degrees of freedom, capable of
+reaching any point on the Bloch sphere.
+
+\paragraph{Entangling gates.}
+The controlled-NOT (CNOT) gate is a two-qubit gate that flips the
+target qubit if and only if the control qubit is in state $|1\rangle$:
+\begin{equation}
+  \text{CNOT} =
+  \begin{pmatrix} 1 & 0 & 0 & 0 \\
+                  0 & 1 & 0 & 0 \\
+                  0 & 0 & 0 & 1 \\
+                  0 & 0 & 1 & 0 \end{pmatrix}.
+\end{equation}
+The CNOT gate is the primary source of \emph{entanglement} in the
+circuit---correlations between qubits that have no classical analogue.
+Entanglement enables the quantum state to encode functions that depend
+jointly on multiple input features, analogous to non-linear interactions
+between neurons in a classical network.
+
+\subsubsection{Parameterised quantum circuits}
+
+A parameterised quantum circuit
+(PQC)~\cite{benedetti2019parameterized}, also referred to as a
+variational quantum circuit, applies a trainable unitary
+$U(\boldsymbol{\theta})$ composed of parameterised gates to the initial
+state $|0\rangle^{\otimes n}$, producing a parameter-dependent quantum
+state
+\begin{equation}
+  |\psi(\boldsymbol{\theta})\rangle
+  = U(\boldsymbol{\theta})\,|0\rangle^{\otimes n}.
+\end{equation}
+The output of the circuit is obtained by measuring a Hermitian
+observable $\hat{O}$, yielding an expectation value
+\begin{equation}
+  f(\boldsymbol{\theta})
+  = \langle\psi(\boldsymbol{\theta})|\,\hat{O}\,|\psi(\boldsymbol{\theta})\rangle,
+\end{equation}
+which is a smooth, differentiable function of
+$\boldsymbol{\theta}$.  By optimising $\boldsymbol{\theta}$ via
+gradient-based methods to minimise a task-specific loss function, the
+PQC acts as a trainable function approximator, playing a role analogous
+to a layer in a classical neural network.  The expressibility of the PQC---its
+ability to represent a wide class of functions---depends on the circuit
+depth, qubit connectivity, and gate set~\cite{sim2019expressibility}.
+
+\paragraph{Data encoding.}
+To use a PQC for supervised learning or function approximation,
+classical input data must be encoded into the quantum state.  Common
+strategies include amplitude encoding, basis encoding, and angle
+encoding~\cite{schuld2021machine}.  In this work we adopt angle
+encoding, where each input feature $x_i$ is mapped to a rotation angle
+via $R_Y(\beta_i\, x_i)$, with $\beta_i$ a trainable scaling parameter.
+This approach provides a one-to-one mapping between input features and
+qubits and is naturally compatible with gradient-based optimisation.
+
+\subsubsection{Circuit architecture}
+\label{sec:circuit_architecture}
+
+The PQC employed in this work (Fig.~\ref{fig:pqc_architecture})
+operates on $n$ qubits with $L$ variational layers and consists of
+three stages:
+
+\begin{enumerate}
+  \item \textbf{Data embedding layer.}  Starting from the initial state
+    $|0\rangle^{\otimes n}$, each qubit $i$ receives an $R_Y(\beta_i\,
+    x_i)$ rotation that encodes the $i$-th component of the classical
+    input vector $\mathbf{x} \in \mathbb{R}^n$, scaled by a trainable
+    basis parameter $\beta_i$.  This produces the encoded state
+    \begin{equation}
+      |\psi_0\rangle = \bigotimes_{i=0}^{n-1}
+        R_Y(\beta_i\, x_i)\,|0\rangle.
+    \end{equation}
+
+  \item \textbf{Variational layers.}  Each of $L$ layers $l = 1,
+    \dots, L$ applies two sub-steps.  First, a general single-qubit
+    rotation
+    $R_Z(\theta^{(3)}_{l,i})\, R_Y(\theta^{(2)}_{l,i})\,
+    R_X(\theta^{(1)}_{l,i})$
+    is applied to every qubit $i$, introducing $3n$ trainable parameters
+    per layer.  Second, a linear CNOT ladder
+    $\text{CNOT}(i, i{+}1)$ for $i = 0, \dots, n{-}2$
+    entangles neighbouring qubits.  The total number of trainable gate
+    parameters is $3\,n\,L$, plus $n$ basis parameters from the
+    embedding layer.
+
+  \item \textbf{Measurement layer.}  The Pauli-$Z$ expectation value
+    $\langle Z_i \rangle = \langle\psi|\,Z_i\,|\psi\rangle$ is
+    evaluated on each qubit.  These $n$ expectation values are averaged
+    to produce a single scalar output:
+    \begin{equation}
+      f(\mathbf{x}, \boldsymbol{\beta}, \boldsymbol{\theta})
+      = \frac{1}{n} \sum_{i=0}^{n-1}
+        \langle\psi|\, Z_i \,|\psi\rangle
+      \;\in [-1,\, 1].
+      \label{eq:pqc_output}
+    \end{equation}
+    The bounded output range $[-1, 1]$ is rescaled by trainable output
+    weights and biases in the surrounding classical layers
+    (Section~\ref{sec:hybrid_network}).
+\end{enumerate}
+
+\subsubsection{Statevector simulation and differentiability}
+
+On near-term quantum hardware, gradients of PQC outputs with respect to
+gate parameters are typically computed via the \emph{parameter-shift
+rule}~\cite{mitarai2018quantum, schuld2019evaluating}, which evaluates
+the circuit at two shifted parameter values per gate.  For an $n$-qubit
+circuit with $p$ parameters this requires $2p$ circuit evaluations per
+gradient, which becomes expensive for large parameter counts.
+
+In classical simulation, however, the statevector is stored explicitly
+as a $2^n$-dimensional complex array, and each gate application is a
+matrix--tensor contraction---a standard differentiable operation.  We
+exploit this by implementing the entire PQC as native JAX array
+operations: rotation gates are $2\!\times\!2$ unitary matrices applied
+via \texttt{jnp.tensordot}, and the CNOT gate is realised through index
+permutation and conditional flipping of the statevector tensor.
+
+This design embeds the quantum circuit directly within the JAX
+computational graph, enabling three key advantages:
+\begin{itemize}
+  \item \textbf{Automatic differentiation.}  \texttt{jax.grad} and
+    \texttt{jax.jvp} propagate gradients through the full hybrid
+    pipeline---classical PINN layers, quantum circuit, and loss
+    function---in a single backward or forward pass, without
+    parameter-shift overhead.
+  \item \textbf{JIT compilation.}  The entire training step, including
+    the quantum circuit evaluation, is compiled into a single optimised
+    XLA program via \texttt{jax.jit}, eliminating Python-level dispatch
+    and framework-bridging overhead.
+  \item \textbf{Composability.}  The circuit integrates seamlessly with
+    JAX transformations such as \texttt{vmap} (batching over subdomains)
+    and \texttt{value\_and\_grad} (simultaneous loss and gradient
+    computation), which are used extensively in the FBPINNs training
+    loop.
+\end{itemize}
+
+The trade-off is that statevector simulation scales as
+$\mathcal{O}(2^n)$ in memory and $\mathcal{O}(L \cdot n \cdot 2^n)$ in
+computation, limiting the approach to moderate qubit counts.  For the
+circuit sizes used in this work ($n \leq 8$, $L \leq 6$), this cost is
+negligible compared to the classical network and loss evaluation.
+
+To verify that our JAX implementation produces correct results, we
+compare parameter gradients $\partial f / \partial\boldsymbol{\theta}$
+against PennyLane's \texttt{default.qubit}
+backend~\cite{bergholm2018pennylane} across eight circuit configurations
+spanning 2--8~qubits and 1--6~layers.  The maximum absolute deviation
+across all configurations is below $2 \times 10^{-7}$, consistent with
+\texttt{float32} machine precision
+(Fig.~\ref{fig:pqc_gradient_agreement}).
+
+
+% === BibTeX entries (add to your .bib file) ===
+%
+% @article{benedetti2019parameterized,
+%   title={Parameterized quantum circuits as machine learning models},
+%   author={Benedetti, Marcello and Lloyd, Erika and Sack, Stefan and Fiorentini, Mattia},
+%   journal={Quantum Science and Technology},
+%   volume={4},
+%   number={4},
+%   pages={043001},
+%   year={2019}
+% }
+%
+% @article{mitarai2018quantum,
+%   title={Quantum circuit learning},
+%   author={Mitarai, Kosuke and Negoro, Makoto and Kitagawa, Masahiro and Fujii, Keisuke},
+%   journal={Physical Review A},
+%   volume={98},
+%   number={3},
+%   pages={032309},
+%   year={2018}
+% }
+%
+% @article{schuld2019evaluating,
+%   title={Evaluating analytic gradients on quantum hardware},
+%   author={Schuld, Maria and Bergholm, Ville and Gogolin, Christian and Izaac, Josh and Killoran, Nathan},
+%   journal={Physical Review A},
+%   volume={99},
+%   number={3},
+%   pages={032331},
+%   year={2019}
+% }
+%
+% @article{sim2019expressibility,
+%   title={Expressibility and entangling capability of parameterized quantum circuits for hybrid quantum-classical algorithms},
+%   author={Sim, Sukin and Johnson, Peter D and Aspuru-Guzik, Al{\'a}n},
+%   journal={Advanced Quantum Technologies},
+%   volume={2},
+%   number={12},
+%   pages={1900070},
+%   year={2019}
+% }
+%
+% @book{schuld2021machine,
+%   title={Machine Learning with Quantum Computers},
+%   author={Schuld, Maria and Petruccione, Francesco},
+%   year={2021},
+%   edition={2nd},
+%   publisher={Springer}
+% }
