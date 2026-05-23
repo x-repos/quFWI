@@ -1,5 +1,6 @@
 # Output directories
 results/
+data/checkerboard_10s/
 
 # IDE
 .antigravitycli/
