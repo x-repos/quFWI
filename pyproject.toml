@@ -19,6 +19,7 @@ dependencies = [
     "matplotlib>=3.10",
     "tensorboardX>=2.6",
     "pillow>=11.0",
+    "ipython>=9.13.0",
 ]
 
 [tool.uv.sources]
