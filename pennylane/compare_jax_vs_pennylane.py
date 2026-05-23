@@ -21,7 +21,7 @@ from jax import grad, jit
 
 import pennylane as qml
 
-from pqcs.circuit import quantum_circuit
+from qufwi.pqcs.circuit import quantum_circuit
 
 SEED = 42
 N_TIMING_RUNS = 100

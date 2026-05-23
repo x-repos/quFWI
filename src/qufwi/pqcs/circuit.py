@@ -5,7 +5,7 @@ Pure JAX implementation — no fbpinns dependency.
 
 import jax.numpy as jnp
 
-from pqcs.gates import quantum_gates, apply_single_qubit_gate, apply_cnot
+from qufwi.pqcs.gates import quantum_gates, apply_single_qubit_gate, apply_cnot
 
 
 def expectation_pauli_z(state, qubit, n_qubits):

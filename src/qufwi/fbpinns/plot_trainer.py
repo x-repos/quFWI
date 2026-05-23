@@ -4,7 +4,7 @@ Imports and calls various plotting functions depending on the dimensionality of 
 This module is used by trainers.py
 """
 
-from fbpinns import plot_trainer_2D, plot_trainer_3D
+from qufwi.fbpinns import plot_trainer_2D, plot_trainer_3D
 
 _plotters = {
     "FBPINN":{2: plot_trainer_2D.plot_2D_FBPINN,

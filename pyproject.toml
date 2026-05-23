@@ -36,4 +36,4 @@ url = "https://storage.googleapis.com/jax-releases/jax_cuda_releases.html"
 explicit = true
 
 [tool.setuptools.packages.find]
-include = ["fbpinns*", "pqcs*", "pennylane*"]
+where = ["src"]

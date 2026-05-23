@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 import IPython.display
 from tensorboardX import SummaryWriter
 
-from fbpinns.util.logger import logger, switch_to_file_logger
+from qufwi.fbpinns.util.logger import logger, switch_to_file_logger
 
 
 class _Trainer:

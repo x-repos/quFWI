@@ -6,8 +6,8 @@ This module is used by plot_trainer.py (and subsequently trainers.py)
 
 import matplotlib.pyplot as plt
 
-from fbpinns.plot_trainer_utils import _plot_setup, _to_numpy
-from fbpinns.plot_trainer_2D import _plot_test_im
+from qufwi.fbpinns.plot_trainer_utils import _plot_setup, _to_numpy
+from qufwi.fbpinns.plot_trainer_2D import _plot_test_im
 
 @_to_numpy
 def plot_3D_FBPINN(x_batch_test, u_exact, u_test, us_test, ws_test, us_raw_test, x_batch, all_params, i, active, decomposition, n_test):

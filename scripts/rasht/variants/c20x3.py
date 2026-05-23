@@ -32,16 +32,16 @@ from jax import random
 import matplotlib.pyplot as plt
 import scipy.interpolate as interpolate
 
-from fbpinns.domains import RectangularDomainND
-from fbpinns.problems import Problem
-from fbpinns.decompositions import RectangularDecompositionND
-from fbpinns.networks import FCN
-from fbpinns.constants import Constants
-from fbpinns.trainers import (FBPINNTrainer, get_inputs, FBPINN_model, FBPINN_model_jit,
+from qufwi.fbpinns.domains import RectangularDomainND
+from qufwi.fbpinns.problems import Problem
+from qufwi.fbpinns.decompositions import RectangularDecompositionND
+from qufwi.fbpinns.networks import FCN
+from qufwi.fbpinns.constants import Constants
+from qufwi.fbpinns.trainers import (FBPINNTrainer, get_inputs, FBPINN_model, FBPINN_model_jit,
                                _common_train_initialisation, tree_map_dicts,
                                FBPINN_update, partition)
-from fbpinns.util.logger import logger
-from fbpinns.util.jax_util import total_size, flops_cost_analysis
+from qufwi.fbpinns.util.logger import logger
+from qufwi.fbpinns.util.jax_util import total_size, flops_cost_analysis
 from tensorboardX import SummaryWriter
 
 
@@ -706,7 +706,7 @@ class FBPINNTrainerFWI16(FBPINNTrainer):
     def train(self):
         if self.resume_step == 0:
             # Wrap _common_train_initialisation to save collocation points
-            import fbpinns.trainers as _trainers
+            import qufwi.fbpinns.trainers as _trainers
             _orig_init = _trainers._common_train_initialisation
             def _saving_init(*args, **kwargs):
                 result = _orig_init(*args, **kwargs)

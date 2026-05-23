@@ -7,7 +7,7 @@ This module is used by constants.py
 import os
 import pickle
 
-from fbpinns.util import io
+from qufwi.fbpinns.util import io
 
 
 class ConstantsBase:

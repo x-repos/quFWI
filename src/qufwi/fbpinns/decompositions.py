@@ -21,11 +21,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.collections as mcoll
 
-from fbpinns import windows
-from fbpinns import networks
-from fbpinns.decompositions_base import inside_models_batch, inside_points_batch
-from fbpinns.util.jax_util import tree_index
-from fbpinns.util.other import colors
+from qufwi.fbpinns import windows
+from qufwi.fbpinns import networks
+from qufwi.fbpinns.decompositions_base import inside_models_batch, inside_points_batch
+from qufwi.fbpinns.util.jax_util import tree_index
+from qufwi.fbpinns.util.other import colors
 
 
 class Decomposition:

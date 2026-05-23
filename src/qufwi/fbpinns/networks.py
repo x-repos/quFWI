@@ -10,7 +10,7 @@ This module is used by constants.py (and subsequently trainers.py)
 import jax.numpy as jnp
 from jax import random
 
-from pqcs.circuit import quantum_circuit
+from qufwi.pqcs.circuit import quantum_circuit
 
 
 class Network:

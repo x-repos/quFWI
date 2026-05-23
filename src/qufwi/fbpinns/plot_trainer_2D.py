@@ -6,7 +6,7 @@ This module is used by plot_trainer.py (and subsequently trainers.py)
 
 import matplotlib.pyplot as plt
 
-from fbpinns.plot_trainer_utils import _plot_setup, _to_numpy
+from qufwi.fbpinns.plot_trainer_utils import _plot_setup, _to_numpy
 import numpy as np
 
 def _plot_test_im(u_test, xlim, ulim, n_test, it=None):

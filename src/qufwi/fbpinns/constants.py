@@ -12,8 +12,8 @@ import socket
 import numpy as np
 import optax
 
-from fbpinns import domains, problems, decompositions, networks, schedulers
-from fbpinns.constants_base import ConstantsBase
+from qufwi.fbpinns import domains, problems, decompositions, networks, schedulers
+from qufwi.fbpinns.constants_base import ConstantsBase
 
 
 # helper functions

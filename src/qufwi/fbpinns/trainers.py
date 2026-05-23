@@ -17,10 +17,10 @@ from jax import random
 import optax
 import numpy as np
 
-from fbpinns.trainers_base import _Trainer
-from fbpinns import networks, plot_trainer
-from fbpinns.util.logger import logger
-from fbpinns.util.jax_util import tree_index, total_size, str_tensor, partition, combine, flops_cost_analysis
+from qufwi.fbpinns.trainers_base import _Trainer
+from qufwi.fbpinns import networks, plot_trainer
+from qufwi.fbpinns.util.logger import logger
+from qufwi.fbpinns.util.jax_util import tree_index, total_size, str_tensor, partition, combine, flops_cost_analysis
 
 
 # LABELLING CONVENTIONS
@@ -952,8 +952,8 @@ class PINNTrainer(_Trainer):
 
 if __name__ == "__main__":
 
-    from fbpinns.constants import Constants
-    from fbpinns.problems import HarmonicOscillator1D, HarmonicOscillator1DHardBC, HarmonicOscillator1DInverse
+    from qufwi.fbpinns.constants import Constants
+    from qufwi.fbpinns.problems import HarmonicOscillator1D, HarmonicOscillator1DHardBC, HarmonicOscillator1DInverse
 
     logger.setLevel("DEBUG")
 

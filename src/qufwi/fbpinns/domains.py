@@ -12,7 +12,7 @@ import jax.numpy as jnp
 import numpy as np
 import scipy.stats
 
-from fbpinns import networks
+from qufwi.fbpinns import networks
 
 
 class Domain:
