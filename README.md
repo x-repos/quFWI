@@ -1,4 +1,4 @@
-# hqFWI — Hybrid Quantum Full Waveform Inversion
+# quFWI — Hybrid Quantum Full Waveform Inversion
 
 Hybrid quantum-classical Full Waveform Inversion (FWI) using FBPINNs (Finite Basis Physics-Informed Neural Networks) with JAX.
 

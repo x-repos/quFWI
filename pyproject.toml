@@ -1,5 +1,5 @@
 [project]
-name = "hqfwi"
+name = "qufwi"
 version = "0.1.0"
 description = "Hybrid quantum-classical Full Waveform Inversion using FBPINNs with JAX"
 readme = "README.md"

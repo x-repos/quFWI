@@ -453,7 +453,7 @@ After Methods and before `\section*{Code Availability}`, add:
 ```tex
 \section*{Data availability}
 
-The synthetic seismic data used in this study were generated with SPECFEM2D~\cite{komatitsch1998spectral} and are available in the project repository at \url{https://github.com/x-repos/hqFWI} under \texttt{data/rasht/} and \texttt{data/checkerboard/}.
+The synthetic seismic data used in this study were generated with SPECFEM2D~\cite{komatitsch1998spectral} and are available in the project repository at \url{https://github.com/x-repos/quFWI} under \texttt{data/rasht/} and \texttt{data/checkerboard/}.
 ```
 
 (SPECFEM2D citation placeholder — add to references.bib in Phase 5 polish if not already present. If absent, mark with a FIXME comment for now.)
@@ -1316,7 +1316,7 @@ Content should state where the synthetic data live and how to reproduce. Confirm
 
 - [ ] **Step 2: Verify Code availability statement** (existing, around line 858)
 
-Existing text mentions `https://github.com/x-repos/hqFWI`. Confirm:
+Existing text mentions `https://github.com/x-repos/quFWI`. Confirm:
 - Repo URL correct (flagged assumption in spec §6.4)
 - Mentions FBPINNs reference repo
 - Mentions the PINN-FWI reference repo
@@ -1326,7 +1326,7 @@ Add a sentence about how to reproduce (`compile.sh` for tex, `pip install -e .` 
 ```tex
 \section*{Code availability}
 
-The JAX-based quantum simulator and quanFWI framework presented here are available at \url{https://github.com/x-repos/hqFWI}. Our implementation builds upon the FBPINNs framework~\cite{Moseley2023} (\url{https://github.com/benmoseley/FBPINNs}) with the PINN-based FWI formulation of Rasht-Behesht et al.~\cite{rahst} (\url{https://github.com/maziarash/PINN-FWI}). Running \texttt{pip install -e .} from the repository root installs the project and its JAX dependencies; training scripts are provided under \texttt{scripts/rasht/} and \texttt{scripts/checkerboard/}.
+The JAX-based quantum simulator and quanFWI framework presented here are available at \url{https://github.com/x-repos/quFWI}. Our implementation builds upon the FBPINNs framework~\cite{Moseley2023} (\url{https://github.com/benmoseley/FBPINNs}) with the PINN-based FWI formulation of Rasht-Behesht et al.~\cite{rahst} (\url{https://github.com/maziarash/PINN-FWI}). Running \texttt{pip install -e .} from the repository root installs the project and its JAX dependencies; training scripts are provided under \texttt{scripts/rasht/} and \texttt{scripts/checkerboard/}.
 ```
 
 - [ ] **Step 3: Build**
@@ -1406,7 +1406,7 @@ The manuscript presents the first integration of parameterized quantum circuits 
 
 We believe this work falls squarely within the scope of \emph{Communications AI \& Computing}, particularly the \emph{Hybrid quantum-classical systems}, \emph{AI for scientific discovery}, and \emph{Computational modeling in physics} areas. The manuscript represents a concrete demonstration of how near-term quantum parameterization can improve an important scientific inverse problem---full waveform inversion---with broader applicability to medical ultrasound, photoacoustic imaging, and non-destructive evaluation.
 
-All data, code, and reproduction scripts are openly available at \url{https://github.com/x-repos/hqFWI}.
+All data, code, and reproduction scripts are openly available at \url{https://github.com/x-repos/quFWI}.
 
 We confirm that this manuscript has not been published elsewhere and is not under consideration by another journal. We suggest the following reviewers with expertise in this area: % FILL: suggest 3-4 reviewers.
 
@@ -1532,7 +1532,7 @@ User-owned items still to fill before submitting to the portal:
 1. Author Contributions section body (marked `% FILL` in main.tex)
 2. Reviewer suggestions in cover letter (marked `% FILL`)
 3. Conflicts of Interest: confirm 'no competing interests' applies, else edit
-4. Verify the github repo `https://github.com/x-repos/hqFWI` is public and reproducible by the time of submission
+4. Verify the github repo `https://github.com/x-repos/quFWI` is public and reproducible by the time of submission
 5. Open questions from earlier (seismogram-fit figure F4 status — include or leave for revision?)
 
 Anything wrong? Any final edits before you hand this off to the submission portal?"

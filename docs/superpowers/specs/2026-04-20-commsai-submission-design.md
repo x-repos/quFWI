@@ -222,7 +222,7 @@ At each checkpoint: build `main.pdf`, point user to section titles / page number
 - User owns all scientific claims. No fabricated numbers — assistant asks when a number is needed that doesn't exist.
 - Author order stays Nguyen, Vashisth, Tura. User fills Author Contributions + Conflicts of Interest.
 - ORCID line in title block is correct.
-- `https://github.com/x-repos/hqFWI` exists / will exist by submission.
+- `https://github.com/x-repos/quFWI` exists / will exist by submission.
 - User handles actual journal submission (PDF upload, form, reviewer selection, OA fee).
 - Communications AI & Computing author guide wins over this design if they conflict; assistant flags such changes at polish stage.
 
