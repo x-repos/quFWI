@@ -9,12 +9,12 @@ Both use 5x3x5 = 75 subdomains.
 │            │      Classical       │             Quantum              │   Trainable Parameters   │
 ├────────────┼──────────────────────┼──────────────────────────────────┼──────────────────────────┤
 │ Wavefield  │ FCN with [3, 32, 32, │ HybridQuantumFCN: classical [3,  │ Classical: 2,001/sub     │
-│ network    │  16, 16, 1]          │ 32, 32, 4] → 4-qubit VQC (2      │ Quantum:   1,346/sub     │
+│ network    │  16, 16, 1]          │ 32, 32, 4] → 4-qubit PQC (2      │ Quantum:   1,346/sub     │
 │ (x75 subs) │                      │ layers) → 1 output               │ Total: 150,075 vs        │
 │            │                      │                                  │        100,950           │
 ├────────────┼──────────────────────┼──────────────────────────────────┼──────────────────────────┤
 │            │ 5-hidden-layer FCN   │ Quantum-hybrid: classical [2,    │ Classical: 1,761         │
-│ Velocity   │ [2, 20, 20, 20, 20,  │ 20, 20, 20, 4] → 4-qubit VQC (2  │ Quantum:   1,014         │
+│ Velocity   │ [2, 20, 20, 20, 20,  │ 20, 20, 20, 4] → 4-qubit PQC (2  │ Quantum:   1,014         │
 │ network    │ 20, 1] with Xavier   │ layers) → output scaling         │                          │
 │            │ init                 │                                  │                          │
 ├────────────┼──────────────────────┼──────────────────────────────────┼──────────────────────────┤

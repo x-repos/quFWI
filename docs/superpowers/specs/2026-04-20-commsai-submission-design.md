@@ -191,7 +191,7 @@ Order is chosen to front-load the parts where the claim framing matters most (Re
 
 | ID   | Decision                                                                                                                                                                                                  |
 |------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 4.1  | One-line pitch: novelty framing + quantitative win ("first integration of VQCs into domain-decomposed PINNs for seismic inverse problems; ~8× faster convergence, ~33% fewer parameters"). |
+| 4.1  | One-line pitch: novelty framing + quantitative win ("first integration of PQCs into domain-decomposed PINNs for seismic inverse problems; ~8× faster convergence, ~33% fewer parameters"). |
 | 4.2  | FBPINN is core to the contribution, not incidental scaffolding. Paper emphasizes combination of domain decomposition with quantum velocity network.                                                         |
 | 4.3  | Cross-discipline applications (medical, photoacoustic, NDE) get one sentence — signal generality without over-claiming.                                                                                      |
 | 4.4  | Statevector simulation framed both ways: deliberate design choice in Methods (enables end-to-end autodiff, avoids parameter-shift overhead); limitation in Discussion (hardware experiments are future work). |

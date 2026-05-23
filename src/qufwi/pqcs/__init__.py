@@ -1,4 +1,4 @@
-"""Standalone quantum circuit library for variational quantum circuits (VQC).
+"""Standalone quantum circuit library for variational quantum circuits (PQC).
 
 Pure JAX implementation — no fbpinns dependency.
 """

@@ -7,7 +7,7 @@ into the FBPINNs framework (JAX + domain decomposition + vmap), using a
 HybridQuantumFCN network instead of classical FCN.
 
 Key differences from fwi_v18.py:
-  - Uses HybridQuantumFCN for wavefield subdomains (classical layers → VQC → measurement)
+  - Uses HybridQuantumFCN for wavefield subdomains (classical layers → PQC → measurement)
   - Velocity inversion: quantum-hybrid network (classical layers + quantum circuit)
   - Reduced batch sizes for quantum memory overhead
   - JAX x64 precision and XLA memory flags for quantum circuits
@@ -124,7 +124,7 @@ OVERLAP_FRACTION = 0.35
 # Classical layers: input(3) → hidden → hidden → n_qubits
 CLASSICAL_LAYER_SIZES = [3, 32, 32]
 N_QUBITS = 4                # 2^4 = 16 state dims, memory-safe
-N_QUANTUM_LAYERS = 2         # VQC depth
+N_QUANTUM_LAYERS = 2         # PQC depth
 # Full classical path: [3, 32, 32, 4] → quantum circuit → 1 output
 SUBDOMAIN_LAYER_SIZES = CLASSICAL_LAYER_SIZES + [N_QUBITS]
 
@@ -1329,7 +1329,7 @@ def main(resume_total_steps=0):
     print(f"\nVelocity quantum-hybrid network:")
     print(f"  Classical layers: {VEL_CLASSICAL_LAYER_SIZES + [VEL_N_QUBITS]}")
     print(f"  Qubits: {VEL_N_QUBITS} (state space: 2^{VEL_N_QUBITS} = {2**VEL_N_QUBITS} dims)")
-    print(f"  VQC layers: {VEL_N_QUANTUM_LAYERS}")
+    print(f"  PQC layers: {VEL_N_QUANTUM_LAYERS}")
     print(f"  Velocity: alpha = {VEL_BACKGROUND} + {VEL_AMPLITUDE}*tanh(quantum_out)*mask")
     print(f"Inversion box (scaled): x'=[{VEL_BOX[0]:.4f}, {VEL_BOX[1]:.4f}], "
           f"z'=[{VEL_BOX[2]:.4f}, {VEL_BOX[3]:.4f}]")
@@ -1341,7 +1341,7 @@ def main(resume_total_steps=0):
     print(f"Wavefield quantum-hybrid network:")
     print(f"  Classical layers: {SUBDOMAIN_LAYER_SIZES}")
     print(f"  Qubits: {N_QUBITS} (state space: 2^{N_QUBITS} = {2**N_QUBITS} dims)")
-    print(f"  VQC layers: {N_QUANTUM_LAYERS}")
+    print(f"  PQC layers: {N_QUANTUM_LAYERS}")
     print(f"  PDE batch shape: {PDE_BATCH_SHAPE}")
     print(f"  Test grid: {N_TEST}")
     print(f"Learning rate: {LEARNING_RATE}")

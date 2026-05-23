@@ -724,7 +724,7 @@ Paragraph D2 — Relation to prior work (~150 words):
 - Berger2025 (TE-QPINN): similar observation at matched parameter count.
 - Rahst2022 (pure PINN for FWI): established the base framework this extends.
 - Moseley2023 (FBPINN): domain decomposition foundation.
-- **Our contribution relative to these:** first integration of VQCs into *domain-decomposed* PINNs for waveform inversion; first demonstration on a geophysical inverse problem with multi-source-term, multi-receiver data.
+- **Our contribution relative to these:** first integration of PQCs into *domain-decomposed* PINNs for waveform inversion; first demonstration on a geophysical inverse problem with multi-source-term, multi-receiver data.
 
 Paragraph D3 — Limitations (~150 words):
 - 2D only; 3D FWI is the real target and statevector simulation cost scales $2^n$.

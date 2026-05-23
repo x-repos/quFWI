@@ -104,7 +104,7 @@ class FourierFCN(FCN):
 class HybridQuantumFCN(Network):
     """Hybrid classical-quantum network
 
-    Architecture: Classical layers -> Quantum embedding + VQC -> Output
+    Architecture: Classical layers -> Quantum embedding + PQC -> Output
     """
 
     @staticmethod

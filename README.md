@@ -6,7 +6,7 @@ Hybrid quantum-classical Full Waveform Inversion (FWI) using FBPINNs (Finite Bas
 
 This repository implements the acoustic FWI problem using both:
 - **Classical FBPINNs** (`scripts/fwi_classical.py`) — fully connected networks
-- **Quantum-hybrid FBPINNs** (`scripts/fwi_quantum.py`) — classical layers + variational quantum circuit (VQC)
+- **Quantum-hybrid FBPINNs** (`scripts/fwi_quantum.py`) — classical layers + variational quantum circuit (PQC)
 
 The quantum circuit implementation (`src/qufwi/pqcs/`) is a standalone JAX module with no fbpinns dependency, enabling future comparison work (e.g., PennyLane).
 
@@ -48,11 +48,11 @@ tensorboard --logdir results/summaries/
 
 ## Repository Structure
 
-- `src/qufwi/pqcs/` — Standalone VQC library
+- `src/qufwi/pqcs/` — Standalone PQC library
 - `src/qufwi/fbpinns/` — Core FBPINNs framework (merged classical + quantum)
 - `scripts/` — FWI training scripts for rasht and checkerboard models
 - `data/` — SPECFEM synthetic seismic data
-- `pennylane/` — Tests and benchmarks comparing the custom VQC against PennyLane
+- `pennylane/` — Tests and benchmarks comparing the custom PQC against PennyLane
 
 ## Dependencies
 

@@ -1,4 +1,4 @@
-"""Variational quantum circuit (VQC) pipeline: embedding, variational layers, measurement.
+"""Variational quantum circuit (PQC) pipeline: embedding, variational layers, measurement.
 
 Pure JAX implementation — no fbpinns dependency.
 """
