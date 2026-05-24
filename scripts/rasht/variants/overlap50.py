@@ -1,21 +1,3 @@
-"""
-Full Waveform Inversion (FWI) — Rasht-Behesht et al. (2022) on FBPINNs
-
-Faithfully translates the rasht-behesht acoustic FWI physics and SPECFEM data
-into the FBPINNs framework (JAX + domain decomposition + vmap).
-
-Key differences from fwi_v15:
-  - Scalar potential formulation: network outputs phi(x',z',t), displacements
-    are dphi/dx', dphi/dz'  (matching rasht-behesht exactly)
-  - Coordinate scaling Lx=Lz=3
-  - Soft ICs from SPECFEM wavefield snapshots (no hard constraining_fn)
-  - Free-stress BC: P=0 at top surface z'=az/Lz
-  - SPECFEM seismogram data (20 receivers, X+Z displacement components)
-  - Velocity: alpha = 3 + 2*tanh(NN)*mask  (matching rasht-behesht exactly)
-
-Run with: python fwi_v16.py
-Resume:   python fwi_v16.py --resume 200000
-"""
 
 import os
 

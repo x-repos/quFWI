@@ -1,20 +1,4 @@
-"""
-Full Waveform Inversion (FWI) — Checkerboard velocity model on FBPINNs
 
-Adapted from the Rasht-Behesht script for a 3x3 checkerboard anomaly pattern.
-Same physics (acoustic scalar potential) and SPECFEM data pipeline.
-
-  - Scalar potential formulation: network outputs phi(x',z',t), displacements
-    are dphi/dx', dphi/dz'
-  - Coordinate scaling Lx=Lz=3
-  - Soft ICs from SPECFEM wavefield snapshots (no hard constraining_fn)
-  - Free-stress BC: P=0 at top surface z'=az/Lz
-  - SPECFEM seismogram data (20 receivers, X+Z displacement components)
-  - Velocity: alpha = 3 + 2*tanh(NN)*mask
-
-Run with: python fwi_classical.py
-Resume:   python fwi_classical.py --resume 200000
-"""
 
 import os
 import time

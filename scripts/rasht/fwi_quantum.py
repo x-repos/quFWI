@@ -1,20 +1,3 @@
-"""
-Full Waveform Inversion (FWI) — Rasht-Behesht et al. (2022) on FBPINNs
-HYBRID QUANTUM-CLASSICAL VERSION
-
-Faithfully translates the rasht-behesht acoustic FWI physics and SPECFEM data
-into the FBPINNs framework (JAX + domain decomposition + vmap), using a
-HybridQuantumFCN network instead of classical FCN.
-
-Key differences from fwi_v18.py:
-  - Uses HybridQuantumFCN for wavefield subdomains (classical layers → PQC → measurement)
-  - Velocity inversion: quantum-hybrid network (classical layers + quantum circuit)
-  - Reduced batch sizes for quantum memory overhead
-  - JAX x64 precision and XLA memory flags for quantum circuits
-
-Run with: python fwi_v18_quantum.py
-Resume:   python fwi_v18_quantum.py --resume 200000
-"""
 
 import os
 import time
