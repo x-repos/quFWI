@@ -383,7 +383,7 @@ CNOT is the sole multi-qubit gate used in our circuit and the sole source of ent
 \subsubsection{PQC ansatz}
 \label{sec:circuit_architecture}
 
-A parameterised quantum circuit (PQC)~\cite{benedetti2019parameterized}, also referred to as a variational quantum circuit, applies a trainable unitary $U(\boldsymbol{\theta})$ to the initial state $|0\rangle^{\otimes n}$ and returns a scalar expectation value of a Hermitian observable, yielding a smooth, differentiable function of $\boldsymbol{\theta}$ that acts as a trainable function approximator. Its expressibility depends on the circuit depth, qubit connectivity, and gate set~\cite{sim2019expressibility}.
+A parameterised quantum circuit (PQC)~\citep{benedetti2019parameterized}, also referred to as a variational quantum circuit, applies a trainable unitary $U(\boldsymbol{\theta})$ to the initial state $|0\rangle^{\otimes n}$ and returns a scalar expectation value of a Hermitian observable, yielding a smooth, differentiable function of $\boldsymbol{\theta}$ that acts as a trainable function approximator. Its expressibility depends on the circuit depth, qubit connectivity, and gate set~\citep{sim2019expressibility}.
 
 The PQC employed in this work (Fig.~\ref{fig:pqc_architecture}) operates on $n$ qubits with $L$ variational layers and consists of three stages:
 
