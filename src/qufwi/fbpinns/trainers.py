@@ -647,6 +647,29 @@ class FBPINNTrainer(_Trainer):
                 active, merge_active, active_opt_states, active_params, fixed_params, static_params, takess, constraints, x_batch = \
                      self._get_update_inputs(i, active, all_params, all_opt_states, x_batch_global, constraints_global, constraint_fs_global, constraint_offsets_global, decomposition, problem)
 
+                # shard inputs across multiple GPUs if enabled
+                if getattr(self.c, "multi_gpu", False):
+                    from jax.experimental import mesh_utils
+                    num_devices = len(jax.devices())
+                    if num_devices > 1:
+                        # Verify divisibility
+                        num_active = len(jnp.arange(all_params["static"]["decomposition"]["m"])[active==1])
+                        if num_active % num_devices != 0:
+                            raise ValueError(f"multi_gpu is enabled, but the number of active subdomains ({num_active}) is not evenly divisible by the number of GPUs ({num_devices}). Please adjust your grid size (e.g. use a 4x2 or 4x4 decomposition instead of 3x3) so it divides evenly.")
+                        
+                        mesh = jax.sharding.Mesh(mesh_utils.create_device_mesh((num_devices,)), ('d',))
+                        sharding = jax.sharding.NamedSharding(mesh, jax.sharding.PartitionSpec('d'))
+                        
+                        def shard_active(d):
+                            if not isinstance(d, dict): return d
+                            return {cl_k: {k: jax.tree_util.tree_map(lambda p: jax.device_put(p, sharding), d[cl_k][k]) if k == "subdomain" else d[cl_k][k]
+                                    for k in d[cl_k]}
+                                    for cl_k in d}
+                        
+                        active_params = shard_active(active_params)
+                        fixed_params = shard_active(fixed_params)
+                        active_opt_states = tree_map_dicts(shard_active, active_opt_states)
+
                 # AOT compile update function
                 startc = time.time()
                 logger.info(f"[i: {i}/{self.c.n_steps}] Compiling update step..")

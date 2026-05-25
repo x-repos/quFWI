@@ -102,7 +102,7 @@ W_BC = 0.1
 L_F = 100  # subsample every 100 steps from SPECFEM
 
 # FBPINN configuration
-N_SUBDOMAINS_X = 5
+N_SUBDOMAINS_X = 4
 N_SUBDOMAINS_Z = 3
 N_SUBDOMAINS_T = 5
 OVERLAP_FRACTION = 0.35

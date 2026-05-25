@@ -34,8 +34,13 @@ XLA_FLAGS=--xla_gpu_enable_command_buffer= uv run python scripts/rasht/fwi_quant
 # Resume from checkpoint
 uv run python scripts/rasht/fwi_classical.py --resume 200000
 
+# Multi-GPU Training
+# 1. Ensure your N_SUBDOMAINS_X * N_SUBDOMAINS_Z * N_SUBDOMAINS_T is divisible by your GPU count
+# 2. Use CUDA_VISIBLE_DEVICES to isolate the GPUs you want to use
+CUDA_VISIBLE_DEVICES=0,1 uv run python scripts/rasht/fwi_classical.py --multi_gpu
+
 # Monitor training
-tensorboard --logdir results/summaries/
+tensorboard --logdir results/rasht/summaries/
 ```
 
 ## Results

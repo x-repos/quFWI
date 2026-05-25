@@ -86,6 +86,10 @@ class Constants(ConstantsBase):
         self.save_figures = False# whether to save figures
         self.clear_output = False# whether to clear ipython output periodically
 
+        # multi gpu support
+        self.multi_gpu = False# whether to shard subdomains across available GPUs
+
+
         # other constants
         self.hostname = socket.gethostname().lower()
 
