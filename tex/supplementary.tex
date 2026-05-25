@@ -1,6 +1,6 @@
-\documentclass[12pt,a4paper]{article}
+\documentclass[11pt,a4paper]{article}
 
-\usepackage[a4paper,top=2cm,bottom=2cm,left=2.5cm,right=2.5cm]{geometry}
+\usepackage[a4paper,margin=2.5cm]{geometry}
 \usepackage[british]{babel}
 \usepackage{amsmath,amsfonts,mathrsfs}
 \usepackage{graphicx}
@@ -8,10 +8,10 @@
 \usepackage{makecell}
 \usepackage[justification=raggedright, singlelinecheck=false]{caption}
 \usepackage{float}
-\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!40!black,urlcolor=blue!50!black]{hyperref}
 \usepackage{url}
-\usepackage{lmodern}
-\usepackage[T1]{fontenc}
+\usepackage{authblk}
+\usepackage{orcidlink}
 
 \captionsetup[table]{position=top}
 
@@ -23,28 +23,75 @@
 \setcounter{table}{0}
 \setcounter{equation}{0}
 
-% Line spacing
-\usepackage{setspace}
-\onehalfspacing
+\renewcommand{\Authfont}{\bfseries}
+\renewcommand{\Affilfont}{\mdseries\normalfont\small}
+\setlength{\affilsep}{0.4em}
 
-\date{}
+\title{Supplementary information for\\[0.5em] Accelerating physics-informed neural networks for full waveform inversion using a hybrid quantum-classical finite-basis architecture}
+
+\author[a,*]{Hoang Anh Nguyen\orcidlink{0000-0002-7504-5284}}
+\author[b]{Divakar Vashisth}
+\author[a]{Ali Tura}
+\affil[a]{Department of Geophysics, Colorado School of Mines, Golden, CO 80401, USA}
+\affil[b]{Department of Energy Science and Engineering, Stanford University, Stanford, CA 94305, USA}
+\affil[*]{Corresponding author: \href{mailto:hoanganh_nguyen@mines.edu}{hoanganh\_nguyen@mines.edu}}
+
+\date{\today}
 
 \begin{document}
 
-\begin{center}
-{\LARGE Supplementary Information for\\[0.5em] \emph{\texttt{quFWI}: Hybrid Quantum-Classical Finite Basis Physics-Informed Neural Networks for Wave Propagation and Full Waveform Inversion}} \\[2ex]
+\maketitle
 
-{\large Hoang Anh Nguyen, Divakar Vashisth, Ali Tura}
-\end{center}
-\vspace{2em}
 
+\section*{Supplementary Note: Quantum background}
+
+For completeness, we summarize the basic quantum-computing concepts used by the hybrid architecture. A single qubit is a two-level quantum system with state
+\begin{equation}
+  |\psi\rangle = \alpha\,|0\rangle + \beta\,|1\rangle, \qquad
+  |\alpha|^2 + |\beta|^2 = 1,
+\end{equation}
+where $\alpha,\beta \in \mathbb{C}$ are probability amplitudes. An $n$-qubit register is represented by a normalized statevector in $\mathbb{C}^{2^n}$,
+\begin{equation}
+  |\psi\rangle = \sum_{k=0}^{2^n-1} \alpha_k\,|k\rangle, \qquad
+  \sum_{k=0}^{2^n-1} |\alpha_k|^2 = 1.
+\end{equation}
+
+The parameterized single-qubit rotations used in this work are
+\begin{equation}
+  R_k(\theta)=e^{-i\theta\,\sigma_k/2}, \qquad k\in\{x,y,z\},
+\end{equation}
+with explicit matrices
+\begin{equation}
+  R_x(\theta) =
+  \begin{pmatrix} \cos\tfrac{\theta}{2} & -i\sin\tfrac{\theta}{2} \\
+  -i\sin\tfrac{\theta}{2} & \cos\tfrac{\theta}{2} \end{pmatrix},
+  \quad
+  R_y(\theta) =
+  \begin{pmatrix} \cos\tfrac{\theta}{2} & -\sin\tfrac{\theta}{2} \\
+  \sin\tfrac{\theta}{2} & \cos\tfrac{\theta}{2} \end{pmatrix},
+  \quad
+  R_z(\theta) =
+  \begin{pmatrix} e^{-i\theta/2} & 0 \\
+  0 & e^{i\theta/2} \end{pmatrix}.
+\end{equation}
+The composition $R_z(\theta_3)R_y(\theta_2)R_x(\theta_1)$ spans $\mathrm{SU}(2)$ and can prepare any single-qubit pure state up to a physically irrelevant global phase.
+
+Entanglement between neighbouring qubits is introduced by the controlled-NOT (CNOT) gate,
+\begin{equation}
+  \mathrm{CNOT} =
+  \begin{pmatrix} 1 & 0 & 0 & 0 \\
+                  0 & 1 & 0 & 0 \\
+                  0 & 0 & 0 & 1 \\
+                  0 & 0 & 1 & 0 \end{pmatrix},
+\end{equation}
+which flips the target qubit if and only if the control qubit is in state $|1\rangle$.
 
 \section*{Supplementary Figures}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.7\textwidth]{figures/pqc_gradient_agreement.pdf}
-\caption{Comparison of parameter gradients $\partial f / \partial \theta$ computed by our JAX statevector implementation and PennyLane's \texttt{default.qubit} backend across eight circuit configurations (2--8 qubits, 1--6 layers). All values fall on the identity line $y = x$ with maximum absolute deviation $\Delta < 10^{-7}$, confirming numerical equivalence of the two implementations.}
+\caption{Comparison of parameter gradients $\partial f / \partial \boldsymbol{\theta}_q$ computed by our JAX statevector implementation and PennyLane's \texttt{default.qubit} backend across eight circuit configurations (2--8 qubits, 1--6 layers). All values fall on the identity line $y = x$ with maximum absolute deviation $\Delta < 10^{-7}$, confirming numerical equivalence of the two implementations.}
 \label{fig:S_pqc_gradient}
 \end{figure}
 
