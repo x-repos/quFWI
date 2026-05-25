@@ -58,6 +58,11 @@
 \makeatother
 
 \definecolor{todoRed}{RGB}{180,30,30}
+\definecolor{classicalBlue}{RGB}{78,121,167}
+\definecolor{quantumOrange}{RGB}{242,142,43}
+\definecolor{outputGreen}{RGB}{89,161,79}
+\definecolor{residualPurple}{RGB}{176,122,161}
+\definecolor{neutralGray}{RGB}{120,120,120}
 \newcommand{\todonote}[1]{\textcolor{todoRed}{\textbf{[TODO: #1]}}}
 \newcommand{\needs}[1]{\textcolor{todoRed}{\textbf{[NEEDED: #1]}}}
 % Mark newly-introduced citations so the author can vet them against the
@@ -153,13 +158,13 @@ Beyond this architectural substitution, both configurations share the same FBPIN
   >=Stealth,
   font=\Large,
   node distance=2.2cm and 2.4cm,
-  box/.style={draw, rounded corners, minimum width=3.0cm, minimum height=1.0cm, align=center, fill=white},
-  qbox/.style={box},
-  circ/.style={circle, draw, minimum size=30, fill=white},
-  loss/.style={ellipse, draw, minimum width=1.8cm, minimum height=1.0cm, align=center, fill=white},
-  data/.style={box, minimum width=3.0cm},
-  physmain/.style={draw, rounded corners, minimum width=4.0cm, minimum height=2.0cm, align=left, fill=white},
-  decision/.style={diamond, draw, aspect=2, minimum width=1.6cm, inner sep=1pt, align=center, fill=white}
+  box/.style={draw=classicalBlue!70!black, rounded corners, line width=0.9pt, minimum width=3.0cm, minimum height=1.0cm, align=center, fill=classicalBlue!10},
+  qbox/.style={draw=quantumOrange!80!black, rounded corners, line width=0.9pt, minimum width=3.0cm, minimum height=1.0cm, align=center, fill=quantumOrange!14},
+  circ/.style={circle, draw=outputGreen!70!black, line width=0.9pt, minimum size=30, fill=outputGreen!14},
+  loss/.style={ellipse, draw=residualPurple!80!black, line width=0.9pt, minimum width=1.8cm, minimum height=1.0cm, align=center, fill=residualPurple!14},
+  data/.style={draw=residualPurple!80!black, rounded corners, line width=0.9pt, minimum width=3.0cm, minimum height=1.0cm, align=center, fill=residualPurple!10},
+  physmain/.style={draw=residualPurple!80!black, rounded corners, line width=0.9pt, minimum width=4.0cm, minimum height=2.0cm, align=left, fill=residualPurple!8},
+  decision/.style={diamond, draw=neutralGray!85!black, aspect=2, minimum width=1.6cm, inner sep=1pt, align=center, fill=neutralGray!10}
 ]
 
 % --- NODES ---
@@ -186,8 +191,8 @@ Parameter constraints / bounds on $v$};
     \node[inner sep=15pt, fit=(net1) (net2) (qc1) (qc2)] (hybridbox) {};
     
     % Wavefield box
-    \node[draw, dashed, fill=gray!10, rounded corners, inner sep=10pt, 
-          fit=(net1) (qc1), label={[yshift=0.0cm]above:\textbf{Finite-basis wavefield}}] (wavebox) {};
+    \node[draw=neutralGray!75!black, dashed, fill=neutralGray!8, rounded corners, inner sep=10pt, 
+          fit=(net1) (qc1), label={[yshift=0.0cm]above:\textbf{Finite-basis network}}] (wavebox) {};
 \end{scope}
 
 % --- CENTERED DECISION NODE ---
@@ -219,7 +224,7 @@ Parameter constraints / bounds on $v$};
 
 \end{tikzpicture}%
 }
-\caption{Schematic of the finite-basis classical-quantum hybrid architecture, combining classical neural networks and quantum circuits with physics-informed constraints. $\mathcal{N}$ denotes classical networks, $\mathcal{Q}$ quantum circuits, $\phi$ the predicted wavefield, $v$ the inverted velocity, and $\mathcal{R}$ the physics- and data-based residuals.}
+\caption{Schematic of the finite-basis classical-quantum hybrid architecture, combining classical neural networks and quantum circuits with physics-informed constraints. Blue boxes denote classical networks $\mathcal{N}$, orange boxes quantum circuits $\mathcal{Q}$, green circles the predicted fields $\phi$ and $v$, and purple nodes the physics- and data-based residuals contributing to $\mathcal{L}_{\mathrm{total}}$.}
 \label{fig:hybrid_arch}
 \end{figure}
 
@@ -230,44 +235,44 @@ Parameter constraints / bounds on $v$};
 \resizebox{0.9\linewidth}{!}{
     \begin{quantikz}
     \lstick{$\ket{q_1}$}
-        & \gate{R_y(\beta_1 z_1)}
-            \gategroup[5,steps=1,style={dashed, fill=gray!10, rounded corners, inner xsep=2pt},background,
+        & \gate[style={draw=classicalBlue!75!black, fill=classicalBlue!12}]{R_y(\beta_1 z_1)}
+            \gategroup[5,steps=1,style={dashed, draw=classicalBlue!70!black, fill=classicalBlue!8, rounded corners, inner xsep=2pt},background,
             label style={label position=below,anchor=north,yshift=-0.2cm}]
             {{\textbf{Encoding}}}
-        & \gate{R_x(\theta_{1,2})}
-            \gategroup[5,steps=7,style={dashed, fill=gray!10, rounded corners, inner xsep=2pt},background,
+        & \gate[style={draw=quantumOrange!80!black, fill=quantumOrange!14}]{R_x(\theta_{1,2})}
+            \gategroup[5,steps=7,style={dashed, draw=quantumOrange!75!black, fill=quantumOrange!9, rounded corners, inner xsep=2pt},background,
             label style={label position=below,anchor=north,yshift=-0.2cm}]
             {{\textbf{Repeat $L$ times}}}
-        & \gate{R_y(\theta_{1,3})}
-        & \gate{R_z(\theta_{1,4})}
-        & \ctrl{1} & & & & \meter{} \\
+        & \gate[style={draw=quantumOrange!80!black, fill=quantumOrange!14}]{R_y(\theta_{1,3})}
+        & \gate[style={draw=quantumOrange!80!black, fill=quantumOrange!14}]{R_z(\theta_{1,4})}
+        & \ctrl{1} & & & & \meter[style={draw=outputGreen!70!black, fill=outputGreen!12}]{} \\
     \lstick{$\ket{q_2}$}
-        & \gate{R_y(\beta_2 z_2)}
-        & \gate{R_x(\theta_{2,2})}
-        & \gate{R_y(\theta_{2,3})}
-        & \gate{R_z(\theta_{2,4})}
+        & \gate[style={draw=classicalBlue!75!black, fill=classicalBlue!12}]{R_y(\beta_2 z_2)}
+        & \gate[style={draw=quantumOrange!80!black, fill=quantumOrange!14}]{R_x(\theta_{2,2})}
+        & \gate[style={draw=quantumOrange!80!black, fill=quantumOrange!14}]{R_y(\theta_{2,3})}
+        & \gate[style={draw=quantumOrange!80!black, fill=quantumOrange!14}]{R_z(\theta_{2,4})}
         & \targ{} 
-        & \ctrl{1} & & & \meter{}\\
+        & \ctrl{1} & & & \meter[style={draw=outputGreen!70!black, fill=outputGreen!12}]{}\\
     \lstick{$\ket{q_3}$}
-        & \gate{R_y(\beta_3 z_3)}
-        & \gate{R_x(\theta_{3,2})}
-        & \gate{R_y(\theta_{3,3})}
-        & \gate{R_z(\theta_{3,4})}
+        & \gate[style={draw=classicalBlue!75!black, fill=classicalBlue!12}]{R_y(\beta_3 z_3)}
+        & \gate[style={draw=quantumOrange!80!black, fill=quantumOrange!14}]{R_x(\theta_{3,2})}
+        & \gate[style={draw=quantumOrange!80!black, fill=quantumOrange!14}]{R_y(\theta_{3,3})}
+        & \gate[style={draw=quantumOrange!80!black, fill=quantumOrange!14}]{R_z(\theta_{3,4})}
         & & \targ{}
         & \ctrl{1}
-        & & \meter{} \\
+        & & \meter[style={draw=outputGreen!70!black, fill=outputGreen!12}]{} \\
     \setwiretype{n} \myvdots
         & \myvdots & \myvdots & \myvdots & \myvdots
         & \myvdots & \myvdots & \myddots & \myddots & \myvdots \\
     \lstick{$\ket{q_n}$}
-        & \gate{R_y(\beta_n z_n)}
-        & \gate{R_x(\theta_{n,2})}
-        & \gate{R_y(\theta_{n,3})}
-        & \gate{R_z(\theta_{n,4})}
-        & & & & \targ{} & \meter{}
+        & \gate[style={draw=classicalBlue!75!black, fill=classicalBlue!12}]{R_y(\beta_n z_n)}
+        & \gate[style={draw=quantumOrange!80!black, fill=quantumOrange!14}]{R_x(\theta_{n,2})}
+        & \gate[style={draw=quantumOrange!80!black, fill=quantumOrange!14}]{R_y(\theta_{n,3})}
+        & \gate[style={draw=quantumOrange!80!black, fill=quantumOrange!14}]{R_z(\theta_{n,4})}
+        & & & & \targ{} & \meter[style={draw=outputGreen!70!black, fill=outputGreen!12}]{}
     \end{quantikz}
 }
-\caption{Multilayer PQC $\mathcal{Q}$. Each input feature $z_i$ is angle-encoded via an $R_y(\beta_i\, z_i)$ rotation (encoding layer, grey), where $\beta_i$ is a trainable scaling parameter. Variational layers of single-qubit rotations $R_x$, $R_y$, $R_z$ followed by a linear CNOT ladder are repeated $L$ times (grey block). Each qubit is measured in the Pauli-$Z$ basis, and the outputs are averaged to yield a scalar in $[-1, 1]$.}
+\caption{Multilayer PQC $\mathcal{Q}$. Each input feature $z_i$ is angle-encoded via an $R_y(\beta_i\, z_i)$ rotation (blue encoding layer), where $\beta_i$ is a trainable scaling parameter. Variational layers of single-qubit rotations $R_x$, $R_y$, $R_z$ followed by a linear CNOT ladder are repeated $L$ times (orange block). Each qubit is measured in the Pauli-$Z$ basis (green meters), and the outputs are averaged to yield a scalar in $[-1, 1]$.}
 \label{fig:pqc_architecture}
 \end{figure}
 
