@@ -1,0 +1,136 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{Tarantola1984}
+\citation{Fichtner2009,Ebru2011}
+\citation{Virieux2009}
+\citation{Zhan2020}
+\citation{10.1121/1.3699240,Sandhu_2015}
+\citation{Wang2016}
+\citation{7422116}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
+\citation{RAISSI2019686}
+\citation{10.1093/gji/ggab010,waheed2021pinntomoseismictomographyusing,10230537}
+\citation{rahst}
+\citation{Moseley2023}
+\citation{Preskill2018quantumcomputingin}
+\citation{PhysRevA.101.032308,Benedetti_2019,Ostaszewski2021structure}
+\citation{https://doi.org/10.1002/qute.202300065}
+\citation{LEONG2025106782}
+\citation{Berger2025}
+\citation{Nguyen2025}
+\citation{rahst}
+\citation{komatitsch1998spectral}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Results}{3}{section.2}\protected@file@percent }
+\newlabel{sec:results}{{2}{3}{Results}{section.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Architecture and training setup}{3}{subsection.2.1}\protected@file@percent }
+\newlabel{sec:results_setup}{{2.1}{3}{Architecture and training setup}{subsection.2.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Anomaly benchmark}{3}{subsection.2.2}\protected@file@percent }
+\newlabel{sec:results_anomaly}{{2.2}{3}{Anomaly benchmark}{subsection.2.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Schematic of the finite-basis classical-quantum hybrid architecture, combining classical neural networks and quantum circuits with physics-informed constraints. $\mathcal  {N}$ denotes classical networks, $\mathcal  {Q}$ quantum circuits, $\phi $ the predicted wavefield, $v$ the inverted velocity, and $\mathcal  {R}$ the physics- and data-based residuals.}}{4}{figure.1}\protected@file@percent }
+\newlabel{fig:hybrid_arch}{{1}{4}{Schematic of the finite-basis classical-quantum hybrid architecture, combining classical neural networks and quantum circuits with physics-informed constraints. $\mathcal {N}$ denotes classical networks, $\mathcal {Q}$ quantum circuits, $\phi $ the predicted wavefield, $v$ the inverted velocity, and $\mathcal {R}$ the physics- and data-based residuals}{figure.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Multilayer PQC $\mathcal  {Q}$. Each classical input feature $x_i$ is angle-encoded via an $R_y(\beta _i\, x_i)$ rotation (encoding layer, grey), where $\beta _i$ is a trainable scaling parameter. Variational layers of single-qubit rotations $R_x$, $R_y$, $R_z$ followed by a linear CNOT ladder are repeated $N_Q$ times (grey block). Each qubit is measured in the Pauli-$Z$ basis, and the outputs are averaged to yield a scalar in $[-1, 1]$.}}{4}{figure.2}\protected@file@percent }
+\newlabel{fig:pqc_architecture}{{2}{4}{Multilayer PQC $\mathcal {Q}$. Each classical input feature $x_i$ is angle-encoded via an $R_y(\beta _i\, x_i)$ rotation (encoding layer, grey), where $\beta _i$ is a trainable scaling parameter. Variational layers of single-qubit rotations $R_x$, $R_y$, $R_z$ followed by a linear CNOT ladder are repeated $N_Q$ times (grey block). Each qubit is measured in the Pauli-$Z$ basis, and the outputs are averaged to yield a scalar in $[-1, 1]$}{figure.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Network configurations for the anomaly benchmark. $\mathcal  {Q}(n_q^{\times n_L})$ denotes a PQC with $n_q$ qubits and $n_L$ layers. Subdomain decomposition ($5\!\times \!3\!\times \!5$, overlap 0.35) applies to the wavefield network $\phi $; the velocity network $v$ is a single global network. Loss weights: $\lambda _\text  {PDE}\!=\!0.1$, $\lambda _\text  {IC}\!=\!1.0$, $\lambda _\text  {seis}\!=\!1.0$, $\lambda _\text  {BC}\!=\!0.1$. Learning rate $10^{-4}$. See Supplementary Table~S1 for the full hyperparameter variant sweep.}}{5}{table.1}\protected@file@percent }
+\newlabel{tab:hyperparams_main}{{1}{5}{Network configurations for the anomaly benchmark. $\mathcal {Q}(n_q^{\times n_L})$ denotes a PQC with $n_q$ qubits and $n_L$ layers. Subdomain decomposition ($5\!\times \!3\!\times \!5$, overlap 0.35) applies to the wavefield network $\phi $; the velocity network $v$ is a single global network. Loss weights: $\lambda _\text {PDE}\!=\!0.1$, $\lambda _\text {IC}\!=\!1.0$, $\lambda _\text {seis}\!=\!1.0$, $\lambda _\text {BC}\!=\!0.1$. Learning rate $10^{-4}$. See Supplementary Table~S1 for the full hyperparameter variant sweep}{table.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Anomaly benchmark inversion and convergence. (a) True velocity model used for the SPECFEM2D forward simulation, with source (red star) and receiver array (green triangles). (b) Initial homogeneous velocity model. (c) Inverted velocity model from the quantum hybrid FBPINN at $65{,}000$ training iterations. (d) L1 velocity error versus training iteration for the classical FBPINN baseline (blue), the quantum hybrid (red markers labelled 65k), and 15 classical hyperparameter variants (thin coloured lines). The quantum hybrid reaches a lower L1 error than any classical variant in approximately $8\times $ fewer training iterations.}}{6}{figure.3}\protected@file@percent }
+\newlabel{fig:anomaly}{{3}{6}{Anomaly benchmark inversion and convergence. (a) True velocity model used for the SPECFEM2D forward simulation, with source (red star) and receiver array (green triangles). (b) Initial homogeneous velocity model. (c) Inverted velocity model from the quantum hybrid FBPINN at $65{,}000$ training iterations. (d) L1 velocity error versus training iteration for the classical FBPINN baseline (blue), the quantum hybrid (red markers labelled 65k), and 15 classical hyperparameter variants (thin coloured lines). The quantum hybrid reaches a lower L1 error than any classical variant in approximately $8\times $ fewer training iterations}{figure.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Checkerboard benchmark}{6}{subsection.2.3}\protected@file@percent }
+\newlabel{sec:results_checkerboard}{{2.3}{6}{Checkerboard benchmark}{subsection.2.3}{}}
+\citation{cerezo2021variational}
+\citation{havlicek2019supervised,huang2021power}
+\citation{schuld2021effect}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Checkerboard benchmark inversion. (a) True velocity model: a $3\times 3$ checkerboard of alternating $\pm $$0.4$\,km/s perturbations on a $3.0$\,km/s background, with source (red star) and receiver array (green triangles). (b) Inverted velocity model from the classical FBPINN at $2\times 10^{6}$ training iterations.}}{7}{figure.4}\protected@file@percent }
+\newlabel{fig:checkerboard_inversion}{{4}{7}{Checkerboard benchmark inversion. (a) True velocity model: a $3\times 3$ checkerboard of alternating $\pm $$0.4$\,km/s perturbations on a $3.0$\,km/s background, with source (red star) and receiver array (green triangles). (b) Inverted velocity model from the classical FBPINN at $2\times 10^{6}$ training iterations}{figure.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Discussion}{7}{section.3}\protected@file@percent }
+\newlabel{sec:discussion}{{3}{7}{Discussion}{section.3}{}}
+\citation{LEONG2025106782}
+\citation{Berger2025}
+\citation{Moseley2023}
+\citation{rahst}
+\citation{mcclean2018barren}
+\citation{krishnapriyan2021failure}
+\citation{10.1121/1.3699240,Sandhu_2015}
+\citation{Wang2016}
+\citation{7422116}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Methods}{8}{section.4}\protected@file@percent }
+\newlabel{sec:method}{{4}{8}{Methods}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Acoustic wave equation}{8}{subsection.4.1}\protected@file@percent }
+\newlabel{sec:methods_wave}{{4.1}{8}{Acoustic wave equation}{subsection.4.1}{}}
+\newlabel{eq:acoustic_wave}{{3}{8}{Acoustic wave equation}{equation.3}{}}
+\citation{RAISSI2019686}
+\citation{Moseley2023}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Finite-basis physics-informed neural network}{9}{subsection.4.2}\protected@file@percent }
+\newlabel{sec:methods_fbpinn}{{4.2}{9}{Finite-basis physics-informed neural network}{subsection.4.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Parameterized quantum circuits}{9}{subsection.4.3}\protected@file@percent }
+\newlabel{sec:methods_pqc}{{4.3}{9}{Parameterized quantum circuits}{subsection.4.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.1}Qubits and quantum states}{9}{subsubsection.4.3.1}\protected@file@percent }
+\citation{benedetti2019parameterized}
+\citation{sim2019expressibility}
+\citation{schuld2021machine}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.2}Quantum gates}{10}{subsubsection.4.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.3}PQC ansatz}{10}{subsubsection.4.3.3}\protected@file@percent }
+\newlabel{sec:circuit_architecture}{{4.3.3}{10}{PQC ansatz}{subsubsection.4.3.3}{}}
+\citation{jax2018github}
+\citation{bergholm2022pennylaneautomaticdifferentiationhybrid}
+\citation{javadiabhari2024quantumcomputingqiskit}
+\citation{mitarai2018quantum,schuld2019evaluating}
+\citation{bergholm2018pennylane}
+\newlabel{eq:pqc_output}{{12}{11}{PQC ansatz}{equation.12}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}JAX-based statevector simulator}{11}{subsection.4.4}\protected@file@percent }
+\newlabel{sec:methods_statevector}{{4.4}{11}{JAX-based statevector simulator}{subsection.4.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Hybrid quantum-classical architecture}{11}{subsection.4.5}\protected@file@percent }
+\newlabel{sec:hybrid_network}{{4.5}{11}{Hybrid quantum-classical architecture}{subsection.4.5}{}}
+\citation{komatitsch1998spectral}
+\newlabel{eq:velocity_output}{{14}{12}{Hybrid quantum-classical architecture}{equation.14}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6}Training setup}{12}{subsection.4.6}\protected@file@percent }
+\newlabel{sec:methods_training}{{4.6}{12}{Training setup}{subsection.4.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.7}Data}{12}{subsection.4.7}\protected@file@percent }
+\newlabel{sec:methods_data}{{4.7}{12}{Data}{subsection.4.7}{}}
+\citation{komatitsch1998spectral}
+\citation{Moseley2023}
+\citation{rahst}
+\bibstyle{unsrtnat}
+\bibdata{references}
+\bibcite{Tarantola1984}{{1}{1984}{{Tarantola}}{{}}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusions}{13}{section.5}\protected@file@percent }
+\bibcite{Fichtner2009}{{2}{2009}{{Fichtner et~al.}}{{Fichtner, Kennett, Igel, and Bunge}}}
+\bibcite{Ebru2011}{{3}{2011}{{Bozdağ et~al.}}{{Bozdağ, Trampert, and Tromp}}}
+\bibcite{Virieux2009}{{4}{2009}{{Virieux and Operto}}{{}}}
+\bibcite{Zhan2020}{{5}{2020}{{Zhan}}{{}}}
+\bibcite{10.1121/1.3699240}{{6}{2012}{{Wiskin et~al.}}{{Wiskin, Borup, Johnson, and Berggren}}}
+\bibcite{Sandhu_2015}{{7}{2015}{{Sandhu et~al.}}{{Sandhu, Li, Roy, Schmidt, and Duric}}}
+\bibcite{Wang2016}{{8}{2016}{{Wang and Yao}}{{}}}
+\bibcite{7422116}{{9}{2016}{{Rao et~al.}}{{Rao, Ratassepp, and Fan}}}
+\bibcite{RAISSI2019686}{{10}{2019}{{Raissi et~al.}}{{Raissi, Perdikaris, and Karniadakis}}}
+\bibcite{10.1093/gji/ggab010}{{11}{2021}{{Song et~al.}}{{Song, Alkhalifah, and Waheed}}}
+\bibcite{waheed2021pinntomoseismictomographyusing}{{12}{2021}{{bin Waheed et~al.}}{{bin Waheed, Alkhalifah, Haghighat, Song, and Virieux}}}
+\bibcite{10230537}{{13}{2023}{{Liu and Almekkawy}}{{}}}
+\bibcite{rahst}{{14}{2022}{{Rasht-Behesht et~al.}}{{Rasht-Behesht, Huber, Shukla, and Karniadakis}}}
+\bibcite{Moseley2023}{{15}{2023}{{Moseley et~al.}}{{Moseley, Markham, and Nissen-Meyer}}}
+\bibcite{Preskill2018quantumcomputingin}{{16}{2018}{{Preskill}}{{}}}
+\bibcite{PhysRevA.101.032308}{{17}{2020}{{Schuld et~al.}}{{Schuld, Bocharov, Svore, and Wiebe}}}
+\bibcite{Benedetti_2019}{{18}{2019{}}{{Benedetti et~al.}}{{Benedetti, Lloyd, Sack, and Fiorentini}}}
+\bibcite{Ostaszewski2021structure}{{19}{2021}{{Ostaszewski et~al.}}{{Ostaszewski, Grant, and Benedetti}}}
+\bibcite{https://doi.org/10.1002/qute.202300065}{{20}{2023}{{Paine et~al.}}{{Paine, Elfving, and Kyriienko}}}
+\bibcite{LEONG2025106782}{{21}{2025}{{Leong et~al.}}{{Leong, Ewe, Tran, Zhang, and Khoo}}}
+\bibcite{Berger2025}{{22}{2025}{{Berger et~al.}}{{Berger, Hosters, and M{\"o}ller}}}
+\bibcite{Nguyen2025}{{23}{2025}{{Nguyen and Tura}}{{}}}
+\bibcite{komatitsch1998spectral}{{24}{1998}{{Komatitsch and Vilotte}}{{}}}
+\bibcite{cerezo2021variational}{{25}{2021}{{Cerezo et~al.}}{{Cerezo, Arrasmith, Babbush, Benjamin, Endo, Fujii, McClean, Mitarai, Yuan, Cincio, and Coles}}}
+\bibcite{havlicek2019supervised}{{26}{2019}{{Havl{\'\i }{\v {c}}ek et~al.}}{{Havl{\'\i }{\v {c}}ek, C{\'o}rcoles, Temme, Harrow, Kandala, Chow, and Gambetta}}}
+\bibcite{huang2021power}{{27}{2021}{{Huang et~al.}}{{Huang, Broughton, Mohseni, Babbush, Boixo, Neven, and McClean}}}
+\bibcite{schuld2021effect}{{28}{2021}{{Schuld et~al.}}{{Schuld, Sweke, and Meyer}}}
+\bibcite{mcclean2018barren}{{29}{2018}{{McClean et~al.}}{{McClean, Boixo, Smelyanskiy, Babbush, and Neven}}}
+\bibcite{krishnapriyan2021failure}{{30}{2021}{{Krishnapriyan et~al.}}{{Krishnapriyan, Gholami, Zhe, Kirby, and Mahoney}}}
+\bibcite{benedetti2019parameterized}{{31}{2019{}}{{Benedetti et~al.}}{{Benedetti, Lloyd, Sack, and Fiorentini}}}
+\bibcite{sim2019expressibility}{{32}{2019}{{Sim et~al.}}{{Sim, Johnson, and Aspuru-Guzik}}}
+\bibcite{schuld2021machine}{{33}{2021}{{Schuld and Petruccione}}{{}}}
+\bibcite{jax2018github}{{34}{2018}{{Bradbury et~al.}}{{Bradbury, Frostig, Hawkins, Johnson, Leary, Maclaurin, Necula, Paszke, Vander{P}las, Wanderman-{M}ilne, and Zhang}}}
+\bibcite{bergholm2022pennylaneautomaticdifferentiationhybrid}{{35}{2022}{{Bergholm et~al.}}{{Bergholm, Izaac, Schuld, Gogolin, Ahmed, Ajith, Alam, Alonso-Linaje, AkashNarayanan, Asadi, Arrazola, Azad, Banning, Blank, Bromley, Cordier, Ceroni, Delgado, Matteo, Dusko, Garg, Guala, Hayes, Hill, Ijaz, Isacsson, Ittah, Jahangiri, Jain, Jiang, Khandelwal, Kottmann, Lang, Lee, Loke, Lowe, McKiernan, Meyer, Montañez-Barrera, Moyard, Niu, O'Riordan, Oud, Panigrahi, Park, Polatajko, Quesada, Roberts, Sá, Schoch, Shi, Shu, Sim, Singh, Strandberg, Soni, Száva, Thabet, Vargas-Hernández, Vincent, Vitucci, Weber, Wierichs, Wiersema, Willmann, Wong, Zhang, and Killoran}}}
+\bibcite{javadiabhari2024quantumcomputingqiskit}{{36}{2024}{{Javadi-Abhari et~al.}}{{Javadi-Abhari, Treinish, Krsulich, Wood, Lishman, Gacon, Martiel, Nation, Bishop, Cross, Johnson, and Gambetta}}}
+\bibcite{mitarai2018quantum}{{37}{2018}{{Mitarai et~al.}}{{Mitarai, Negoro, Kitagawa, and Fujii}}}
+\bibcite{schuld2019evaluating}{{38}{2019}{{Schuld et~al.}}{{Schuld, Bergholm, Gogolin, Izaac, and Killoran}}}
+\bibcite{bergholm2018pennylane}{{39}{2018}{{Bergholm et~al.}}{{Bergholm, Izaac, Schuld, Gogolin, Ahmed, Ajith, Alam, Alonso-Linaje, AkashNarayanan, Asadi, et~al.}}}
+\gdef \@abspage@last{17}
