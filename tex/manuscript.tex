@@ -164,13 +164,9 @@ Beyond this velocity network substitution, both configurations share a unified f
 
 % --- NODES ---
 \node[box] (net1) {$\mathcal{N}_\phi(x, z, t)$};
-\node[box, below=3.5cm of net1] (net2) {$\mathcal{N}_v(x,z)$};
 \node[qbox, right=1.cm of net1] (qc1) {$\mathcal{Q}_\phi(\mathcal{N}_\phi)$};
-\node[qbox, right=1.cm of net2] (qc2) {$\mathcal{Q}_v(\mathcal{N}_v)$};
-
-
 \node[circ, right=1.5cm of qc1] (phi) {$\phi$};
-\node[circ, right=1.5cm of qc2] (cvar) {$v$};
+
 \node[data, right=3.5 cm of phi] (data) {Data residual: $\mathcal{R}_{\mathrm{data}}$};
 \node[physmain, below=1.5cm of data] (phys)
 {PDE residual: $\mathcal{R}_{\mathrm{PDE}}(\phi,v)$\\
@@ -178,6 +174,11 @@ BC residual: $\mathcal{R}_{\mathrm{BC}}(\phi,v)$\\
 IC residual: $\mathcal{R}_{\mathrm{IC}}(\phi,v)$\\
 Parameter constraints / bounds on $v$};
 \node[loss, right=1.5cm of phys] (loss) {$\mathcal{L}_{\mathrm{total}}$};
+
+\coordinate (phys_lower) at ([yshift=-0.85cm]phys.center);
+\node[box] (net2) at (net1 |- phys_lower) {$\mathcal{N}_v(x,z)$};
+\node[qbox, right=1.cm of net2] (qc2) {$\mathcal{Q}_v(\mathcal{N}_v)$};
+\node[circ, right=1.5cm of qc2] (cvar) {$v$};
 
 % --- BACKGROUND BOX ---
 \begin{scope}[on background layer]
