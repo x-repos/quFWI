@@ -14,6 +14,9 @@ results/checkerboard/plots/*
 !results/checkerboard/plots/*.pdf
 data/checkerboard_10s/
 
+# LaTeX paper source (maintained separately, not tracked in this repo)
+/tex/
+
 # IDE
 .antigravitycli/
 
