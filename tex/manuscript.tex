@@ -1,15 +1,11 @@
 % =============================================================================
 %  manuscript.tex
-%  Draft submission to Computers & Geosciences (Elsevier)
+%  Draft submission to Communications AI & Computing (Nature Portfolio)
 %
 %  Compile from this directory:
 %      ./compile.sh manuscript.tex
 % =============================================================================
 
-% --- elsarticle alternative (uncomment when ready to submit) -----------------
-% \documentclass[review,12pt,authoryear]{elsarticle}
-% \journal{Computers \& Geosciences}
-% -----------------------------------------------------------------------------
 \documentclass[11pt,a4paper]{article}
 
 \usepackage[a4paper,margin=2.5cm]{geometry}
@@ -69,7 +65,7 @@
 % curated refs.bib.  Usage: \newcite{Smith2020}.
 \newcommand{\newcite}[1]{\textcolor{todoRed}{$^{\ast}$}\citep{#1}}
 
-% Drop-in replacements for elsarticle's frontmatter / highlights / keyword envs
+% Local definitions of the frontmatter / highlights / keyword environments
 \newenvironment{frontmatter}{}{}
 \newenvironment{highlights}{%
   \begin{quote}\textbf{Highlights}\par\vspace{-0.5em}
