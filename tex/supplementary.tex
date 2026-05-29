@@ -86,19 +86,39 @@ Entanglement between neighbouring qubits is introduced by the controlled-NOT (CN
 \end{equation}
 which flips the target qubit if and only if the control qubit is in state $|1\rangle$.
 
+\section*{Supplementary Note: Fourier structure of the angle-encoded PQC}
+
+This note derives the finite-frequency structure of the PQC output used in the Discussion, specializing the general result of Schuld, Sweke, and Meyer (2021) to the angle encoding adopted in this work.
+
+Consider first a single encoded scalar $s$ with Hermitian generator $G$ and encoding unitary $U_{\mathrm{enc}}(s)=e^{-i\beta s G}$, acting on the reference state $|\psi_0\rangle=|0\rangle^{\otimes n}$. Because the variational block $V(\boldsymbol{\theta}_q)$ is applied after the encoding, the averaged measurement observable $O=\frac{1}{n}\sum_{i=0}^{n-1}Z_i$ can be folded into the Heisenberg-picture operator $M(\boldsymbol{\theta}_q)=V(\boldsymbol{\theta}_q)^\dagger O\,V(\boldsymbol{\theta}_q)$, so the measured output is
+\begin{equation}
+  f(s)=\langle\psi_0|\,U_{\mathrm{enc}}(s)^\dagger M(\boldsymbol{\theta}_q)\,U_{\mathrm{enc}}(s)\,|\psi_0\rangle.
+\end{equation}
+Writing the spectral decomposition $G=\sum_a \lambda_a \Pi_a$ gives $U_{\mathrm{enc}}(s)=\sum_a e^{-i\beta s\lambda_a}\Pi_a$, and therefore
+\begin{equation}
+  f(s)=\sum_{a,b} e^{i\beta s(\lambda_a-\lambda_b)}\,\langle\psi_0|\,\Pi_a M(\boldsymbol{\theta}_q)\Pi_b\,|\psi_0\rangle,
+\end{equation}
+so the accessible frequency indices are the pairwise eigenvalue differences, $\Omega\subseteq\{\lambda_a-\lambda_b\}$. For the $R_y(\beta s)$ encoding used here, $G=Y/2$ has eigenvalues $\pm\tfrac{1}{2}$, so the differences are $0,\pm 1$ and
+\begin{equation}
+  f(s)=A+B\cos(\beta s)+C\sin(\beta s).
+\end{equation}
+The trainable angles change $A$, $B$, and $C$ but cannot create frequencies outside this set.
+
+For the full register, each coordinate $z_i$ is encoded on its own qubit through $R_y(\beta_i z_i)$, so the encoding generators $\{Y_i/2\}$ act on disjoint tensor factors and mutually commute. The encoding unitary then factorizes as $\prod_i e^{-i\beta_i z_i Y_i/2}$, the per-coordinate spectra combine additively, and the accessible index set becomes $\Omega\subseteq\{-1,0,1\}^n$, with physical frequencies $\boldsymbol{\beta}\odot\boldsymbol{\omega}$. This is the multivariate Fourier form quoted in the Discussion. The entangling CNOT layers and variational angles determine which coefficients $c_{\boldsymbol{\omega}}$ are nonzero, in particular populating cross-coordinate indices, but they do not enlarge $\Omega$.
+
 \section*{Supplementary Figures}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.7\textwidth]{figures/pqc_gradient_agreement.pdf}
-\caption{Comparison of parameter gradients $\partial f / \partial \boldsymbol{\theta}_q$ computed by our JAX statevector implementation and PennyLane's \texttt{default.qubit} backend across eight circuit configurations (2--8 qubits, 1--6 layers). All values fall on the identity line $y = x$ with maximum absolute deviation $\Delta < 10^{-7}$, confirming numerical equivalence of the two implementations.}
+\caption{Comparison of parameter gradients $\partial f / \partial \boldsymbol{\theta}_q$ computed by our JAX statevector implementation and PennyLane's \texttt{default.qubit} backend across eight circuit configurations (2--8 qubits, 1--6 layers). All values fall on the identity line $y = x$ with maximum absolute deviation $\Delta < 2\times 10^{-7}$, confirming numerical equivalence of the two implementations.}
 \label{fig:S_pqc_gradient}
 \end{figure}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\linewidth]{../results/rasht/plots/metrics_losses.png}
-\caption{Training loss decomposition for the classical FBPINN baseline on the anomaly benchmark: total loss, PDE residual, displacement-snapshot initial conditions (two components), seismogram misfit, and free-stress boundary condition, plotted versus training iteration. Inset: early-iteration behaviour showing rapid initial loss reduction.}
+\caption{Training loss decomposition for the classical FBPINN baseline on the anomaly benchmark: total loss, PDE residual, displacement-snapshot initial conditions (two components), seismogram misfit, and free-surface boundary condition, plotted versus training iteration. Inset: early-iteration behaviour showing rapid initial loss reduction.}
 \label{fig:S_metrics_losses}
 \end{figure}
 
@@ -106,12 +126,12 @@ which flips the target qubit if and only if the control qubit is in state $|1\ra
 
 \begin{table}[H]
 \centering
-\caption{Full hyperparameter variant sweep for the anomaly benchmark. $\mathcal{Q}(n_q^{\times n_L})$ denotes a parameterized quantum circuit with $n_q$ qubits and $n_L$ layers. Values marked ``--'' are identical to the \texttt{classical} baseline. Subdomains column shows $\phi(\cdot)$ for wavefield decomposition and $c(\cdot)$ for velocity decomposition.}
+\caption{Full hyperparameter variant sweep for the anomaly benchmark. $\mathcal{Q}(n_q^{\times n_L})$ denotes a parameterized quantum circuit with $n_q$ qubits and $n_L$ layers. Values marked ``--'' are identical to the \texttt{classical} baseline. Subdomains column shows $\phi(\cdot)$ for wavefield decomposition.}
 \label{tab:S_hyperparams_full}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{l l l c c c c c c c r}
 \toprule
-\textbf{Model} & \makecell{$\boldsymbol{\phi}$ \textbf{network}\\$(x,z,t)\!\to\!\phi$} & \makecell{$\boldsymbol{c}$ \textbf{network}\\$(x,z)\!\to\!c$} & \textbf{LR} & \textbf{Subs} & \textbf{Overlap} & $\boldsymbol{\lambda_\text{PDE}}$ & $\boldsymbol{\lambda_\text{IC}}$ & $\boldsymbol{\lambda_\text{seis}}$ & $\boldsymbol{\lambda_\text{BC}}$ & \textbf{\# Pars} \\\midrule
+\textbf{Model} & \makecell{$\boldsymbol{\phi}$ \textbf{network}\\$(x,z,t)\!\to\!\phi$} & \makecell{$\boldsymbol{\alpha}$ \textbf{network}\\$(x,z)\!\to\!\alpha$} & \textbf{LR} & \textbf{Subs} & \textbf{Overlap} & $\boldsymbol{\lambda_\text{PDE}}$ & $\boldsymbol{\lambda_\text{IC}}$ & $\boldsymbol{\lambda_\text{data}}$ & $\boldsymbol{\lambda_\text{BC}}$ & \textbf{\# Pars} \\\midrule
 \texttt{classical} & $\mathcal{N}$: $32^{\times2}\!\to\!16^{\times2}$ & $\mathcal{N}$: $20^{\times5}$ & $10^{-4}$ & $\phi(5\!\times\!3\!\times\!5)$ & 0.35 & 0.1 & 1.0 & 1.0 & 0.1 & 151{,}836 \\
 \midrule
 \multicolumn{11}{l}{\emph{$\phi$-network size variants}} \\
@@ -122,18 +142,13 @@ which flips the target qubit if and only if the control qubit is in state $|1\ra
 \texttt{sub3x2x3} & -- & -- & -- & $\phi(3\!\times\!2\!\times\!3)$ & -- & -- & -- & -- & -- & 37{,}779 \\
 \texttt{sub8x4x8} & -- & -- & -- & $\phi(8\!\times\!4\!\times\!8)$ & -- & -- & -- & -- & -- & 514{,}017 \\
 \midrule
-\multicolumn{11}{l}{\emph{$c$-network size variants}} \\
-\texttt{c10x2} & -- & $\mathcal{N}$: $10^{\times2}$ & -- & -- & -- & -- & -- & -- & -- & 150{,}226 \\
-\texttt{c10x3} & -- & $\mathcal{N}$: $10^{\times3}$ & -- & -- & -- & -- & -- & -- & -- & 150{,}336 \\
-\texttt{c20x3} & -- & $\mathcal{N}$: $20^{\times3}$ & -- & -- & -- & -- & -- & -- & -- & 150{,}996 \\
-\texttt{c40x3} & -- & $\mathcal{N}$: $40^{\times3}$ & -- & -- & -- & -- & -- & -- & -- & 153{,}516 \\
-\texttt{c40x5} & -- & $\mathcal{N}$: $40^{\times5}$ & -- & -- & -- & -- & -- & -- & -- & 156{,}796 \\
-\texttt{c60x3} & -- & $\mathcal{N}$: $60^{\times3}$ & -- & -- & -- & -- & -- & -- & -- & 157{,}636 \\
-\midrule
-\multicolumn{11}{l}{\emph{Decomposed $c$-network variants}} \\
-\texttt{c\_dec5x3} & -- & $\mathcal{N}$: $10^{\times2}$ & -- & \makecell{$\phi(5\!\times\!3\!\times\!5)$\\$c(5\!\times\!3)$} & -- & -- & -- & -- & -- & 152{,}340 \\
-\texttt{c\_dec8x4} & -- & $\mathcal{N}$: $10^{\times2}$ & -- & \makecell{$\phi(5\!\times\!3\!\times\!5)$\\$c(8\!\times\!4)$} & -- & -- & -- & -- & -- & 154{,}907 \\
-\texttt{c\_dec5x3\_20} & -- & $\mathcal{N}$: $20^{\times2}$ & -- & \makecell{$\phi(5\!\times\!3\!\times\!5)$\\$c(5\!\times\!3)$} & -- & -- & -- & -- & -- & 156{,}600 \\
+\multicolumn{11}{l}{\emph{$\alpha$-network size variants}} \\
+\texttt{alpha10x2} & -- & $\mathcal{N}$: $10^{\times2}$ & -- & -- & -- & -- & -- & -- & -- & 150{,}226 \\
+\texttt{alpha10x3} & -- & $\mathcal{N}$: $10^{\times3}$ & -- & -- & -- & -- & -- & -- & -- & 150{,}336 \\
+\texttt{alpha20x3} & -- & $\mathcal{N}$: $20^{\times3}$ & -- & -- & -- & -- & -- & -- & -- & 150{,}996 \\
+\texttt{alpha40x3} & -- & $\mathcal{N}$: $40^{\times3}$ & -- & -- & -- & -- & -- & -- & -- & 153{,}516 \\
+\texttt{alpha40x5} & -- & $\mathcal{N}$: $40^{\times5}$ & -- & -- & -- & -- & -- & -- & -- & 156{,}796 \\
+\texttt{alpha60x3} & -- & $\mathcal{N}$: $60^{\times3}$ & -- & -- & -- & -- & -- & -- & -- & 157{,}636 \\
 \midrule
 \multicolumn{11}{l}{\emph{Training hyperparameter variants}} \\
 \texttt{lr5e4} & -- & -- & $5\!\times\!10^{-4}$ & -- & -- & -- & -- & -- & -- & -- \\

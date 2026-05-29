@@ -15,7 +15,7 @@ mkdir -p "$RESULTS_DIR/logs"
 MAIN_SCRIPTS=(fwi_classical fwi_quantum)
 
 VARIANTS=(
-    c10x2 c10x3 c20x3 c40x3 c40x5 c60x3
+    alpha10x2 alpha10x3 alpha20x3 alpha40x3 alpha40x5 alpha60x3
     phi16x2 phi64x3
     sub3x2x3 sub8x4x8 overlap50
     lr5e4 lr5e5

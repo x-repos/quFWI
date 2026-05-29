@@ -1,4 +1,5 @@
 
+
 import os
 import time
 import pickle
@@ -25,7 +26,7 @@ from tensorboardX import SummaryWriter
 
 
 # ============================================================================
-# RASHT-BEHESHT PARAMETERS (matching PINNs_Inversion_Acoustic.py exactly)
+# CHECKERBOARD PARAMETERS
 # ============================================================================
 
 # SPECFEM grid
@@ -81,10 +82,13 @@ VEL_AMPLITUDE = 2.0      # alpha = 3 + 2*tanh(NN)*mask
 VEL_LAYER_SIZES = (2, 20, 20, 20, 20, 20, 1)  # matching rasht layers0
 
 # Inversion box (in physical km, before scaling by Lx/Lz)
-z_st_phys = 0.1 - n_absz * dz_grid   # 0.05 km
-z_fi_phys = 0.45 - n_absz * dz_grid  # 0.40 km
-x_st_phys = 0.7 - n_absx * dx_grid   # 0.55 km
-x_fi_phys = 1.25 - n_absx * dx_grid  # 1.10 km
+# Checkerboard region: x=[0.85, 1.20] km, z=[0.15, 0.40] km in SPECFEM coords
+# Box with ~50m margin: x=[0.80, 1.25] km, z=[0.10, 0.45] km in SPECFEM coords
+# Shift by absorbing layer offset to get PINN coords
+z_st_phys = 0.10 - n_absz * dz_grid   # 0.05 km
+z_fi_phys = 0.45 - n_absz * dz_grid   # 0.40 km
+x_st_phys = 0.80 - n_absx * dx_grid   # 0.65 km
+x_fi_phys = 1.25 - n_absx * dx_grid   # 1.10 km
 
 # Convert inversion box to scaled coordinates for the mask
 VEL_BOX = (x_st_phys / Lx, x_fi_phys / Lx,
@@ -99,10 +103,10 @@ W_SEISMO = 1.0
 W_BC = 0.1
 
 # Seismogram subsampling
-L_F = 100  # subsample every 100 steps from SPECFEM
+L_F = 50  # subsample every 50 steps from SPECFEM (finer for 60 Hz)
 
 # FBPINN configuration
-N_SUBDOMAINS_X = 4
+N_SUBDOMAINS_X = 5
 N_SUBDOMAINS_Z = 3
 N_SUBDOMAINS_T = 5
 OVERLAP_FRACTION = 0.35
@@ -110,16 +114,16 @@ OVERLAP_FRACTION = 0.35
 SUBDOMAIN_LAYER_SIZES = [3, 32, 32, 16, 16, 1]
 
 # Training configuration
-LEARNING_RATE = 1e-4
-TRAINING_STEPS = 500000
+LEARNING_RATE = 5e-4
+TRAINING_STEPS = 1000000
 
 # BC sampling
 BC_XN = 100
 BC_TN = 50
 
 # Collocation points per dimension for PDE constraint
-PDE_BATCH_SHAPE = (40, 40, 25)
-N_TEST = (40, 20, 10)
+PDE_BATCH_SHAPE = (60, 60, 30)
+N_TEST = (30, 15, 8)
 
 SHOW_PLOTS = False
 SAVE_PLOTS = True
@@ -127,10 +131,12 @@ RUN_NAME = os.path.splitext(os.path.basename(__file__))[0]
 
 # Data directory
 DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
-                        "data", "rasht", "specfem")
+                        "data", "checkerboard", "specfem")
 
 
-
+# ============================================================================
+# DATA LOADING
+# ============================================================================
 
 def load_specfem_data(data_dir=None):
     """Load and preprocess SPECFEM data following rasht-behesht exactly.
@@ -269,7 +275,7 @@ def load_specfem_data(data_dir=None):
 # ============================================================================
 
 class AcousticFWIScalarPotential(Problem):
-    """Acoustic FWI using scalar potential formulation (Rasht-Behesht et al.).
+    """Acoustic FWI using scalar potential formulation (checkerboard model).
 
     Network outputs phi(x',z',t). Displacements are dphi/dx', dphi/dz'.
 
@@ -456,7 +462,7 @@ class AcousticFWIScalarPotential(Problem):
 
     @staticmethod
     def c_fn(all_params, x_batch):
-        """Velocity forward pass matching rasht-behesht exactly.
+        """Velocity forward pass.
 
         Input (x',z') in scaled coords -> normalize to [-1,1] -> 5-hidden-layer tanh NN
         -> alpha = vel_background + vel_amplitude * tanh(NN) * mask
@@ -503,16 +509,31 @@ class AcousticFWIScalarPotential(Problem):
 # ============================================================================
 
 def alpha_true_fn(x_phys, z_phys):
-    """Compute the true acoustic wavespeed (Rasht-Behesht ellipsoidal anomaly).
+    """Compute the true acoustic wavespeed (3x3 checkerboard anomaly).
 
     Args:
-        x_phys, z_phys: physical coordinates in km (NOT scaled)
+        x_phys, z_phys: physical coordinates in km (NOT scaled).
+                         These are PINN-domain coords (absorbing layers removed).
     """
-    a, b = 0.18, 0.1
-    c_center = 1.0 - n_absx * dx_grid  # 0.85 km
-    d_center = 0.3 - n_absz * dz_grid  # 0.25 km
-    g = (x_phys - c_center)**2 / a**2 + (z_phys - d_center)**2 / b**2
-    return 3.0 - 0.25 * (1.0 + np.tanh(100 * (1.0 - g)))
+    # Checkerboard in SPECFEM coords: x=[0.85, 1.20] km, z=[0.15, 0.40] km
+    # Convert to PINN coords by subtracting absorbing offsets
+    cb_x0 = 0.85 - n_absx * dx_grid
+    cb_x1 = 1.20 - n_absx * dx_grid
+    cb_z0 = 0.15 - n_absz * dz_grid
+    cb_z1 = 0.40 - n_absz * dz_grid
+    n_cells_x, n_cells_z = 3, 3
+
+    checker = np.sin(n_cells_x * np.pi * (x_phys - cb_x0) / (cb_x1 - cb_x0)) * \
+              np.sin(n_cells_z * np.pi * (z_phys - cb_z0) / (cb_z1 - cb_z0))
+
+    # Smooth mask
+    mask_x = 0.5 * (1 + np.tanh(200 * (x_phys - cb_x0))) * \
+             0.5 * (1 + np.tanh(200 * (cb_x1 - x_phys)))
+    mask_z = 0.5 * (1 + np.tanh(200 * (z_phys - cb_z0))) * \
+             0.5 * (1 + np.tanh(200 * (cb_z1 - z_phys)))
+    mask = mask_x * mask_z
+
+    return 3.0 + 0.3 * checker * mask
 
 
 # ============================================================================
@@ -520,7 +541,7 @@ def alpha_true_fn(x_phys, z_phys):
 # ============================================================================
 
 class FBPINNTrainerFWI16(FBPINNTrainer):
-    """FBPINNTrainer subclass for Rasht-Behesht FWI with custom test plots."""
+    """FBPINNTrainer subclass for checkerboard FWI with custom test plots."""
 
     def __init__(self, c, resume_step=0):
         self.resume_step = resume_step
@@ -1129,10 +1150,10 @@ class FBPINNTrainerFWI16(FBPINNTrainer):
 # MAIN
 # ============================================================================
 
-def main(resume_total_steps=0, multi_gpu=False):
+def main(resume_total_steps=0):
 
     cache_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
-                             'results', 'rasht', 'cache')
+                             'results', 'checkerboard', 'cache')
     os.makedirs(cache_dir, exist_ok=True)
     cache_file = os.path.join(cache_dir, 'specfem_data.npz')
 
@@ -1146,7 +1167,7 @@ def main(resume_total_steps=0, multi_gpu=False):
     else:
         # Load SPECFEM data
         print("=" * 60)
-        print("Step 1: Loading SPECFEM data from rasht-behesht_etal_2021/event1/")
+        print("Step 1: Loading SPECFEM data from checkerboard/event1/")
         print("=" * 60)
 
         data = load_specfem_data()
@@ -1249,9 +1270,11 @@ def main(resume_total_steps=0, multi_gpu=False):
 
         show_figures=SHOW_PLOTS,
         save_figures=SAVE_PLOTS,
-        multi_gpu=multi_gpu,
     )
 
+    # Override results path to results/checkerboard/
+    c.results_base = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
+                                   'results', 'checkerboard')
 
     print(f"\nVelocity network: {VEL_LAYER_SIZES}")
     print(f"Velocity: alpha = {VEL_BACKGROUND} + {VEL_AMPLITUDE}*tanh(NN)*mask")
@@ -1279,11 +1302,9 @@ def main(resume_total_steps=0, multi_gpu=False):
 
 if __name__ == "__main__":
     import argparse
-    parser = argparse.ArgumentParser(description="Rasht-Behesht FWI on FBPINNs")
+    parser = argparse.ArgumentParser(description="Checkerboard FWI on FBPINNs")
     parser.add_argument('--resume', type=int, default=0, metavar='TOTAL_STEPS',
                         help='Resume from last checkpoint, train to TOTAL_STEPS')
-    parser.add_argument('--multi_gpu', action='store_true',
-                        help='Enable multi-GPU parallelization for the training loop')
     args = parser.parse_args()
 
-    trained_params = main(resume_total_steps=args.resume, multi_gpu=args.multi_gpu)
+    trained_params = main(resume_total_steps=args.resume)

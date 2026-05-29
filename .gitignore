@@ -1,5 +1,17 @@
-# Output directories
-results/
+# Output directories — ignore all results except the paper-figure plots
+results/*
+!results/rasht/
+results/rasht/*
+!results/rasht/plots/
+results/rasht/plots/*
+!results/rasht/plots/*.png
+!results/rasht/plots/*.pdf
+!results/checkerboard/
+results/checkerboard/*
+!results/checkerboard/plots/
+results/checkerboard/plots/*
+!results/checkerboard/plots/*.png
+!results/checkerboard/plots/*.pdf
 data/checkerboard_10s/
 
 # IDE
