@@ -4,14 +4,13 @@ results/*
 results/rasht/*
 !results/rasht/plots/
 results/rasht/plots/*
-!results/rasht/plots/*.png
-!results/rasht/plots/*.pdf
+!results/rasht/plots/l1_and_velocity.png
+!results/rasht/plots/metrics_losses.png
 !results/checkerboard/
 results/checkerboard/*
 !results/checkerboard/plots/
 results/checkerboard/plots/*
-!results/checkerboard/plots/*.png
-!results/checkerboard/plots/*.pdf
+!results/checkerboard/plots/true_and_inverted.png
 data/checkerboard_10s/
 
 # LaTeX paper source (maintained separately, not tracked in this repo)
