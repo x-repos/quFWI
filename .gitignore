@@ -17,6 +17,9 @@ data/checkerboard_10s/
 # LaTeX paper source (maintained separately, not tracked in this repo)
 /tex/
 
+# SLURM job scripts and logs
+/slurm/
+
 # IDE
 .antigravitycli/
 
