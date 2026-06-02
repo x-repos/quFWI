@@ -61,3 +61,16 @@ Managed via `pyproject.toml` and `uv.lock`. Core dependencies:
 - JAX >= 0.8 (with CUDA 12)
 - Optax >= 0.2
 - NumPy, SciPy, Matplotlib, TensorboardX
+
+## Cite this repo:
+```bash
+@misc{nguyen2026acceleratingphysicsinformedneuralnetworks,
+      title={Accelerating physics-informed neural networks for full waveform inversion using a hybrid quantum-classical finite-basis architecture}, 
+      author={Hoang Anh Nguyen and Divakar Vashisth and Ali Tura},
+      year={2026},
+      eprint={2606.01110},
+      archivePrefix={arXiv},
+      primaryClass={physics.geo-ph},
+      url={https://arxiv.org/abs/2606.01110}, 
+}
+```
