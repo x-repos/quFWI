@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "Please cite the following if you use quFWI in your research:"
+title: "quFWI"
+authors:
+  - family-names: "Nguyen"
+    given-names: "Hoang Anh"
+  - family-names: "Vashisth"
+    given-names: "Divakar"
+  - family-names: "Tura"
+    given-names: "Ali"
+date-released: 2026-01-01
+url: "https://github.com/x-repos/quFWI"
+repository-code: "https://github.com/x-repos/quFWI"
+preferred-citation:
+  type: article
+  title: "Accelerating physics-informed neural networks for full waveform inversion using a hybrid quantum-classical finite-basis architecture"
+  authors:
+    - family-names: "Nguyen"
+      given-names: "Hoang Anh"
+    - family-names: "Vashisth"
+      given-names: "Divakar"
+    - family-names: "Tura"
+      given-names: "Ali"
+  year: 2026
+  notes: "arXiv:2606.01110 [physics.geo-ph]"
+  url: "https://arxiv.org/abs/2606.01110"
