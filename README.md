@@ -62,7 +62,8 @@ Managed via `pyproject.toml` and `uv.lock`. Core dependencies:
 - Optax >= 0.2
 - NumPy, SciPy, Matplotlib, TensorboardX
 
-## Cite this repo:
+## Citation
+Please cite the following if you use quFWI in your research
 ```bash
 @misc{nguyen2026acceleratingphysicsinformedneuralnetworks,
       title={Accelerating physics-informed neural networks for full waveform inversion using a hybrid quantum-classical finite-basis architecture}, 
