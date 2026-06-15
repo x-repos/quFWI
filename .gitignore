@@ -19,6 +19,9 @@ data/checkerboard_10s/
 # SLURM job scripts and logs
 /slurm/
 
+# Internal working docs (plans, specs, notes) — not tracked
+/docs/
+
 # IDE
 .antigravitycli/
 
