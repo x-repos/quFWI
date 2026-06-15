@@ -2,11 +2,11 @@
 # Submit all training runs as separate SLURM jobs (one GPU each).
 #
 # Submits fwi_classical, fwi_quantum, and every variant under variants/.
-# Each job logs to results/rasht/logs/slurm_<jobname>_<jobid>.log.
+# Each job logs to results/anomaly/logs/slurm_<jobname>_<jobid>.log.
 
 cd "$(dirname "$0")/../.."
 
-mkdir -p results/rasht/logs
+mkdir -p results/anomaly/logs
 
 MAIN_SCRIPTS=(fwi_classical fwi_quantum)
 
@@ -22,9 +22,9 @@ submit() {
     local name="$1"
     local script="$2"
     echo "Submitting $name"
-    sbatch --job-name="$name" --output="results/rasht/logs/slurm_%x_%j.log" \
+    sbatch --job-name="$name" --output="results/anomaly/logs/slurm_%x_%j.log" \
         -p gpu --account=2602090805 --gres=gpu:v100:1 --ntasks=1 --cpus-per-task=4 \
-        --wrap="module load apps/python3 && conda activate jaxcu12 && cd $(pwd)/scripts/rasht && python ${script} $*"
+        --wrap="module load apps/python3 && conda activate jaxcu12 && cd $(pwd)/scripts/anomaly && python ${script} $*"
 }
 
 for m in "${MAIN_SCRIPTS[@]}"; do

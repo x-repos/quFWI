@@ -1,6 +1,6 @@
 #!/bin/bash
 SCRIPTS_DIR="$(cd "$(dirname "$0")/.." && pwd)"
-RESULTS_DIR="$(cd "$SCRIPTS_DIR/../.." && pwd)/results/rasht"
+RESULTS_DIR="$(cd "$SCRIPTS_DIR/../.." && pwd)/results/anomaly"
 cd "$SCRIPTS_DIR"
 mkdir -p "$RESULTS_DIR/logs"
 

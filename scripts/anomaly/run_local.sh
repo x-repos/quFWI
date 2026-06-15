@@ -2,14 +2,14 @@
 # Run all training scripts locally (sequential, one GPU).
 #
 # Runs fwi_classical, fwi_quantum, and every variant under variants/.
-# Each script logs to results/rasht/logs/<name>.log. The orchestrator
-# itself logs to results/rasht/logs/run_all.log.
+# Each script logs to results/anomaly/logs/<name>.log. The orchestrator
+# itself logs to results/anomaly/logs/run_all.log.
 #
 # Usage:
 #   ./run_local.sh [extra args passed to every python invocation]
 
 SCRIPTS_DIR="$(cd "$(dirname "$0")" && pwd)"
-RESULTS_DIR="$(cd "$SCRIPTS_DIR/../.." && pwd)/results/rasht"
+RESULTS_DIR="$(cd "$SCRIPTS_DIR/../.." && pwd)/results/anomaly"
 mkdir -p "$RESULTS_DIR/logs"
 
 MAIN_SCRIPTS=(fwi_classical fwi_quantum)

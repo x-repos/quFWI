@@ -1,8 +1,5 @@
 
 import os
-# Ensure working directory is scripts/ for relative result paths
-SCRIPTS_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-os.chdir(SCRIPTS_DIR)
 import time
 import pickle
 import glob as glob_mod
@@ -74,14 +71,14 @@ zl_s = 0.06 - n_absz * dz_grid  # z location of last seismometer at depth
 u_scl = 1 / 3640
 
 # Velocity parameters
-INIT_VEL_PATH = os.path.join(SCRIPTS_DIR, "initial_velocity.npy")
+INIT_VEL_PATH = os.path.join(os.path.dirname(__file__), "initial_velocity.npy")
 if os.path.exists(INIT_VEL_PATH):
     VEL_BACKGROUND = float(np.load(INIT_VEL_PATH))
     print(f"Loaded initial velocity = {VEL_BACKGROUND} km/s from {INIT_VEL_PATH}")
 else:
     VEL_BACKGROUND = 3.0     # km/s (default)
 VEL_AMPLITUDE = 2.0      # alpha = 3 + 2*tanh(NN)*mask
-VEL_LAYER_SIZES = (2, 20, 20, 20, 1)  # matching rasht layers0
+VEL_LAYER_SIZES = (2, 20, 20, 20, 20, 20, 1)  # matching Rasht-Behesht layers0
 
 # Inversion box (in physical km, before scaling by Lx/Lz)
 z_st_phys = 0.1 - n_absz * dz_grid   # 0.05 km
@@ -94,7 +91,7 @@ VEL_BOX = (x_st_phys / Lx, x_fi_phys / Lx,
            z_st_phys / Lz, z_fi_phys / Lz)
 MASK_STEEPNESS = 1000.0
 
-# Loss weights (matching rasht exactly)
+# Loss weights (matching Rasht-Behesht exactly)
 W_PDE = 0.1
 W_IC1 = 1.0
 W_IC2 = 1.0
@@ -129,13 +126,11 @@ SAVE_PLOTS = True
 RUN_NAME = os.path.splitext(os.path.basename(__file__))[0]
 
 # Data directory
-DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(SCRIPTS_DIR)),
-                        "data", "rasht", "specfem")
+DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
+                        "data", "anomaly", "specfem")
 
 
-# ============================================================================
-# DATA LOADING
-# ============================================================================
+
 
 def load_specfem_data(data_dir=None):
     """Load and preprocess SPECFEM data following rasht-behesht exactly.
@@ -209,7 +204,7 @@ def load_specfem_data(data_dir=None):
     smsz = [f for f in sms if f[-6] == 'Z']
     seismo_listz = [np.loadtxt(os.path.join(seis_dir, f)) for f in smsz]
 
-    # Time axis processing (matching rasht exactly)
+    # Time axis processing (matching Rasht-Behesht exactly)
     t_spec = -seismo_listz[0][0, 0] + seismo_listz[0][:, 0]
     cut_u = t_spec > t_s
     cut_l = t_spec < t_st
@@ -319,7 +314,7 @@ class AcousticFWIScalarPotential(Problem):
             "vel_layers": vel_layers,
         }
 
-        # Upper bounds for input normalization (matching rasht's ub0)
+        # Upper bounds for input normalization (matching Rasht-Behesht's ub0)
         ub0 = jnp.array([ax / Lx, az / Lz])
 
         static_params = {
@@ -478,7 +473,7 @@ class AcousticFWIScalarPotential(Problem):
         x_raw = x_batch[:, 0:1]  # x'
         z_raw = x_batch[:, 1:2]  # z'
 
-        # Normalize to [-1, 1] (matching rasht: H = 2*(X/ub0) - 1)
+        # Normalize to [-1, 1] (matching Rasht-Behesht: H = 2*(X/ub0) - 1)
         h = jnp.concatenate([2.0 * x_raw / ub0[0] - 1.0,
                               2.0 * z_raw / ub0[1] - 1.0], axis=1)
 
@@ -1134,9 +1129,10 @@ class FBPINNTrainerFWI16(FBPINNTrainer):
 # MAIN
 # ============================================================================
 
-def main(resume_total_steps=0):
+def main(resume_total_steps=0, multi_gpu=False):
 
-    cache_dir = os.path.join(os.path.dirname(os.path.dirname(SCRIPTS_DIR)), 'results', 'rasht', 'cache')
+    cache_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
+                             'results', 'anomaly', 'cache')
     os.makedirs(cache_dir, exist_ok=True)
     cache_file = os.path.join(cache_dir, 'specfem_data.npz')
 
@@ -1253,7 +1249,9 @@ def main(resume_total_steps=0):
 
         show_figures=SHOW_PLOTS,
         save_figures=SAVE_PLOTS,
+        multi_gpu=multi_gpu,
     )
+
 
     print(f"\nVelocity network: {VEL_LAYER_SIZES}")
     print(f"Velocity: alpha = {VEL_BACKGROUND} + {VEL_AMPLITUDE}*tanh(NN)*mask")
@@ -1284,6 +1282,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Rasht-Behesht FWI on FBPINNs")
     parser.add_argument('--resume', type=int, default=0, metavar='TOTAL_STEPS',
                         help='Resume from last checkpoint, train to TOTAL_STEPS')
+    parser.add_argument('--multi_gpu', action='store_true',
+                        help='Enable multi-GPU parallelization for the training loop')
     args = parser.parse_args()
 
-    trained_params = main(resume_total_steps=args.resume)
+    trained_params = main(resume_total_steps=args.resume, multi_gpu=args.multi_gpu)

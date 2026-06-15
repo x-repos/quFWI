@@ -56,13 +56,13 @@ problem_init_kwargs: {'Lx': 3.0, 'Lz': 3.0, 'vel_background': 3.0, 'vel_amplitud
        ...,
        [-0.01134937],
        [-0.00963497],
-       [-0.00545904]], shape=(1620, 1)), 'X_BC_t': array([[0.14592365, 0.15      , 0.28279982],
-       [0.32746974, 0.15      , 0.28279982],
-       [0.03637635, 0.15      , 0.28279982],
+       [-0.00545904]], shape=(1620, 1)), 'X_BC_t': array([[0.28828081, 0.15      , 0.39150117],
+       [0.3701639 , 0.15      , 0.39150117],
+       [0.2561309 , 0.15      , 0.39150117],
        ...,
-       [0.3340719 , 0.15      , 0.29513994],
-       [0.1300623 , 0.15      , 0.29513994],
-       [0.02775115, 0.15      , 0.29513994]], shape=(5000, 3)), 'U_specx': array([[ 3.26447208e-02],
+       [0.34897678, 0.15      , 0.34132156],
+       [0.18717464, 0.15      , 0.34132156],
+       [0.15581679, 0.15      , 0.34132156]], shape=(5000, 3)), 'U_specx': array([[ 3.26447208e-02],
        [ 2.44358442e-02],
        [ 1.89137767e-02],
        ...,
@@ -103,13 +103,13 @@ decomposition: <class 'qufwi.fbpinns.decompositions.RectangularDecompositionND'>
 decomposition_init_kwargs: {'subdomain_xs': [array([0.        , 0.09583333, 0.19166667, 0.2875    , 0.38333333]), array([0.   , 0.075, 0.15 ]), array([0. , 0.1, 0.2, 0.3, 0.4])], 'subdomain_ws': [array([0.35, 0.35, 0.35, 0.35, 0.35]), array([0.35, 0.35, 0.35]), array([0.35, 0.35, 0.35, 0.35, 0.35])], 'unnorm': (0.0, 1.0)}
 network: <class 'qufwi.fbpinns.networks.FCN'>
 network_init_kwargs: {'layer_sizes': [3, 32, 32, 16, 16, 1]}
-n_steps: 500000
+n_steps: 1000000
 scheduler: <class 'qufwi.fbpinns.schedulers.AllActiveSchedulerND'>
 scheduler_kwargs: {}
 ns: ((40, 40, 25), (1600,), (1600,), (1620,), (5000,))
 n_test: (40, 20, 10)
 sampler: sobol
-optimiser: <function adam at 0x748629c84900>
+optimiser: <function adam at 0x7a03a3aa0900>
 optimiser_kwargs: {'learning_rate': 0.0001}
 seed: 0
 summary_freq: 1000

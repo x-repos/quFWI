@@ -19,29 +19,29 @@ uv sync
 This installs all dependencies including JAX with CUDA 12 GPU support. To run scripts:
 
 ```bash
-uv run python scripts/rasht/fwi_classical.py
+uv run python scripts/anomaly/fwi_classical.py
 ```
 
 ## Usage
 
 ```bash
 # Classical FWI
-uv run python scripts/rasht/fwi_classical.py
+uv run python scripts/anomaly/fwi_classical.py
 
 # Quantum-hybrid FWI
-uv run python scripts/rasht/fwi_quantum.py
+uv run python scripts/anomaly/fwi_quantum.py
 
 # Resume from checkpoint
-uv run python scripts/rasht/fwi_classical.py --resume 200000
+uv run python scripts/anomaly/fwi_classical.py --resume 200000
 
 # Monitor training
-tensorboard --logdir results/rasht/summaries/
+tensorboard --logdir results/anomaly/summaries/
 ```
 
 ## Results
 
 <p align="center">
-<img src="results/rasht/plots/l1_and_velocity.png" width="600">
+<img src="results/anomaly/plots/l1_and_velocity.png" width="600">
 </p>
 
 **(a)** True velocity model with ellipsoidal anomaly. **(b)** Initial (homogeneous) guess. **(c)** Inverted velocity from the classical FBPINN baseline. **(d)** L1 velocity error convergence across hyperparameter variants and the quantum-hybrid model.
@@ -50,7 +50,7 @@ tensorboard --logdir results/rasht/summaries/
 
 - `src/qufwi/pqcs/` — Standalone PQC library
 - `src/qufwi/fbpinns/` — Core FBPINNs framework (merged classical + quantum)
-- `scripts/` — FWI training scripts for rasht and checkerboard models
+- `scripts/` — FWI training scripts for anomaly and checkerboard models
 - `data/` — SPECFEM synthetic seismic data
 - `pennylane/` — Tests and benchmarks comparing the custom PQC against PennyLane
 

@@ -35,7 +35,7 @@ class ConstantsBase:
     # below methods assume self.run exist
 
     # calculated variables
-    results_base = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "results", "rasht")
+    results_base = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "results", "anomaly")
 
     @property
     def summary_out_dir(self):

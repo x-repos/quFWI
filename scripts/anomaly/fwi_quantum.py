@@ -1,9 +1,5 @@
 
 import os
-
-# Ensure working directory is scripts/ for relative result paths
-SCRIPTS_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-os.chdir(SCRIPTS_DIR)
 import time
 import pickle
 import glob as glob_mod
@@ -18,8 +14,9 @@ import scipy.interpolate as interpolate
 from qufwi.fbpinns.domains import RectangularDomainND
 from qufwi.fbpinns.problems import Problem
 from qufwi.fbpinns.decompositions import RectangularDecompositionND
-from qufwi.fbpinns.networks import FCN
+from qufwi.fbpinns.networks import HybridQuantumFCN
 from qufwi.fbpinns.constants import Constants
+from qufwi.pqcs.circuit import quantum_circuit
 from qufwi.fbpinns.trainers import (FBPINNTrainer, get_inputs, FBPINN_model, FBPINN_model_jit,
                                _common_train_initialisation, tree_map_dicts,
                                FBPINN_update, partition)
@@ -75,14 +72,9 @@ zl_s = 0.06 - n_absz * dz_grid  # z location of last seismometer at depth
 u_scl = 1 / 3640
 
 # Velocity parameters
-INIT_VEL_PATH = os.path.join(SCRIPTS_DIR, "initial_velocity.npy")
-if os.path.exists(INIT_VEL_PATH):
-    VEL_BACKGROUND = float(np.load(INIT_VEL_PATH))
-    print(f"Loaded initial velocity = {VEL_BACKGROUND} km/s from {INIT_VEL_PATH}")
-else:
-    VEL_BACKGROUND = 3.0     # km/s (default)
+VEL_BACKGROUND = 3.0     # km/s
 VEL_AMPLITUDE = 2.0      # alpha = 3 + 2*tanh(NN)*mask
-VEL_LAYER_SIZES = (2, 20, 20, 20, 20, 20, 1)  # matching rasht layers0
+VEL_LAYER_SIZES = (2, 20, 20, 20, 20, 20, 1)  # matching Rasht-Behesht layers0
 
 # Inversion box (in physical km, before scaling by Lx/Lz)
 z_st_phys = 0.1 - n_absz * dz_grid   # 0.05 km
@@ -95,12 +87,12 @@ VEL_BOX = (x_st_phys / Lx, x_fi_phys / Lx,
            z_st_phys / Lz, z_fi_phys / Lz)
 MASK_STEEPNESS = 1000.0
 
-# Loss weights (matching rasht exactly)
-W_PDE = 0.01
+# Loss weights (matching Rasht-Behesht exactly)
+W_PDE = 0.1
 W_IC1 = 1.0
 W_IC2 = 1.0
 W_SEISMO = 1.0
-W_BC = 0.01
+W_BC = 0.1
 
 # Seismogram subsampling
 L_F = 100  # subsample every 100 steps from SPECFEM
@@ -111,7 +103,19 @@ N_SUBDOMAINS_Z = 3
 N_SUBDOMAINS_T = 5
 OVERLAP_FRACTION = 0.35
 
-SUBDOMAIN_LAYER_SIZES = [3, 32, 32, 16, 16, 1]
+# Quantum-classical network configuration (wavefield subdomains)
+# Classical layers: input(3) → hidden → hidden → n_qubits
+CLASSICAL_LAYER_SIZES = [3, 32, 32]
+N_QUBITS = 4                # 2^4 = 16 state dims, memory-safe
+N_QUANTUM_LAYERS = 2         # PQC depth
+# Full classical path: [3, 32, 32, 4] → quantum circuit → 1 output
+SUBDOMAIN_LAYER_SIZES = CLASSICAL_LAYER_SIZES + [N_QUBITS]
+
+# Velocity quantum-hybrid network configuration
+# Classical layers: input(2) → hidden layers → n_qubits (same hidden structure as classical VEL_LAYER_SIZES)
+VEL_CLASSICAL_LAYER_SIZES = [2, 20, 20, 20]
+VEL_N_QUBITS = 4
+VEL_N_QUANTUM_LAYERS = 2
 
 # Training configuration
 LEARNING_RATE = 1e-4
@@ -121,7 +125,7 @@ TRAINING_STEPS = 500000
 BC_XN = 100
 BC_TN = 50
 
-# Collocation points per dimension for PDE constraint
+# Collocation points per dimension for PDE constraint (reduced for quantum memory)
 PDE_BATCH_SHAPE = (40, 40, 25)
 N_TEST = (40, 20, 10)
 
@@ -130,8 +134,8 @@ SAVE_PLOTS = True
 RUN_NAME = os.path.splitext(os.path.basename(__file__))[0]
 
 # Data directory
-DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(SCRIPTS_DIR)),
-                        "data", "rasht", "specfem")
+DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
+                        "data", "anomaly", "specfem")
 
 
 # ============================================================================
@@ -210,7 +214,7 @@ def load_specfem_data(data_dir=None):
     smsz = [f for f in sms if f[-6] == 'Z']
     seismo_listz = [np.loadtxt(os.path.join(seis_dir, f)) for f in smsz]
 
-    # Time axis processing (matching rasht exactly)
+    # Time axis processing (matching Rasht-Behesht exactly)
     t_spec = -seismo_listz[0][0, 0] + seismo_listz[0][:, 0]
     cut_u = t_spec > t_s
     cut_l = t_spec < t_st
@@ -296,6 +300,9 @@ class AcousticFWIScalarPotential(Problem):
         vel_layer_sizes=(2, 20, 20, 20, 20, 20, 1),
         vel_box=(0.0, 1.0, 0.0, 1.0),
         mask_steepness=1000.0,
+        vel_classical_layer_sizes=None,
+        vel_n_qubits=4,
+        vel_n_quantum_layers=2,
         X_init1=None, U_ini1x=None, U_ini1z=None,
         X_init2=None, U_ini2x=None, U_ini2z=None,
         X_S=None, Sx=None, Sz=None,
@@ -304,23 +311,47 @@ class AcousticFWIScalarPotential(Problem):
         xx_eval=None, zz_eval=None,
         w_pde=0.1, w_ic1=1.0, w_ic2=1.0, w_seismo=1.0, w_bc=0.1,
     ):
-        # Initialize velocity network weights (uniform, matching quantum script)
+        if vel_classical_layer_sizes is None:
+            vel_classical_layer_sizes = [2, 20, 20, 20, 20, 20]
+
+        # Build classical layer sizes ending in n_qubits for quantum embedding
+        vel_full_layer_sizes = vel_classical_layer_sizes + [vel_n_qubits]
+
+        # Initialize velocity quantum-hybrid network params (same pattern as HybridQuantumFCN)
         key = jax.random.PRNGKey(42)
-        key, classical_key, _, _, _ = jax.random.split(key, 5)
-        vel_layers = []
-        keys = jax.random.split(classical_key, len(vel_layer_sizes) - 1)
-        for k, m, n in zip(keys, vel_layer_sizes[:-1], vel_layer_sizes[1:]):
+        key, classical_key, basis_key, theta_key, output_key = jax.random.split(key, 5)
+
+        # Classical layers
+        keys = jax.random.split(classical_key, len(vel_full_layer_sizes) - 1)
+        vel_classical_layers = []
+        for k, m, n in zip(keys, vel_full_layer_sizes[:-1], vel_full_layer_sizes[1:]):
             w_key, b_key = jax.random.split(k)
             v = jnp.sqrt(1.0 / m)
             w = jax.random.uniform(w_key, (n, m), minval=-v, maxval=v)
             b = jax.random.uniform(b_key, (n,), minval=-v, maxval=v)
-            vel_layers.append((w, b))
+            vel_classical_layers.append((w, b))
+
+        # Quantum embedding basis
+        vel_basis = jax.random.normal(basis_key, (vel_n_qubits,)) * 0.5
+
+        # Variational circuit params: [n_layers, n_qubits, 3] for RX/RY/RZ
+        vel_theta = jax.random.normal(theta_key, (vel_n_quantum_layers, vel_n_qubits, 3)) * 0.1
+
+        # Output scaling: quantum_output in [-1,1] → alpha_star
+        w_out_key, b_out_key = jax.random.split(output_key)
+        v_out = 0.02
+        vel_output_weight = jax.random.uniform(w_out_key, (), minval=-v_out, maxval=v_out)
+        vel_output_bias = jax.random.uniform(b_out_key, (), minval=-v_out, maxval=v_out)
 
         trainable_params = {
-            "vel_layers": vel_layers,
+            "vel_classical_layers": vel_classical_layers,
+            "vel_basis": vel_basis,
+            "vel_theta": vel_theta,
+            "vel_output_weight": vel_output_weight,
+            "vel_output_bias": vel_output_bias,
         }
 
-        # Upper bounds for input normalization (matching rasht's ub0)
+        # Upper bounds for input normalization (matching Rasht-Behesht's ub0)
         ub0 = jnp.array([ax / Lx, az / Lz])
 
         static_params = {
@@ -332,6 +363,8 @@ class AcousticFWIScalarPotential(Problem):
             "vel_amplitude": float(vel_amplitude),
             "vel_box": jnp.array(vel_box),
             "mask_steepness": float(mask_steepness),
+            "vel_n_qubits": vel_n_qubits,
+            "vel_n_quantum_layers": vel_n_quantum_layers,
             "ub0": ub0,
             # IC data
             "X_init1": jnp.array(X_init1),
@@ -462,32 +495,48 @@ class AcousticFWIScalarPotential(Problem):
 
     @staticmethod
     def c_fn(all_params, x_batch):
-        """Velocity forward pass matching rasht-behesht exactly.
+        """Quantum-hybrid velocity forward pass.
 
-        Input (x',z') in scaled coords -> normalize to [-1,1] -> 5-hidden-layer tanh NN
-        -> alpha = vel_background + vel_amplitude * tanh(NN) * mask
+        Input (x',z') in scaled coords -> normalize to [-1,1] -> classical layers (tanh)
+        -> quantum circuit -> output scaling -> tanh -> mask
+        -> alpha = vel_background + vel_amplitude * tanh(quantum_out) * mask
         """
-        vel_layers = all_params["trainable"]["problem"]["vel_layers"]
+        tp = all_params["trainable"]["problem"]
+        vel_classical_layers = tp["vel_classical_layers"]
+        vel_basis = tp["vel_basis"]
+        vel_theta = tp["vel_theta"]
+        vel_output_weight = tp["vel_output_weight"]
+        vel_output_bias = tp["vel_output_bias"]
+
         p = all_params["static"]["problem"]
         c0 = p["vel_background"]
         vel_amp = p["vel_amplitude"]
         vel_box = p["vel_box"]
         lld = p["mask_steepness"]
         ub0 = p["ub0"]
+        vel_n_qubits = p["vel_n_qubits"]
+        vel_n_quantum_layers = p["vel_n_quantum_layers"]
 
         # Extract spatial coords only
         x_raw = x_batch[:, 0:1]  # x'
         z_raw = x_batch[:, 1:2]  # z'
 
-        # Normalize to [-1, 1] (matching rasht: H = 2*(X/ub0) - 1)
+        # Normalize to [-1, 1] (matching Rasht-Behesht: H = 2*(X/ub0) - 1)
         h = jnp.concatenate([2.0 * x_raw / ub0[0] - 1.0,
                               2.0 * z_raw / ub0[1] - 1.0], axis=1)
 
-        # Forward pass through velocity network
-        for w, b in vel_layers[:-1]:
+        # Classical layers with tanh activations → output of size n_qubits
+        for w, b in vel_classical_layers:
             h = jnp.tanh(h @ w.T + b)
-        w, b = vel_layers[-1]
-        alpha_star = jnp.tanh(h @ w.T + b)  # (n, 1), range [-1, 1]
+
+        # Quantum circuit applied per-point
+        def _single_point_quantum(h_single):
+            qout = quantum_circuit(
+                h_single, vel_basis, vel_theta, vel_n_qubits, vel_n_quantum_layers)
+            return vel_output_weight * qout + vel_output_bias
+
+        alpha_star_flat = jax.vmap(_single_point_quantum)(h)  # (n,)
+        alpha_star = jnp.tanh(alpha_star_flat[:, None])  # (n, 1), range [-1, 1]
 
         # Smooth spatial mask (product of 4 tanh sigmoids)
         mask = (0.5 * (1.0 + jnp.tanh(lld * (x_raw - vel_box[0]))) *
@@ -928,12 +977,11 @@ class FBPINNTrainerFWI16(FBPINNTrainer):
         fig, axes = plt.subplots(1, 3, figsize=(16, 4))
         extent = [0, ax, 0, az]
 
-        im0 = axes[0].contourf(xx_eval * Lx, zz_eval * Lz, c_true, 50, cmap='GnBu',
-                                 vmin=vmin, vmax=vmax)
+        im0 = axes[0].contourf(xx_eval * Lx, zz_eval * Lz, c_true, 50, cmap='jet')
         axes[0].set_title('True alpha')
         fig.colorbar(im0, ax=axes[0], shrink=0.5, aspect=10)
 
-        im1 = axes[1].contourf(xx_eval * Lx, zz_eval * Lz, c_learned, 50, cmap='GnBu',
+        im1 = axes[1].contourf(xx_eval * Lx, zz_eval * Lz, c_learned, 50, cmap='jet',
                                  vmin=vmin, vmax=vmax)
         axes[1].set_title('Learned alpha')
         fig.colorbar(im1, ax=axes[1], shrink=0.5, aspect=10)
@@ -1137,7 +1185,8 @@ class FBPINNTrainerFWI16(FBPINNTrainer):
 
 def main(resume_total_steps=0):
 
-    cache_dir = os.path.join(os.path.dirname(os.path.dirname(SCRIPTS_DIR)), 'results', 'rasht', 'cache')
+    cache_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
+                             'results', 'anomaly', 'cache')
     os.makedirs(cache_dir, exist_ok=True)
     cache_file = os.path.join(cache_dir, 'specfem_data.npz')
 
@@ -1175,7 +1224,7 @@ def main(resume_total_steps=0):
 
     # Configure Constants
     print("\n" + "=" * 60)
-    print("Step 2: Configuring FBPINNs training")
+    print("Step 2: Configuring Quantum-Hybrid FBPINNs training")
     print("=" * 60)
 
     # Domain bounds in scaled coordinates
@@ -1199,6 +1248,9 @@ def main(resume_total_steps=0):
             vel_layer_sizes=VEL_LAYER_SIZES,
             vel_box=VEL_BOX,
             mask_steepness=MASK_STEEPNESS,
+            vel_classical_layer_sizes=VEL_CLASSICAL_LAYER_SIZES,
+            vel_n_qubits=VEL_N_QUBITS,
+            vel_n_quantum_layers=VEL_N_QUANTUM_LAYERS,
             X_init1=data["X_init1"],
             U_ini1x=data["U_ini1x"],
             U_ini1z=data["U_ini1z"],
@@ -1235,9 +1287,11 @@ def main(resume_total_steps=0):
             unnorm=(0., 1.),
         ),
 
-        network=FCN,
+        network=HybridQuantumFCN,
         network_init_kwargs=dict(
-            layer_sizes=SUBDOMAIN_LAYER_SIZES,
+            classical_layer_sizes=SUBDOMAIN_LAYER_SIZES,
+            n_qubits=N_QUBITS,
+            n_quantum_layers=N_QUANTUM_LAYERS,
         ),
 
         # 5 constraints: PDE, IC1, IC2, Seismo, BC
@@ -1248,16 +1302,18 @@ def main(resume_total_steps=0):
         n_steps=n_steps,
         optimiser_kwargs=dict(learning_rate=LEARNING_RATE),
 
-        summary_freq=1000, #print to console + save loss metrics
-        test_freq=5000, #L1 velocity + plots (velocity, displacement, seismogram)
-        model_save_freq=10000, #save model checkpoint (.jax: 10000) and + metrics.npz (1000) + physical data (.npz) (5000) from summary_freq and test_freq
-
+        summary_freq=100,
+        test_freq=500,
+        model_save_freq=1000,
         show_figures=SHOW_PLOTS,
         save_figures=SAVE_PLOTS,
     )
 
-    print(f"\nVelocity network: {VEL_LAYER_SIZES}")
-    print(f"Velocity: alpha = {VEL_BACKGROUND} + {VEL_AMPLITUDE}*tanh(NN)*mask")
+    print(f"\nVelocity quantum-hybrid network:")
+    print(f"  Classical layers: {VEL_CLASSICAL_LAYER_SIZES + [VEL_N_QUBITS]}")
+    print(f"  Qubits: {VEL_N_QUBITS} (state space: 2^{VEL_N_QUBITS} = {2**VEL_N_QUBITS} dims)")
+    print(f"  PQC layers: {VEL_N_QUANTUM_LAYERS}")
+    print(f"  Velocity: alpha = {VEL_BACKGROUND} + {VEL_AMPLITUDE}*tanh(quantum_out)*mask")
     print(f"Inversion box (scaled): x'=[{VEL_BOX[0]:.4f}, {VEL_BOX[1]:.4f}], "
           f"z'=[{VEL_BOX[2]:.4f}, {VEL_BOX[3]:.4f}]")
     print(f"Mask steepness: {MASK_STEEPNESS}")
@@ -1265,14 +1321,21 @@ def main(resume_total_steps=0):
           f"Seismo={W_SEISMO}, BC={W_BC}")
     print(f"Subdomains: {N_SUBDOMAINS_X}x{N_SUBDOMAINS_Z}x{N_SUBDOMAINS_T} = "
           f"{N_SUBDOMAINS_X * N_SUBDOMAINS_Z * N_SUBDOMAINS_T}")
-    print(f"Per-subdomain network: {SUBDOMAIN_LAYER_SIZES}")
+    print(f"Wavefield quantum-hybrid network:")
+    print(f"  Classical layers: {SUBDOMAIN_LAYER_SIZES}")
+    print(f"  Qubits: {N_QUBITS} (state space: 2^{N_QUBITS} = {2**N_QUBITS} dims)")
+    print(f"  PQC layers: {N_QUANTUM_LAYERS}")
+    print(f"  PDE batch shape: {PDE_BATCH_SHAPE}")
+    print(f"  Test grid: {N_TEST}")
     print(f"Learning rate: {LEARNING_RATE}")
     print(f"Training steps: {n_steps}")
 
     # Train
     print("\n" + "=" * 60)
-    print("Step 3: Training")
+    print("Step 3: Training (Quantum-Hybrid)")
     print("=" * 60)
+    print("NOTE: Quantum circuits are computationally intensive.")
+    print("      Training will be slower than classical networks.\n")
 
     trainer = FBPINNTrainerFWI16(c, resume_step=n_steps if resume_total_steps > 0 else 0)
     all_params = trainer.train()
@@ -1282,9 +1345,22 @@ def main(resume_total_steps=0):
 
 if __name__ == "__main__":
     import argparse
-    parser = argparse.ArgumentParser(description="Rasht-Behesht FWI on FBPINNs")
+    parser = argparse.ArgumentParser(description="Rasht-Behesht FWI on FBPINNs (Quantum-Hybrid)")
     parser.add_argument('--resume', type=int, default=0, metavar='TOTAL_STEPS',
                         help='Resume from last checkpoint, train to TOTAL_STEPS')
     args = parser.parse_args()
+
+    # Enable 64-bit precision for better quantum circuit accuracy
+    jax.config.update("jax_enable_x64", True)
+
+    # Configure memory settings for quantum circuits
+    os.environ['XLA_FLAGS'] = '--xla_gpu_enable_command_buffer='
+    os.environ['XLA_PYTHON_CLIENT_MEM_FRACTION'] = '.75'
+
+    print("\nJAX Configuration:")
+    print(f"  Devices: {jax.devices()}")
+    print(f"  Default backend: {jax.default_backend()}")
+    print(f"  64-bit precision: Enabled")
+    print(f"  Memory fraction: 75%\n")
 
     trained_params = main(resume_total_steps=args.resume)

@@ -1,8 +1,5 @@
 
 import os
-# Ensure working directory is scripts/ for relative result paths
-SCRIPTS_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-os.chdir(SCRIPTS_DIR)
 import time
 import pickle
 import glob as glob_mod
@@ -25,6 +22,10 @@ from qufwi.fbpinns.trainers import (FBPINNTrainer, get_inputs, FBPINN_model, FBP
 from qufwi.fbpinns.util.logger import logger
 from qufwi.fbpinns.util.jax_util import total_size, flops_cost_analysis
 from tensorboardX import SummaryWriter
+
+# Ensure working directory is scripts/ for relative result paths
+SCRIPTS_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+os.chdir(SCRIPTS_DIR)
 
 
 # ============================================================================
@@ -81,7 +82,7 @@ if os.path.exists(INIT_VEL_PATH):
 else:
     VEL_BACKGROUND = 3.0     # km/s (default)
 VEL_AMPLITUDE = 2.0      # alpha = 3 + 2*tanh(NN)*mask
-VEL_LAYER_SIZES = (2, 40, 40, 40, 1)  # matching rasht layers0
+VEL_LAYER_SIZES = (2, 20, 20, 20, 20, 20, 1)  # matching Rasht-Behesht layers0
 
 # Inversion box (in physical km, before scaling by Lx/Lz)
 z_st_phys = 0.1 - n_absz * dz_grid   # 0.05 km
@@ -94,7 +95,7 @@ VEL_BOX = (x_st_phys / Lx, x_fi_phys / Lx,
            z_st_phys / Lz, z_fi_phys / Lz)
 MASK_STEEPNESS = 1000.0
 
-# Loss weights (matching rasht exactly)
+# Loss weights (matching Rasht-Behesht exactly)
 W_PDE = 0.1
 W_IC1 = 1.0
 W_IC2 = 1.0
@@ -105,9 +106,9 @@ W_BC = 0.1
 L_F = 100  # subsample every 100 steps from SPECFEM
 
 # FBPINN configuration
-N_SUBDOMAINS_X = 5
-N_SUBDOMAINS_Z = 3
-N_SUBDOMAINS_T = 5
+N_SUBDOMAINS_X = 3
+N_SUBDOMAINS_Z = 2
+N_SUBDOMAINS_T = 3
 OVERLAP_FRACTION = 0.35
 
 SUBDOMAIN_LAYER_SIZES = [3, 32, 32, 16, 16, 1]
@@ -130,7 +131,7 @@ RUN_NAME = os.path.splitext(os.path.basename(__file__))[0]
 
 # Data directory
 DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(SCRIPTS_DIR)),
-                        "data", "rasht", "specfem")
+                        "data", "anomaly", "specfem")
 
 
 # ============================================================================
@@ -209,7 +210,7 @@ def load_specfem_data(data_dir=None):
     smsz = [f for f in sms if f[-6] == 'Z']
     seismo_listz = [np.loadtxt(os.path.join(seis_dir, f)) for f in smsz]
 
-    # Time axis processing (matching rasht exactly)
+    # Time axis processing (matching Rasht-Behesht exactly)
     t_spec = -seismo_listz[0][0, 0] + seismo_listz[0][:, 0]
     cut_u = t_spec > t_s
     cut_l = t_spec < t_st
@@ -319,7 +320,7 @@ class AcousticFWIScalarPotential(Problem):
             "vel_layers": vel_layers,
         }
 
-        # Upper bounds for input normalization (matching rasht's ub0)
+        # Upper bounds for input normalization (matching Rasht-Behesht's ub0)
         ub0 = jnp.array([ax / Lx, az / Lz])
 
         static_params = {
@@ -478,7 +479,7 @@ class AcousticFWIScalarPotential(Problem):
         x_raw = x_batch[:, 0:1]  # x'
         z_raw = x_batch[:, 1:2]  # z'
 
-        # Normalize to [-1, 1] (matching rasht: H = 2*(X/ub0) - 1)
+        # Normalize to [-1, 1] (matching Rasht-Behesht: H = 2*(X/ub0) - 1)
         h = jnp.concatenate([2.0 * x_raw / ub0[0] - 1.0,
                               2.0 * z_raw / ub0[1] - 1.0], axis=1)
 
@@ -1136,7 +1137,7 @@ class FBPINNTrainerFWI16(FBPINNTrainer):
 
 def main(resume_total_steps=0):
 
-    cache_dir = os.path.join(os.path.dirname(os.path.dirname(SCRIPTS_DIR)), 'results', 'rasht', 'cache')
+    cache_dir = os.path.join(os.path.dirname(os.path.dirname(SCRIPTS_DIR)), 'results', 'anomaly', 'cache')
     os.makedirs(cache_dir, exist_ok=True)
     cache_file = os.path.join(cache_dir, 'specfem_data.npz')
 

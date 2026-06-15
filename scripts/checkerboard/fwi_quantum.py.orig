@@ -79,7 +79,7 @@ if os.path.exists(INIT_VEL_PATH):
 else:
     VEL_BACKGROUND = 3.0     # km/s (default)
 VEL_AMPLITUDE = 2.0      # alpha = 3 + 2*tanh(NN)*mask
-VEL_LAYER_SIZES = (2, 20, 20, 20, 20, 20, 1)  # matching rasht layers0
+VEL_LAYER_SIZES = (2, 20, 20, 20, 20, 20, 1)  # matching Rasht-Behesht layers0
 
 # Inversion box (in physical km, before scaling by Lx/Lz)
 # Checkerboard region: x=[0.85, 1.20] km, z=[0.15, 0.40] km in SPECFEM coords
@@ -95,7 +95,7 @@ VEL_BOX = (x_st_phys / Lx, x_fi_phys / Lx,
            z_st_phys / Lz, z_fi_phys / Lz)
 MASK_STEEPNESS = 1000.0
 
-# Loss weights (matching rasht exactly)
+# Loss weights (matching Rasht-Behesht exactly)
 W_PDE = 0.1
 W_IC1 = 1.0
 W_IC2 = 1.0
@@ -210,7 +210,7 @@ def load_specfem_data(data_dir=None):
     smsz = [f for f in sms if f[-6] == 'Z']
     seismo_listz = [np.loadtxt(os.path.join(seis_dir, f)) for f in smsz]
 
-    # Time axis processing (matching rasht exactly)
+    # Time axis processing (matching Rasht-Behesht exactly)
     t_spec = -seismo_listz[0][0, 0] + seismo_listz[0][:, 0]
     cut_u = t_spec > t_s
     cut_l = t_spec < t_st
@@ -320,7 +320,7 @@ class AcousticFWIScalarPotential(Problem):
             "vel_layers": vel_layers,
         }
 
-        # Upper bounds for input normalization (matching rasht's ub0)
+        # Upper bounds for input normalization (matching Rasht-Behesht's ub0)
         ub0 = jnp.array([ax / Lx, az / Lz])
 
         static_params = {
@@ -479,7 +479,7 @@ class AcousticFWIScalarPotential(Problem):
         x_raw = x_batch[:, 0:1]  # x'
         z_raw = x_batch[:, 1:2]  # z'
 
-        # Normalize to [-1, 1] (matching rasht: H = 2*(X/ub0) - 1)
+        # Normalize to [-1, 1] (matching Rasht-Behesht: H = 2*(X/ub0) - 1)
         h = jnp.concatenate([2.0 * x_raw / ub0[0] - 1.0,
                               2.0 * z_raw / ub0[1] - 1.0], axis=1)
 
