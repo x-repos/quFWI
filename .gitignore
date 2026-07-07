@@ -13,6 +13,9 @@ results/checkerboard/plots/*
 !results/checkerboard/plots/true_and_inverted.png
 data/checkerboard_10s/
 
+# Checkerboard experiment scripts (working files, not tracked)
+scripts/checkerboard/
+
 # LaTeX paper source (maintained separately, not tracked in this repo)
 /tex/
 
