@@ -118,6 +118,7 @@ TRAINING_STEPS = 500000
 # BC sampling
 BC_XN = 100
 BC_TN = 50
+BC_SEED = 0   # fixed draw of the free-surface points, see load_specfem_data()
 
 # Collocation points per dimension for PDE constraint
 PDE_BATCH_SHAPE = (40, 40, 25)
@@ -247,8 +248,12 @@ def load_specfem_data(data_dir=None):
              t_spec_sub), axis=1)
 
     # --- BC points (free stress at top surface z'=az/Lz) ---
-    x_vec = np.random.rand(BC_XN, 1) * ax / Lx
-    t_vec = np.random.rand(BC_TN, 1) * (t_m - t_st)
+    # Drawn with a fixed seed so that fresh runs (which re-preprocess the data)
+    # train on the same boundary sample. Until 2026-10-30 this used the unseeded
+    # global RNG, so every fresh run had a different boundary sample.
+    bc_rng = np.random.default_rng(BC_SEED)
+    x_vec = bc_rng.random((BC_XN, 1)) * ax / Lx
+    t_vec = bc_rng.random((BC_TN, 1)) * (t_m - t_st)
     xxb, ttb = np.meshgrid(x_vec.ravel(), t_vec.ravel())
     X_BC_t = np.concatenate((xxb.reshape((-1, 1)),
                               az / Lz * np.ones((xxb.reshape((-1, 1)).shape[0], 1)),
@@ -1135,7 +1140,9 @@ class FBPINNTrainerFWI16(FBPINNTrainer):
 # MAIN
 # ============================================================================
 
-def main(resume_total_steps=0, multi_gpu=False, run_name=None, total_steps=None):
+def main(resume_total_steps=0, multi_gpu=False, run_name=None, total_steps=None, pde_batch_shape=None):
+
+    pde_batch_shape = tuple(pde_batch_shape) if pde_batch_shape else PDE_BATCH_SHAPE
 
     cache_dir = paths.results_path('anomaly', 'cache')
     os.makedirs(cache_dir, exist_ok=True)
@@ -1241,7 +1248,7 @@ def main(resume_total_steps=0, multi_gpu=False, run_name=None, total_steps=None)
         ),
 
         # 5 constraints: PDE, IC1, IC2, Seismo, BC
-        ns=(PDE_BATCH_SHAPE, (n_ic,), (n_ic,), (n_seismo,), (n_bc,)),
+        ns=(pde_batch_shape, (n_ic,), (n_ic,), (n_seismo,), (n_bc,)),
         n_test=N_TEST,
         sampler="sobol",
 
@@ -1270,6 +1277,7 @@ def main(resume_total_steps=0, multi_gpu=False, run_name=None, total_steps=None)
     print(f"Per-subdomain network: {SUBDOMAIN_LAYER_SIZES}")
     print(f"Learning rate: {LEARNING_RATE}")
     print(f"Training steps: {n_steps}")
+    print(f"PDE collocation points: {'x'.join(map(str, pde_batch_shape))} = {int(np.prod(pde_batch_shape)):,}")
     print(f"Run name: {c.run}")
     print(f"Results: {c.summary_out_dir}")
     print(f"Devices: {jax.devices()} (multi_gpu={multi_gpu})")
@@ -1298,6 +1306,10 @@ if __name__ == "__main__":
                              f'(default: "{RUN_NAME}", or "{RUN_NAME}_<N>gpu" with --multi_gpu). '
                              'A fresh run clears this directory, so use a new name to keep '
                              'existing results intact; --resume needs the same name as the original run.')
+    parser.add_argument('--pde_points', type=int, nargs=3, default=None, metavar=('NX', 'NZ', 'NT'),
+                        help=f'PDE collocation grid (Sobol batch shape in x, z, t); default '
+                             f'{" ".join(map(str, PDE_BATCH_SHAPE))} = {int(np.prod(PDE_BATCH_SHAPE)):,} points. '
+                             'With --resume it must equal the value of the original run.')
     parser.add_argument('--n_steps', type=int, default=None, metavar='STEPS',
                         help=f'Number of training steps for a fresh run (default: {TRAINING_STEPS}); '
                              'with --resume the step target is the --resume value instead')
@@ -1306,10 +1318,12 @@ if __name__ == "__main__":
         parser.error("--n_steps must be a positive integer")
     if args.resume and args.n_steps is not None:
         parser.error("--n_steps only applies to a fresh run; with --resume, the total step target is the --resume value")
+    if args.pde_points is not None and min(args.pde_points) <= 0:
+        parser.error("--pde_points values must be positive integers")
 
     run_name = args.run_name
     if run_name is None and args.multi_gpu:
         run_name = f"{RUN_NAME}_{len(jax.devices())}gpu"
 
     trained_params = main(resume_total_steps=args.resume, multi_gpu=args.multi_gpu,
-                          run_name=run_name, total_steps=args.n_steps)
+                          run_name=run_name, total_steps=args.n_steps, pde_batch_shape=args.pde_points)
