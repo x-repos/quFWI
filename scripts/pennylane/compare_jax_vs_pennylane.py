@@ -3,17 +3,14 @@
 
 Usage:
     pip install pennylane
-    python compare_jax_vs_pennylane.py
+    uv run python scripts/pennylane/compare_jax_vs_pennylane.py
 """
 
 import os
 os.environ["JAX_PLATFORMS"] = "cpu"
 
-import sys
 import time
 import numpy as np
-
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 
 import jax
 import jax.numpy as jnp
@@ -21,11 +18,12 @@ from jax import grad, jit
 
 import pennylane as qml
 
+from qufwi import paths
 from qufwi.pqcs.circuit import quantum_circuit
 
 SEED = 42
 N_TIMING_RUNS = 100
-OUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "results")
+OUT_DIR = paths.results_path("pennylane")
 
 
 def make_params(n_qubits, n_layers, seed=SEED):

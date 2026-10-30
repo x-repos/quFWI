@@ -2,25 +2,25 @@
 """Plot PQC benchmark results from pqc_benchmark.npz.
 
 Usage:
-    python plot_pqc_benchmark.py
+    uv run python scripts/pennylane/plot_pqc_benchmark.py
 """
 
 import os
 import numpy as np
 import matplotlib.pyplot as plt
+
+from qufwi import paths
 plt.rcParams['text.usetex'] = True
 plt.rcParams['font.family'] = 'serif'
 
-DATA_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                         "results", "pqc_benchmark.npz")
-OUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                       "results", "plots")
+DATA_PATH = paths.results_path("pennylane", "pqc_benchmark.npz")
+OUT_DIR = paths.results_path("pennylane", "plots")
 
 
 def main():
     if not os.path.exists(DATA_PATH):
         print(f"Data not found: {DATA_PATH}")
-        print("Run: python compare_jax_vs_pennylane.py first")
+        print("Run: uv run python scripts/pennylane/compare_jax_vs_pennylane.py first")
         return
 
     d = dict(np.load(DATA_PATH, allow_pickle=True))

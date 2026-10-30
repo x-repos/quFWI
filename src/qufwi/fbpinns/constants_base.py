@@ -7,6 +7,7 @@ This module is used by constants.py
 import os
 import pickle
 
+from qufwi import paths
 from qufwi.fbpinns.util import io
 
 
@@ -34,8 +35,11 @@ class ConstantsBase:
 
     # below methods assume self.run exist
 
-    # calculated variables
-    results_base = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "results", "anomaly")
+    # Outputs go to <results>/<experiment>/{summaries,models}/<run>/, where
+    # <results> is paths.RESULTS_DIR (see qufwi/paths.py)
+    @property
+    def results_base(self):
+        return paths.results_path(getattr(self, "experiment", "anomaly"))
 
     @property
     def summary_out_dir(self):

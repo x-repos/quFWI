@@ -22,6 +22,7 @@ from qufwi.fbpinns.trainers import (FBPINNTrainer, get_inputs, FBPINN_model, FBP
                                FBPINN_update, partition)
 from qufwi.fbpinns.util.logger import logger
 from qufwi.fbpinns.util.jax_util import total_size, flops_cost_analysis
+from qufwi import paths
 from tensorboardX import SummaryWriter
 
 
@@ -134,8 +135,7 @@ SAVE_PLOTS = True
 RUN_NAME = os.path.splitext(os.path.basename(__file__))[0]
 
 # Data directory
-DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
-                        "data", "anomaly", "specfem")
+DATA_DIR = paths.data_path("anomaly", "specfem")
 
 
 # ============================================================================
@@ -1185,8 +1185,7 @@ class FBPINNTrainerFWI16(FBPINNTrainer):
 
 def main(resume_total_steps=0):
 
-    cache_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
-                             'results', 'anomaly', 'cache')
+    cache_dir = paths.results_path('anomaly', 'cache')
     os.makedirs(cache_dir, exist_ok=True)
     cache_file = os.path.join(cache_dir, 'specfem_data.npz')
 

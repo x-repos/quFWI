@@ -31,6 +31,7 @@ class Constants(ConstantsBase):
 
         # Define run
         self.run = "test"
+        self.experiment = "anomaly"# results go to results/<experiment>/{summaries,models}/<run>/
 
         # Define domain
         self.domain = domains.RectangularDomainND

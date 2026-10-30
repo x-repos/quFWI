@@ -1,4 +1,5 @@
-# Output directories — ignore all results except the paper-figure plots
+# Outputs. Everything under results/ is local except the paper figures and the
+# reference runs listed below (see README "Repository layout").
 results/*
 !results/anomaly/
 results/anomaly/*
@@ -6,11 +7,25 @@ results/anomaly/*
 results/anomaly/plots/*
 !results/anomaly/plots/l1_and_velocity.png
 !results/anomaly/plots/metrics_losses.png
+!results/anomaly/summaries/
+results/anomaly/summaries/*
+!results/anomaly/summaries/fwi_classical/
+!results/anomaly/summaries/fwi_classical_multigpu/
+!results/anomaly/models/
+results/anomaly/models/*
+!results/anomaly/models/fwi_classical/
+!results/anomaly/models/fwi_classical_multigpu/
 !results/checkerboard/
 results/checkerboard/*
 !results/checkerboard/plots/
 results/checkerboard/plots/*
 !results/checkerboard/plots/true_and_inverted.png
+!results/pennylane/
+results/pennylane/*
+!results/pennylane/pqc_benchmark.npz
+!results/pennylane/plots/
+results/pennylane/plots/*
+!results/pennylane/plots/pqc_gradient_agreement.pdf
 data/checkerboard_10s/
 
 # Checkerboard experiment scripts (working files, not tracked)

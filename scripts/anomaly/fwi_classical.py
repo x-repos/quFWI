@@ -22,6 +22,7 @@ from qufwi.fbpinns.trainers import (FBPINNTrainer, get_inputs, FBPINN_model, FBP
                                FBPINN_update, partition)
 from qufwi.fbpinns.util.logger import logger
 from qufwi.fbpinns.util.jax_util import total_size, flops_cost_analysis
+from qufwi import paths
 from tensorboardX import SummaryWriter
 
 
@@ -127,8 +128,7 @@ SAVE_PLOTS = True
 RUN_NAME = os.path.splitext(os.path.basename(__file__))[0]
 
 # Data directory
-DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
-                        "data", "anomaly", "specfem")
+DATA_DIR = paths.data_path("anomaly", "specfem")
 
 
 
@@ -1137,8 +1137,7 @@ class FBPINNTrainerFWI16(FBPINNTrainer):
 
 def main(resume_total_steps=0, multi_gpu=False, run_name=None, total_steps=None):
 
-    cache_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
-                             'results', 'anomaly', 'cache')
+    cache_dir = paths.results_path('anomaly', 'cache')
     os.makedirs(cache_dir, exist_ok=True)
     cache_file = os.path.join(cache_dir, 'specfem_data.npz')
 
@@ -1272,6 +1271,7 @@ def main(resume_total_steps=0, multi_gpu=False, run_name=None, total_steps=None)
     print(f"Learning rate: {LEARNING_RATE}")
     print(f"Training steps: {n_steps}")
     print(f"Run name: {c.run}")
+    print(f"Results: {c.summary_out_dir}")
     print(f"Devices: {jax.devices()} (multi_gpu={multi_gpu})")
 
     # Train
@@ -1294,7 +1294,7 @@ if __name__ == "__main__":
                         help='Shard the training points across all visible GPUs '
                              '(select GPUs with CUDA_VISIBLE_DEVICES)')
     parser.add_argument('--run_name', type=str, default=None, metavar='NAME',
-                        help=f'Results directory name under src/qufwi/results/anomaly/{{summaries,models}}/ '
+                        help=f'Results directory name under results/anomaly/{{summaries,models}}/ '
                              f'(default: "{RUN_NAME}", or "{RUN_NAME}_<N>gpu" with --multi_gpu). '
                              'A fresh run clears this directory, so use a new name to keep '
                              'existing results intact; --resume needs the same name as the original run.')

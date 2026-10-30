@@ -5,8 +5,8 @@ Hybrid quantum-classical Full Waveform Inversion (FWI) using FBPINNs (Finite Bas
 ## Overview
 
 This repository implements the acoustic FWI problem using both:
-- **Classical FBPINNs** (`scripts/fwi_classical.py`) — fully connected networks
-- **Quantum-hybrid FBPINNs** (`scripts/fwi_quantum.py`) — classical layers + variational quantum circuit (PQC)
+- **Classical FBPINNs** (`scripts/anomaly/fwi_classical.py`) — fully connected networks
+- **Quantum-hybrid FBPINNs** (`scripts/anomaly/fwi_quantum.py`) — classical layers + variational quantum circuit (PQC)
 
 The quantum circuit implementation (`src/qufwi/pqcs/`) is a standalone JAX module with no fbpinns dependency, enabling future comparison work (e.g., PennyLane).
 
@@ -35,17 +35,17 @@ uv run python scripts/anomaly/fwi_quantum.py
 uv run python scripts/anomaly/fwi_classical.py --resume 200000
 
 # Multi-GPU training: shards the training points across all visible GPUs.
-# Results go to src/qufwi/results/anomaly/{summaries,models}/fwi_classical_2gpu/ (for 2 GPUs)
+# Results go to results/anomaly/{summaries,models}/fwi_classical_2gpu/ (for 2 GPUs)
 CUDA_VISIBLE_DEVICES=0,1 uv run python scripts/anomaly/fwi_classical.py --multi_gpu
 CUDA_VISIBLE_DEVICES=0,1 uv run python scripts/anomaly/fwi_classical.py --multi_gpu --resume 500000
 
-# Custom run name / step count. Results live in src/qufwi/results/anomaly/{summaries,models}/<run_name>/.
+# Custom run name / step count. Results live in results/anomaly/{summaries,models}/<run_name>/.
 # A fresh run clears its own results directory (the default name "fwi_classical" is the
 # reference run), so give experiments their own name to keep existing results intact.
 uv run python scripts/anomaly/fwi_classical.py --run_name my_experiment --n_steps 50000
 
 # Monitor training
-tensorboard --logdir src/qufwi/results/anomaly/summaries/
+tensorboard --logdir results/anomaly/summaries/
 ```
 
 ## Results
@@ -56,13 +56,33 @@ tensorboard --logdir src/qufwi/results/anomaly/summaries/
 
 **(a)** True velocity model with ellipsoidal anomaly. **(b)** Initial (homogeneous) guess. **(c)** Inverted velocity from the classical FBPINN baseline. **(d)** L1 velocity error convergence across hyperparameter variants and the quantum-hybrid model.
 
-## Repository Structure
+## Repository layout
 
-- `src/qufwi/pqcs/` — Standalone PQC library
-- `src/qufwi/fbpinns/` — Core FBPINNs framework (merged classical + quantum)
-- `scripts/` — FWI training scripts for anomaly and checkerboard models
-- `data/` — SPECFEM synthetic seismic data
-- `pennylane/` — Tests and benchmarks comparing the custom PQC against PennyLane
+```
+data/                    SPECFEM synthetic seismic data (inputs, tracked)
+results/                 all outputs; local except the files listed below
+  anomaly/
+    summaries/<run>/     TensorBoard events, metrics.npz, figures, physical fields
+    models/<run>/        checkpoints (model_<step>.jax)
+    cache/               preprocessed SPECFEM data (specfem_data.npz)
+    logs/                logs written by scripts/anomaly/run_*.sh
+    plots/               paper figures
+  checkerboard/plots/    paper figures
+  pennylane/             PQC-vs-PennyLane benchmark data and figure
+scripts/
+  anomaly/               FWI training: fwi_classical.py, fwi_quantum.py, variants/,
+                         run_local.sh, run_slurm.sh
+  pennylane/             benchmarks comparing the custom PQC against PennyLane
+src/qufwi/
+  paths.py               repository layout: data and results roots
+  fbpinns/               core FBPINNs framework (merged classical + quantum)
+  pqcs/                  standalone PQC library (JAX only, no fbpinns dependency)
+```
+
+Under `results/` only the paper figures and the reference runs `fwi_classical` and
+`fwi_classical_multigpu` are tracked (see `.gitignore`); every other run is local.
+To write outputs elsewhere, e.g. a scratch filesystem on a cluster, set
+`QUFWI_RESULTS_DIR` (and `QUFWI_DATA_DIR` for the inputs) before running a script.
 
 ## Dependencies
 
