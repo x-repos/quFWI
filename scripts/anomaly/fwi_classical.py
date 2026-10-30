@@ -121,7 +121,7 @@ BC_TN = 50
 BC_SEED = 0   # fixed draw of the free-surface points, see load_specfem_data()
 
 # Collocation points per dimension for PDE constraint
-PDE_BATCH_SHAPE = (60, 60, 30)   # 108,000 PDE collocation points (paper reference run used 40x40x25 = 40,000)
+PDE_BATCH_SHAPE = (40, 40, 25)
 N_TEST = (40, 20, 10)
 
 SHOW_PLOTS = False
