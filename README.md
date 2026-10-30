@@ -34,8 +34,18 @@ uv run python scripts/anomaly/fwi_quantum.py
 # Resume from checkpoint
 uv run python scripts/anomaly/fwi_classical.py --resume 200000
 
+# Multi-GPU training: shards the training points across all visible GPUs.
+# Results go to src/qufwi/results/anomaly/{summaries,models}/fwi_classical_2gpu/ (for 2 GPUs)
+CUDA_VISIBLE_DEVICES=0,1 uv run python scripts/anomaly/fwi_classical.py --multi_gpu
+CUDA_VISIBLE_DEVICES=0,1 uv run python scripts/anomaly/fwi_classical.py --multi_gpu --resume 500000
+
+# Custom run name / step count. Results live in src/qufwi/results/anomaly/{summaries,models}/<run_name>/.
+# A fresh run clears its own results directory (the default name "fwi_classical" is the
+# reference run), so give experiments their own name to keep existing results intact.
+uv run python scripts/anomaly/fwi_classical.py --run_name my_experiment --n_steps 50000
+
 # Monitor training
-tensorboard --logdir results/anomaly/summaries/
+tensorboard --logdir src/qufwi/results/anomaly/summaries/
 ```
 
 ## Results

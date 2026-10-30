@@ -419,6 +419,53 @@ def get_inputs(x_batch, active, all_params, decomposition):
     return takes, all_ims, (active, cut_active, cut_fixed, cut_all, merge_active)
 
 
+def shard_takess_across_devices(takess):
+    """Shard the point-subdomain pair axis of each constraint's takes across all
+    visible devices, so that each device evaluates the subdomain networks on a
+    disjoint slice of the training pairs (data parallelism). The subdomain
+    parameters and optimiser states stay replicated on every device and XLA
+    inserts the cross-device reductions needed by the segment sums and the loss.
+
+    m_take, n_take and p_take all have length s (the number of point-subdomain
+    pairs). s is padded up to a multiple of the device count. Each padded pair
+    points at point 0 of subdomain 0 and at segment id len(np_take), which lies
+    outside [0, num_segments) and is therefore dropped by jax.ops.segment_sum,
+    so padded pairs contribute nothing to the model output, loss or gradients.
+
+    Works for any number of subdomains. (An earlier implementation sharded the
+    subdomain axis of the parameters instead, which required the number of
+    active subdomains to be divisible by the device count and left the heavy
+    per-pair network evaluation replicated.)
+    """
+    devices = jax.devices()
+    num_devices = len(devices)
+    if num_devices < 2:
+        logger.info(f"multi_gpu is enabled but only {num_devices} device is visible ({devices}) - running on a single device")
+        return takess
+    from jax.experimental import mesh_utils
+    mesh = jax.sharding.Mesh(mesh_utils.create_device_mesh((num_devices,)), ("d",))
+    sharding = jax.sharding.NamedSharding(mesh, jax.sharding.PartitionSpec("d"))
+    takess_sharded = []
+    for ic, (m_take, n_take, p_take, np_take, npou) in enumerate(takess):
+        s = m_take.shape[0]
+        pad = (-s) % num_devices
+        if pad:
+            m_take = jnp.concatenate([m_take, jnp.zeros(pad, dtype=m_take.dtype)])
+            n_take = jnp.concatenate([n_take, jnp.zeros(pad, dtype=n_take.dtype)])
+            p_take = jnp.concatenate([p_take, jnp.full(pad, np_take.shape[0], dtype=p_take.dtype)])
+        m_take, n_take, p_take = (jax.device_put(a, sharding) for a in (m_take, n_take, p_take))
+        takess_sharded.append((m_take, n_take, p_take, np_take, npou))
+        logger.info(f"Constraint {ic}: sharded {s:,} point-subdomain pairs (+{pad} padding) across {num_devices} devices {[d.id for d in devices]}")
+    return takess_sharded
+
+def num_take_shards(takess):
+    "Number of devices the pair axis of takess is sharded across (1 when unsharded)"
+    for takes in takess:
+        for a in takes[:3]:
+            if hasattr(a, "sharding"):
+                return a.sharding.num_devices
+    return 1
+
 def _common_train_initialisation(c, key, all_params, problem, domain):
 
     # print stats
@@ -647,28 +694,9 @@ class FBPINNTrainer(_Trainer):
                 active, merge_active, active_opt_states, active_params, fixed_params, static_params, takess, constraints, x_batch = \
                      self._get_update_inputs(i, active, all_params, all_opt_states, x_batch_global, constraints_global, constraint_fs_global, constraint_offsets_global, decomposition, problem)
 
-                # shard inputs across multiple GPUs if enabled
+                # shard the training points across multiple GPUs if enabled
                 if getattr(self.c, "multi_gpu", False):
-                    from jax.experimental import mesh_utils
-                    num_devices = len(jax.devices())
-                    if num_devices > 1:
-                        # Verify divisibility
-                        num_active = len(jnp.arange(all_params["static"]["decomposition"]["m"])[active==1])
-                        if num_active % num_devices != 0:
-                            raise ValueError(f"multi_gpu is enabled, but the number of active subdomains ({num_active}) is not evenly divisible by the number of GPUs ({num_devices}). Please adjust your grid size (e.g. use a 4x2 or 4x4 decomposition instead of 3x3) so it divides evenly.")
-                        
-                        mesh = jax.sharding.Mesh(mesh_utils.create_device_mesh((num_devices,)), ('d',))
-                        sharding = jax.sharding.NamedSharding(mesh, jax.sharding.PartitionSpec('d'))
-                        
-                        def shard_active(d):
-                            if not isinstance(d, dict): return d
-                            return {cl_k: {k: jax.tree_util.tree_map(lambda p: jax.device_put(p, sharding), d[cl_k][k]) if k == "subdomain" else d[cl_k][k]
-                                    for k in d[cl_k]}
-                                    for cl_k in d}
-                        
-                        active_params = shard_active(active_params)
-                        fixed_params = shard_active(fixed_params)
-                        active_opt_states = tree_map_dicts(shard_active, active_opt_states)
+                    takess = shard_takess_across_devices(takess)
 
                 # AOT compile update function
                 startc = time.time()
@@ -678,7 +706,8 @@ class FBPINNTrainer(_Trainer):
                                              active_params, fixed_params, static_params_dynamic, static_params_static,
                                              takess, constraints, model_fns, jmapss, loss_fn).compile()
                 logger.info(f"[i: {i}/{self.c.n_steps}] Compiling done ({time.time()-startc:.2f} s)")
-                p,f = total_size(active_params["network"]), flops_cost_analysis(update.cost_analysis())
+                # note: cost_analysis() of an SPMD-partitioned executable is per device
+                p,f = total_size(active_params["network"]), flops_cost_analysis(update.cost_analysis())*num_take_shards(takess)
                 logger.debug("p, f")
                 logger.debug((p,f))
 

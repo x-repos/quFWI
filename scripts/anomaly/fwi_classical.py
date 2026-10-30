@@ -17,6 +17,7 @@ from qufwi.fbpinns.decompositions import RectangularDecompositionND
 from qufwi.fbpinns.networks import FCN
 from qufwi.fbpinns.constants import Constants
 from qufwi.fbpinns.trainers import (FBPINNTrainer, get_inputs, FBPINN_model, FBPINN_model_jit,
+                                     shard_takess_across_devices, num_take_shards,
                                _common_train_initialisation, tree_map_dicts,
                                FBPINN_update, partition)
 from qufwi.fbpinns.util.logger import logger
@@ -806,6 +807,10 @@ class FBPINNTrainerFWI16(FBPINNTrainer):
                         constraint_offsets_global, decomposition, problem,
                     )
 
+                # shard the training points across multiple GPUs if enabled
+                if getattr(c, "multi_gpu", False):
+                    takess = shard_takess_across_devices(takess)
+
                 startc = time.time()
                 logger.info(f"[i: {gi}/{c.n_steps}] Compiling update step..")
                 static_params_dynamic, static_params_static = partition(static_params)
@@ -815,7 +820,8 @@ class FBPINNTrainerFWI16(FBPINNTrainer):
                     takess, constraints, model_fns, jmapss, loss_fn,
                 ).compile()
                 logger.info(f"[i: {gi}/{c.n_steps}] Compiling done ({time.time() - startc:.2f} s)")
-                p, f = total_size(active_params["network"]), flops_cost_analysis(update.cost_analysis())
+                # note: cost_analysis() of an SPMD-partitioned executable is per device
+                p, f = total_size(active_params["network"]), flops_cost_analysis(update.cost_analysis()) * num_take_shards(takess)
 
             lossval, self._loss_components, active_opt_states, active_params = update(
                 active_opt_states, active_params, fixed_params, static_params_dynamic,
@@ -1129,7 +1135,7 @@ class FBPINNTrainerFWI16(FBPINNTrainer):
 # MAIN
 # ============================================================================
 
-def main(resume_total_steps=0, multi_gpu=False):
+def main(resume_total_steps=0, multi_gpu=False, run_name=None, total_steps=None):
 
     cache_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
                              'results', 'anomaly', 'cache')
@@ -1154,7 +1160,7 @@ def main(resume_total_steps=0, multi_gpu=False):
         # Save preprocessed data for fast re-loading
         np.savez(cache_file, **data)
         print(f"Saved preprocessed data to {cache_file}")
-        n_steps = TRAINING_STEPS
+        n_steps = total_steps if total_steps else TRAINING_STEPS
 
     # Print data summary
     n_ic = data["X_init1"].shape[0]
@@ -1178,7 +1184,7 @@ def main(resume_total_steps=0, multi_gpu=False):
     xmax = np.array([ax / Lx, az / Lz, t_m - t_st])
 
     c = Constants(
-        run=RUN_NAME,
+        run=run_name if run_name else RUN_NAME,
 
         domain=RectangularDomainND,
         domain_init_kwargs=dict(
@@ -1265,6 +1271,8 @@ def main(resume_total_steps=0, multi_gpu=False):
     print(f"Per-subdomain network: {SUBDOMAIN_LAYER_SIZES}")
     print(f"Learning rate: {LEARNING_RATE}")
     print(f"Training steps: {n_steps}")
+    print(f"Run name: {c.run}")
+    print(f"Devices: {jax.devices()} (multi_gpu={multi_gpu})")
 
     # Train
     print("\n" + "=" * 60)
@@ -1283,7 +1291,25 @@ if __name__ == "__main__":
     parser.add_argument('--resume', type=int, default=0, metavar='TOTAL_STEPS',
                         help='Resume from last checkpoint, train to TOTAL_STEPS')
     parser.add_argument('--multi_gpu', action='store_true',
-                        help='Enable multi-GPU parallelization for the training loop')
+                        help='Shard the training points across all visible GPUs '
+                             '(select GPUs with CUDA_VISIBLE_DEVICES)')
+    parser.add_argument('--run_name', type=str, default=None, metavar='NAME',
+                        help=f'Results directory name under src/qufwi/results/anomaly/{{summaries,models}}/ '
+                             f'(default: "{RUN_NAME}", or "{RUN_NAME}_<N>gpu" with --multi_gpu). '
+                             'A fresh run clears this directory, so use a new name to keep '
+                             'existing results intact; --resume needs the same name as the original run.')
+    parser.add_argument('--n_steps', type=int, default=None, metavar='STEPS',
+                        help=f'Number of training steps for a fresh run (default: {TRAINING_STEPS}); '
+                             'with --resume the step target is the --resume value instead')
     args = parser.parse_args()
+    if args.n_steps is not None and args.n_steps <= 0:
+        parser.error("--n_steps must be a positive integer")
+    if args.resume and args.n_steps is not None:
+        parser.error("--n_steps only applies to a fresh run; with --resume, the total step target is the --resume value")
 
-    trained_params = main(resume_total_steps=args.resume, multi_gpu=args.multi_gpu)
+    run_name = args.run_name
+    if run_name is None and args.multi_gpu:
+        run_name = f"{RUN_NAME}_{len(jax.devices())}gpu"
+
+    trained_params = main(resume_total_steps=args.resume, multi_gpu=args.multi_gpu,
+                          run_name=run_name, total_steps=args.n_steps)
