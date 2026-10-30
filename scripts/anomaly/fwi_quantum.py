@@ -1183,7 +1183,7 @@ class FBPINNTrainerFWI16(FBPINNTrainer):
 # MAIN
 # ============================================================================
 
-def main(resume_total_steps=0):
+def main(resume_total_steps=0, run_name=None, total_steps=None):
 
     cache_dir = paths.results_path('anomaly', 'cache')
     os.makedirs(cache_dir, exist_ok=True)
@@ -1207,7 +1207,7 @@ def main(resume_total_steps=0):
         # Save preprocessed data for fast re-loading
         np.savez(cache_file, **data)
         print(f"Saved preprocessed data to {cache_file}")
-        n_steps = TRAINING_STEPS
+        n_steps = total_steps if total_steps else TRAINING_STEPS
 
     # Print data summary
     n_ic = data["X_init1"].shape[0]
@@ -1231,7 +1231,7 @@ def main(resume_total_steps=0):
     xmax = np.array([ax / Lx, az / Lz, t_m - t_st])
 
     c = Constants(
-        run=RUN_NAME,
+        run=run_name if run_name else RUN_NAME,
 
         domain=RectangularDomainND,
         domain_init_kwargs=dict(
@@ -1347,7 +1347,19 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Rasht-Behesht FWI on FBPINNs (Quantum-Hybrid)")
     parser.add_argument('--resume', type=int, default=0, metavar='TOTAL_STEPS',
                         help='Resume from last checkpoint, train to TOTAL_STEPS')
+    parser.add_argument('--run_name', type=str, default=None, metavar='NAME',
+                        help=f'Results directory name under results/anomaly/{{summaries,models}}/ '
+                             f'(default: "{RUN_NAME}"). '
+                             'A fresh run clears this directory, so use a new name to keep '
+                             'existing results intact; --resume needs the same name as the original run.')
+    parser.add_argument('--n_steps', type=int, default=None, metavar='STEPS',
+                        help=f'Number of training steps for a fresh run (default: {TRAINING_STEPS}); '
+                             'with --resume the step target is the --resume value instead')
     args = parser.parse_args()
+    if args.n_steps is not None and args.n_steps <= 0:
+        parser.error("--n_steps must be a positive integer")
+    if args.resume and args.n_steps is not None:
+        parser.error("--n_steps only applies to a fresh run; with --resume, the total step target is the --resume value")
 
     # Enable 64-bit precision for better quantum circuit accuracy
     jax.config.update("jax_enable_x64", True)
@@ -1362,4 +1374,4 @@ if __name__ == "__main__":
     print(f"  64-bit precision: Enabled")
     print(f"  Memory fraction: 75%\n")
 
-    trained_params = main(resume_total_steps=args.resume)
+    trained_params = main(resume_total_steps=args.resume, run_name=args.run_name, total_steps=args.n_steps)
