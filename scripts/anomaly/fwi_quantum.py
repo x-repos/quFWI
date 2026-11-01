@@ -18,6 +18,7 @@ from qufwi.fbpinns.networks import HybridQuantumFCN
 from qufwi.fbpinns.constants import Constants
 from qufwi.pqcs.circuit import quantum_circuit
 from qufwi.fbpinns.trainers import (FBPINNTrainer, get_inputs, FBPINN_model, FBPINN_model_jit,
+                                     shard_takess_across_devices, num_take_shards,
                                _common_train_initialisation, tree_map_dicts,
                                FBPINN_update, partition)
 from qufwi.fbpinns.util.logger import logger
@@ -128,6 +129,8 @@ BC_TN = 50
 
 # Collocation points per dimension for PDE constraint (reduced for quantum memory)
 PDE_BATCH_SHAPE = (40, 40, 25)
+BC_SEED = 0   # fixed draw of the free-surface points, see load_specfem_data()
+VEL_SEED = 42  # PRNGKey of the velocity network initialisation
 N_TEST = (40, 20, 10)
 
 SHOW_PLOTS = False
@@ -142,7 +145,7 @@ DATA_DIR = paths.data_path("anomaly", "specfem")
 # DATA LOADING
 # ============================================================================
 
-def load_specfem_data(data_dir=None):
+def load_specfem_data(data_dir=None, bc_seed=BC_SEED):
     """Load and preprocess SPECFEM data following rasht-behesht exactly.
 
     Returns dict with keys:
@@ -256,8 +259,12 @@ def load_specfem_data(data_dir=None):
              t_spec_sub), axis=1)
 
     # --- BC points (free stress at top surface z'=az/Lz) ---
-    x_vec = np.random.rand(BC_XN, 1) * ax / Lx
-    t_vec = np.random.rand(BC_TN, 1) * (t_m - t_st)
+    # Drawn with a fixed seed so that fresh runs (which re-preprocess the data)
+    # train on the same boundary sample. Until 2026-11-01 this used the unseeded
+    # global RNG, so every fresh run had a different boundary sample.
+    bc_rng = np.random.default_rng(bc_seed)
+    x_vec = bc_rng.random((BC_XN, 1)) * ax / Lx
+    t_vec = bc_rng.random((BC_TN, 1)) * (t_m - t_st)
     xxb, ttb = np.meshgrid(x_vec.ravel(), t_vec.ravel())
     X_BC_t = np.concatenate((xxb.reshape((-1, 1)),
                               az / Lz * np.ones((xxb.reshape((-1, 1)).shape[0], 1)),
@@ -310,6 +317,7 @@ class AcousticFWIScalarPotential(Problem):
         U_specx=None, U_specz=None,
         xx_eval=None, zz_eval=None,
         w_pde=0.1, w_ic1=1.0, w_ic2=1.0, w_seismo=1.0, w_bc=0.1,
+        vel_seed=42,
     ):
         if vel_classical_layer_sizes is None:
             vel_classical_layer_sizes = [2, 20, 20, 20, 20, 20]
@@ -318,7 +326,7 @@ class AcousticFWIScalarPotential(Problem):
         vel_full_layer_sizes = vel_classical_layer_sizes + [vel_n_qubits]
 
         # Initialize velocity quantum-hybrid network params (same pattern as HybridQuantumFCN)
-        key = jax.random.PRNGKey(42)
+        key = jax.random.PRNGKey(vel_seed)
         key, classical_key, basis_key, theta_key, output_key = jax.random.split(key, 5)
 
         # Classical layers
@@ -861,6 +869,10 @@ class FBPINNTrainerFWI16(FBPINNTrainer):
                         constraint_offsets_global, decomposition, problem,
                     )
 
+                # shard the training points across multiple GPUs if enabled
+                if getattr(c, "multi_gpu", False):
+                    takess = shard_takess_across_devices(takess)
+
                 startc = time.time()
                 logger.info(f"[i: {gi}/{c.n_steps}] Compiling update step..")
                 static_params_dynamic, static_params_static = partition(static_params)
@@ -870,7 +882,8 @@ class FBPINNTrainerFWI16(FBPINNTrainer):
                     takess, constraints, model_fns, jmapss, loss_fn,
                 ).compile()
                 logger.info(f"[i: {gi}/{c.n_steps}] Compiling done ({time.time() - startc:.2f} s)")
-                p, f = total_size(active_params["network"]), flops_cost_analysis(update.cost_analysis())
+                # note: cost_analysis() of an SPMD-partitioned executable is per device
+                p, f = total_size(active_params["network"]), flops_cost_analysis(update.cost_analysis()) * num_take_shards(takess)
 
             lossval, self._loss_components, active_opt_states, active_params = update(
                 active_opt_states, active_params, fixed_params, static_params_dynamic,
@@ -1183,11 +1196,12 @@ class FBPINNTrainerFWI16(FBPINNTrainer):
 # MAIN
 # ============================================================================
 
-def main(resume_total_steps=0, run_name=None, total_steps=None):
+def main(resume_total_steps=0, multi_gpu=False, run_name=None, total_steps=None, seed=0):
 
     cache_dir = paths.results_path('anomaly', 'cache')
     os.makedirs(cache_dir, exist_ok=True)
-    cache_file = os.path.join(cache_dir, 'specfem_data.npz')
+    # each seed has its own boundary-point draw, so it gets its own cache (read back on --resume)
+    cache_file = os.path.join(cache_dir, 'specfem_data.npz' if seed == 0 else f'specfem_data_seed{seed}.npz')
 
     if resume_total_steps > 0:
         print("=" * 60)
@@ -1202,7 +1216,7 @@ def main(resume_total_steps=0, run_name=None, total_steps=None):
         print("Step 1: Loading SPECFEM data from rasht-behesht_etal_2021/event1/")
         print("=" * 60)
 
-        data = load_specfem_data()
+        data = load_specfem_data(bc_seed=BC_SEED + seed)
 
         # Save preprocessed data for fast re-loading
         np.savez(cache_file, **data)
@@ -1232,6 +1246,7 @@ def main(resume_total_steps=0, run_name=None, total_steps=None):
 
     c = Constants(
         run=run_name if run_name else RUN_NAME,
+        seed=seed,
 
         domain=RectangularDomainND,
         domain_init_kwargs=dict(
@@ -1244,6 +1259,7 @@ def main(resume_total_steps=0, run_name=None, total_steps=None):
             Lx=Lx, Lz=Lz,
             vel_background=VEL_BACKGROUND,
             vel_amplitude=VEL_AMPLITUDE,
+            vel_seed=VEL_SEED + seed,
             vel_layer_sizes=VEL_LAYER_SIZES,
             vel_box=VEL_BOX,
             mask_steepness=MASK_STEEPNESS,
@@ -1306,6 +1322,7 @@ def main(resume_total_steps=0, run_name=None, total_steps=None):
         model_save_freq=1000,
         show_figures=SHOW_PLOTS,
         save_figures=SAVE_PLOTS,
+        multi_gpu=multi_gpu,
     )
 
     print(f"\nVelocity quantum-hybrid network:")
@@ -1328,6 +1345,9 @@ def main(resume_total_steps=0, run_name=None, total_steps=None):
     print(f"  Test grid: {N_TEST}")
     print(f"Learning rate: {LEARNING_RATE}")
     print(f"Training steps: {n_steps}")
+    print(f"Seed: {seed} (wavefield networks {seed}, velocity network {VEL_SEED + seed}, free-surface draw {BC_SEED + seed})")
+    print(f"Run name: {c.run}")
+    print(f"Devices: {jax.devices()} (multi_gpu={multi_gpu})")
 
     # Train
     print("\n" + "=" * 60)
@@ -1347,14 +1367,21 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Rasht-Behesht FWI on FBPINNs (Quantum-Hybrid)")
     parser.add_argument('--resume', type=int, default=0, metavar='TOTAL_STEPS',
                         help='Resume from last checkpoint, train to TOTAL_STEPS')
+    parser.add_argument('--multi_gpu', action='store_true',
+                        help='Shard the training points across all visible GPUs '
+                             '(select GPUs with CUDA_VISIBLE_DEVICES)')
     parser.add_argument('--run_name', type=str, default=None, metavar='NAME',
                         help=f'Results directory name under results/anomaly/{{summaries,models}}/ '
-                             f'(default: "{RUN_NAME}"). '
+                             f'(default: "{RUN_NAME}", or "{RUN_NAME}_<N>gpu" with --multi_gpu). '
                              'A fresh run clears this directory, so use a new name to keep '
                              'existing results intact; --resume needs the same name as the original run.')
     parser.add_argument('--n_steps', type=int, default=None, metavar='STEPS',
                         help=f'Number of training steps for a fresh run (default: {TRAINING_STEPS}); '
                              'with --resume the step target is the --resume value instead')
+    parser.add_argument('--seed', type=int, default=0, metavar='S',
+                        help='Random seed: wavefield networks use S, the velocity network PRNGKey(42 + S) and the '
+                             'free-surface point draw BC_SEED + S. Default 0 reproduces the earlier runs; '
+                             'with --resume it must equal the value of the original run.')
     args = parser.parse_args()
     if args.n_steps is not None and args.n_steps <= 0:
         parser.error("--n_steps must be a positive integer")
@@ -1374,4 +1401,9 @@ if __name__ == "__main__":
     print(f"  64-bit precision: Enabled")
     print(f"  Memory fraction: 75%\n")
 
-    trained_params = main(resume_total_steps=args.resume, run_name=args.run_name, total_steps=args.n_steps)
+    run_name = args.run_name
+    if run_name is None and args.multi_gpu:
+        run_name = f"{RUN_NAME}_{len(jax.devices())}gpu"
+
+    trained_params = main(resume_total_steps=args.resume, multi_gpu=args.multi_gpu,
+                          run_name=run_name, total_steps=args.n_steps, seed=args.seed)

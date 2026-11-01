@@ -119,6 +119,7 @@ TRAINING_STEPS = 500000
 BC_XN = 100
 BC_TN = 50
 BC_SEED = 0   # fixed draw of the free-surface points, see load_specfem_data()
+VEL_SEED = 42  # PRNGKey of the velocity network initialisation
 
 # Collocation points per dimension for PDE constraint
 PDE_BATCH_SHAPE = (40, 40, 25)
@@ -134,7 +135,7 @@ DATA_DIR = paths.data_path("anomaly", "specfem")
 
 
 
-def load_specfem_data(data_dir=None):
+def load_specfem_data(data_dir=None, bc_seed=BC_SEED):
     """Load and preprocess SPECFEM data following rasht-behesht exactly.
 
     Returns dict with keys:
@@ -251,7 +252,7 @@ def load_specfem_data(data_dir=None):
     # Drawn with a fixed seed so that fresh runs (which re-preprocess the data)
     # train on the same boundary sample. Until 2026-10-30 this used the unseeded
     # global RNG, so every fresh run had a different boundary sample.
-    bc_rng = np.random.default_rng(BC_SEED)
+    bc_rng = np.random.default_rng(bc_seed)
     x_vec = bc_rng.random((BC_XN, 1)) * ax / Lx
     t_vec = bc_rng.random((BC_TN, 1)) * (t_m - t_st)
     xxb, ttb = np.meshgrid(x_vec.ravel(), t_vec.ravel())
@@ -303,9 +304,10 @@ class AcousticFWIScalarPotential(Problem):
         U_specx=None, U_specz=None,
         xx_eval=None, zz_eval=None,
         w_pde=0.1, w_ic1=1.0, w_ic2=1.0, w_seismo=1.0, w_bc=0.1,
+        vel_seed=42,
     ):
         # Initialize velocity network weights (uniform, matching quantum script)
-        key = jax.random.PRNGKey(42)
+        key = jax.random.PRNGKey(vel_seed)
         key, classical_key, _, _, _ = jax.random.split(key, 5)
         vel_layers = []
         keys = jax.random.split(classical_key, len(vel_layer_sizes) - 1)
@@ -1140,13 +1142,14 @@ class FBPINNTrainerFWI16(FBPINNTrainer):
 # MAIN
 # ============================================================================
 
-def main(resume_total_steps=0, multi_gpu=False, run_name=None, total_steps=None, pde_batch_shape=None):
+def main(resume_total_steps=0, multi_gpu=False, run_name=None, total_steps=None, pde_batch_shape=None, seed=0):
 
     pde_batch_shape = tuple(pde_batch_shape) if pde_batch_shape else PDE_BATCH_SHAPE
 
     cache_dir = paths.results_path('anomaly', 'cache')
     os.makedirs(cache_dir, exist_ok=True)
-    cache_file = os.path.join(cache_dir, 'specfem_data.npz')
+    # each seed has its own boundary-point draw, so it gets its own cache (read back on --resume)
+    cache_file = os.path.join(cache_dir, 'specfem_data.npz' if seed == 0 else f'specfem_data_seed{seed}.npz')
 
     if resume_total_steps > 0:
         print("=" * 60)
@@ -1161,7 +1164,7 @@ def main(resume_total_steps=0, multi_gpu=False, run_name=None, total_steps=None,
         print("Step 1: Loading SPECFEM data from rasht-behesht_etal_2021/event1/")
         print("=" * 60)
 
-        data = load_specfem_data()
+        data = load_specfem_data(bc_seed=BC_SEED + seed)
 
         # Save preprocessed data for fast re-loading
         np.savez(cache_file, **data)
@@ -1191,6 +1194,7 @@ def main(resume_total_steps=0, multi_gpu=False, run_name=None, total_steps=None,
 
     c = Constants(
         run=run_name if run_name else RUN_NAME,
+        seed=seed,
 
         domain=RectangularDomainND,
         domain_init_kwargs=dict(
@@ -1203,6 +1207,7 @@ def main(resume_total_steps=0, multi_gpu=False, run_name=None, total_steps=None,
             Lx=Lx, Lz=Lz,
             vel_background=VEL_BACKGROUND,
             vel_amplitude=VEL_AMPLITUDE,
+            vel_seed=VEL_SEED + seed,
             vel_layer_sizes=VEL_LAYER_SIZES,
             vel_box=VEL_BOX,
             mask_steepness=MASK_STEEPNESS,
@@ -1277,6 +1282,7 @@ def main(resume_total_steps=0, multi_gpu=False, run_name=None, total_steps=None,
     print(f"Per-subdomain network: {SUBDOMAIN_LAYER_SIZES}")
     print(f"Learning rate: {LEARNING_RATE}")
     print(f"Training steps: {n_steps}")
+    print(f"Seed: {seed} (wavefield networks {seed}, velocity network {VEL_SEED + seed}, free-surface draw {BC_SEED + seed})")
     print(f"PDE collocation points: {'x'.join(map(str, pde_batch_shape))} = {int(np.prod(pde_batch_shape)):,}")
     print(f"Run name: {c.run}")
     print(f"Results: {c.summary_out_dir}")
@@ -1313,6 +1319,10 @@ if __name__ == "__main__":
     parser.add_argument('--n_steps', type=int, default=None, metavar='STEPS',
                         help=f'Number of training steps for a fresh run (default: {TRAINING_STEPS}); '
                              'with --resume the step target is the --resume value instead')
+    parser.add_argument('--seed', type=int, default=0, metavar='S',
+                        help='Random seed: wavefield networks use S, the velocity network PRNGKey(42 + S) and the '
+                             'free-surface point draw BC_SEED + S. Default 0 reproduces the earlier runs; '
+                             'with --resume it must equal the value of the original run.')
     args = parser.parse_args()
     if args.n_steps is not None and args.n_steps <= 0:
         parser.error("--n_steps must be a positive integer")
@@ -1326,4 +1336,5 @@ if __name__ == "__main__":
         run_name = f"{RUN_NAME}_{len(jax.devices())}gpu"
 
     trained_params = main(resume_total_steps=args.resume, multi_gpu=args.multi_gpu,
-                          run_name=run_name, total_steps=args.n_steps, pde_batch_shape=args.pde_points)
+                          run_name=run_name, total_steps=args.n_steps, pde_batch_shape=args.pde_points,
+                          seed=args.seed)
